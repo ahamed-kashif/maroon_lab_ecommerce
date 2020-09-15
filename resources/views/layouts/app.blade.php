@@ -75,12 +75,14 @@
     <script src="{{asset('js/detect.js')}}"></script>
     <script src="{{asset('js/jquery.slimscroll.js')}}"></script>
     <script src="{{asset('js/vertical-menu.js')}}"></script>
+
+    {{--    Extra js--}}
+    @yield('js')
     <!-- Switchery js -->
     <script src="{{asset('plugins/switchery/switchery.min.js')}}"></script>
     <!-- Core js -->
     <script src="{{asset('js/core.js')}}"></script>
     <!-- End js -->
-    {{--    Extra js--}}
-    @yield('js')
+
 </body>
 </html>

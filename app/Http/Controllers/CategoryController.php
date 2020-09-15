@@ -14,9 +14,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::active()->get();
+        $categories = Category::all();
         $featuredCategories = Category::featured()->get();
-
+        //dd($categories);
         return view('category.index')->with([
             'categories' => $categories
         ]);
