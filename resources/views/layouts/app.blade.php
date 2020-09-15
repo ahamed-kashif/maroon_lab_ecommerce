@@ -24,7 +24,7 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Switchery css -->
     <link href="{{(asset('plugins/switchery/switchery.min.css'))}}" rel="stylesheet">
-    <link href="{{asset('css/vendor/bootstrap.min.css" rel="stylesheet')}}" type="text/css">
+    <link href="{{asset('css/bootstrap.min.css" rel="stylesheet')}}" type="text/css">
     <link href="{{asset('css/icons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/vendor/flag-icon.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
