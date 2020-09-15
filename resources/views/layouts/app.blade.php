@@ -28,6 +28,8 @@
     <link href="{{asset('css/icons.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/vendor/flag-icon.min.css')}}" rel="stylesheet" type="text/css">
     <link href="{{asset('css/style.css')}}" rel="stylesheet" type="text/css">
+{{--    extra css--}}
+    @yield('css')
 </head>
 <body class="vertical-layout">
     <div id="app">
