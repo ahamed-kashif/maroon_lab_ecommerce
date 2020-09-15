@@ -2,7 +2,7 @@
     <div class="row align-items-center">
         <div class="col-md-12">
             <div class="mobile-logobar">
-                <a href="index-2.html" class="mobile-logo"><img src="{{asset('images/logo.svg')}}" class="img-fluid" alt="logo"></a>
+                <a href="/" class="mobile-logo"><img src="{{asset('images/logo.svg')}}" class="img-fluid" alt="logo"></a>
             </div>
             <div class="mobile-togglebar">
                 <ul class="list-inline mb-0">
@@ -61,11 +61,13 @@
                 <ul class="list-inline mb-0">
                 @guest
                     <li class="list-inline-item">
-                        <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                        <a class="nav-link btn-outline-primary btn-sm" href="{{ route('login') }}">
+                            {{ strtoupper(__('Login')) }}
+                        </a>
                     </li>
                     @if (Route::has('register'))
                         <li class="list-inline-item">
-                            <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                            <a class="nav-link  btn-outline-primary btn-sm" href="{{ route('register') }}">{{ strtoupper(__('Register')) }}</a>
                         </li>
                     @endif
                 @else
@@ -79,9 +81,9 @@
                     <li class="list-inline-item">
                         @include('partials.partials-notifications')
                     </li>
-                    <li class="list-inline-item">
-                        @include('partials.partials-language')
-                    </li>
+{{--                    <li class="list-inline-item">--}}
+{{--                        @include('partials.partials-language')--}}
+{{--                    </li>--}}
                     <li class="list-inline-item">
                         @include('partials.partials-profile-bar')
                     </li>
