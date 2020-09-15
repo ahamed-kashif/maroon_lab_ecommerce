@@ -7,6 +7,10 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Fevicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- app name -->
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
@@ -18,6 +22,12 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <!-- Switchery css -->
+    <link href="{{(asset('plugins/switchery/switchery.min.css'))}}" rel="stylesheet">
+    <link href="{{asset('css/vendor/bootstrap.min.css" rel="stylesheet')}}" type="text/css">
+    <link href="{{asset('css/vendor/icons.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('css/vendor/flag-icon.min.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{asset('/css/vendor/style.css')}}" rel="stylesheet" type="text/css">
 </head>
 <body>
     <div id="app">
@@ -76,5 +86,19 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Start js -->
+    <script src="{{asset('/js/vendor/jquery.min.js')}}"></script>
+    <script src="{{asset('/js/vendor/popper.min.js')}}"></script>
+    <script src="{{asset('/js/vendor/bootstrap.min.js')}}"></script>
+    <script src="{{asset('/js/vendor/modernizr.min.js')}}"></script>
+    <script src="{{asset('/js/vendor/detect.js')}}"></script>
+    <script src="{{asset('/js/vendor/jquery.slimscroll.js')}}"></script>
+    <script src="{{asset('/js/vendor/vertical-menu.js')}}"></script>
+    <!-- Switchery js -->
+    <script src="{{asset('plugins/switchery/switchery.min.js')}}"></script>
+    <!-- Core js -->
+    <script src="{{assets('/js/vendor/core.js')}}"></script>
+    <!-- End js -->
 </body>
 </html>
