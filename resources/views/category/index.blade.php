@@ -7,10 +7,18 @@
     <div class="col-lg-12">
         <div class="card m-b-30">
             <div class="card-header">
-                <h5 class="card-title">Categories</h5>
+                <div class="row">
+                    <div class="col-md-8 col-lg-8">
+                        <h5 class="card-title">Categories</h5>
+                    </div>
+                    <div class="col-md-4 col-md-4">
+                        <a href="{{route('category.create')}}" class="btn btn-primary-rgba mr-1"><i class="feather icon-plus mr-2"></i>{{__('Add New Category')}}</a>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
-                <h6 class="card-subtitle">Categories are displayed here.</h6>
+                <h6 class="card-subtitle">Categories are displayed here. Click the title to show category</h6>
+                @include('partials.alert')
                 <div class="table-responsive">
                     <table id="default-datatable" class="display table table-striped table-bordered">
                         <thead>
@@ -25,7 +33,11 @@
                         <tbody>
                         @foreach($categories as $category)
                             <tr>
-                                <td>{{$category->title}}</td>
+                                <td>
+                                    <a href="{{route('category.show',$category->id)}}">
+                                        {{__($category->title)}}
+                                    </a>
+                                </td>
                                 <td>{{$category->short_code}}</td>
                                 <td>
                                     {{$category->is_active ? 'active' : 'inactive'}}
