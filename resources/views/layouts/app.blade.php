@@ -78,5 +78,7 @@
     <!-- Core js -->
     <script src="{{asset('js/core.js')}}"></script>
     <!-- End js -->
+    {{--    Extra js--}}
+    @yield('js')
 </body>
 </html>
