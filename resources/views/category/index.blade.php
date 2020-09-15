@@ -49,7 +49,7 @@
                                     <div class="dropdown">
                                         <button class="btn btn-link" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal-"></i></button>
                                         <div class="dropdown-menu" aria-labelledby="CustomdropdownMenuButton8">
-                                            <a class="dropdown-item" href="#"><i class="fa fa-edit"></i><span class="text-alias"> edit</span></a>
+                                            <a class="dropdown-item" href="{{route('category.edit',$category->id)}}"><i class="fa fa-edit"></i><span class="text-alias"> edit</span></a>
                                         </div>
                                     </div>
                                 </td>
