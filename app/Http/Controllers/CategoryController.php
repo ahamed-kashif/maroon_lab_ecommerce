@@ -57,9 +57,12 @@ class CategoryController extends Controller
                 'title' => 'required|max:20',
                 'short_code' => 'required|max:5'
             ]);
+
             $category = new Category;
+
             $category->title = $request->title;
             $category->short_code = $request->short_code;
+
             if($request->has('description')){
                 $category->description = $request->description;
             }
@@ -73,6 +76,7 @@ class CategoryController extends Controller
                 return redirect()->back()->withErrors($e);
             }
         }
+        return redirect('home')->with('error','Unauthorized Access!');
 
     }
 
