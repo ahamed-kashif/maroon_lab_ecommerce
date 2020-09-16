@@ -52,26 +52,28 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->can('store category')){
-            $request->validate([
-                'title' => 'required|max:20',
-                'short_code' => 'required|max:5'
-            ]);
-            $category = new Category;
-            $category->title = $request->title;
-            $category->short_code = $request->short_code;
-            if($request->has('description')){
-                $category->description = $request->description;
-            }
-            $category->is_active = $request->has('is_active');
-            $category->is_featured = $request->has('is_featured');
 
-            try{
-                $category->save();
-                return redirect(route('category.index'))->with('success','successfully stored');
-            }catch (\Exception $e){
-                return redirect()->back()->withErrors($e);
-            }
+        $request->validate([
+            'title' => 'required|max:20',
+            'short_code' => 'required|max:5'
+        ]);
+
+        $category = new Category;
+
+        $category->title = $request->title;
+        $category->short_code = $request->short_code;
+
+        if($request->has('description')){
+            $category->description = $request->description;
+        }
+        $category->is_active = $request->has('is_active');
+        $category->is_featured = $request->has('is_featured');
+
+        try{
+            $category->save();
+            return redirect(route('category.index'))->with('success','successfully stored');
+        }catch (\Exception $e){
+            return redirect()->back()->withErrors($e);
         }
 
     }
