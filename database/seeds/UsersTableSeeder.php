@@ -30,7 +30,7 @@ class UsersTableSeeder extends Seeder
         $role = Role::create(['name' => 'admin']);
 
 
-        $admin_user = User::find(0);
+        $admin_user = User::find(1);
         $admin_user->assignRole('super-admin');
     }
 }
