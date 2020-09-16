@@ -20,6 +20,29 @@
                         <li><a href="#">eCommerce</a></li>
                         <li><a href="#">Hospital</a></li>
                         <li><a href="#">Crypto</a></li>
+                        <li><a href="{{route('category.index')}}">Categories</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javaScript:void(0);">
+                        <i class="fa fa-shopping-bag"></i><span>Shop</span><i class="feather icon-chevron-right pull-right"></i>
+                    </a>
+                    <ul class="vertical-submenu">
+                        <li>
+                            <a href="#">Category</a>
+                            <ul class="vertical-submenu">
+                                @foreach(categories() as $item)
+                                <li>
+                                    <a href="{{route('category.show', $item)}}">
+                                        {{$item->title}}
+                                    </a>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </li>
+                        <li><a href="#">eCommerce</a></li>
+                        <li><a href="#">Hospital</a></li>
+                        <li><a href="#">Crypto</a></li>
                         <li><a href="#">School</a></li>
                     </ul>
                 </li>
