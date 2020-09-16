@@ -52,31 +52,29 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        if(auth()->user()->can('store category')){
-            $request->validate([
-                'title' => 'required|max:20',
-                'short_code' => 'required|max:5'
-            ]);
 
-            $category = new Category;
+        $request->validate([
+            'title' => 'required|max:20',
+            'short_code' => 'required|max:5'
+        ]);
 
-            $category->title = $request->title;
-            $category->short_code = $request->short_code;
+        $category = new Category;
 
-            if($request->has('description')){
-                $category->description = $request->description;
-            }
-            $category->is_active = $request->has('is_active');
-            $category->is_featured = $request->has('is_featured');
+        $category->title = $request->title;
+        $category->short_code = $request->short_code;
 
-            try{
-                $category->save();
-                return redirect(route('category.index'))->with('success','successfully stored');
-            }catch (\Exception $e){
-                return redirect()->back()->withErrors($e);
-            }
+        if($request->has('description')){
+            $category->description = $request->description;
         }
-        return redirect('home')->with('error','Unauthorized Access!');
+        $category->is_active = $request->has('is_active');
+        $category->is_featured = $request->has('is_featured');
+
+        try{
+            $category->save();
+            return redirect(route('category.index'))->with('success','successfully stored');
+        }catch (\Exception $e){
+            return redirect()->back()->withErrors($e);
+        }
 
     }
 
