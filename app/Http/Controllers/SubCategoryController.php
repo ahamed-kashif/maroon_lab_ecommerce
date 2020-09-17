@@ -56,10 +56,10 @@ class SubCategoryController extends Controller
 
         try{
             $subcategory->save();
-            dd($subcategory);
-            return redirect('subcategory.index')->with('success','successfully stored');
+            return redirect(route('subcategory.index'))->with('success','successfully stored');
         }catch (\Exception $e){
-            return redirect()->back()->withErrors($e);
+            //dd($e);
+            return redirect()->back()->withErrors($e->getMessage());
         }
 
     }
