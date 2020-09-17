@@ -73,7 +73,7 @@ class CategoryController extends Controller
             $category->save();
             return redirect(route('category.index'))->with('success','successfully stored');
         }catch (\Exception $e){
-            return redirect()->back()->withErrors($e);
+            return redirect()->back()->withErrors($e->getmessage());
         }
 
     }
