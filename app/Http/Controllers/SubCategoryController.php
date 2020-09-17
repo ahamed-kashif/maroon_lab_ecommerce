@@ -39,7 +39,7 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required|max:20',
+            'title' => 'required|max:20|unique:sub_categories',
             'short_code' => 'required|max:5'
         ]);
 
@@ -52,7 +52,7 @@ class SubCategoryController extends Controller
             $subcategory->description = $request->description;
         }
         $subcategory->is_active = $request->has('is_active');
-
+        $subcategory->category_id = 1;
 
         try{
             $subcategory->save();
