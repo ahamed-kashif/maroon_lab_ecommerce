@@ -54,7 +54,7 @@ class CategoryController extends Controller
     {
 
         $request->validate([
-            'title' => 'required|max:20',
+            'title' => 'required|max:20|unique:categories',
             'short_code' => 'required|max:5'
         ]);
 
