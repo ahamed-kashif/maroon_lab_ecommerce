@@ -10,6 +10,6 @@ $factory->define(SubCategory::class, function (Faker $faker) {
         'title' => $faker->userName,
         'description' => $faker->paragraph,
         'short_code' => $faker->streetSuffix,
-        'category_id' => 1
+        'category_id' => 2
     ];
 });

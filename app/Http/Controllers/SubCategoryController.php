@@ -100,8 +100,59 @@ class SubCategoryController extends Controller
         return redirect('home')->with('error','Unauthorized Access!');
     }
 
+    public function destroy($id)
+    {
+        if(auth()->user()->can('delete subcategory')){
+            if(is_numeric($id)){
+                $subcategory = SubCategory::find($id);
+                if($subcategory == null){
+                    return redirect()->back()->with('error','category not exists!');
+                }
+                try{
+                    $subcategory->delete();
+                    return redirect(route('subcategory.index'))->with('success','successfully deleted!');
+                }catch (\Exception $e){
+                    return redirect()->back()->withErrors($e);
+                }
+            }else{
+                return redirect()->back()->with('error','wrong url!');
+            }
+        }
+        return redirect('home')->with('error','Unauthorized Access!');
+    }
+
+    public function update(Request $request, $id)
+    {
+        if(auth()->user()->can('update subcategory')){
+            if(is_numeric($id)){
+                $subcategory = SubCategory::find($id);
+                if($subcategory == null){
+                    return redirect()->back()->with('error','sub-category not exists!');
+                }
+                $request->validate([
+                    'title' => 'required|max:20',
+                    'short_code' => 'required|max:5'
+                ]);
+                $subcategory->title = $request->title;
+                $subcategory->short_code = $request->short_code;
+                if($request->has('description')){
+                    $subcategory->description = $request->description;
+                }
+                $subcategory->is_active = $request->has('is_active');
 
 
+                try{
+                    $subcategory->save();
+                    return redirect(route('subcategory.index'))->with('success','successfully updated!');
+                }catch (\Exception $e){
+                    return redirect()->back()->withErrors($e);
+                }
+            }else{
+                return redirect()->back()->with('error','wrong url!');
+            }
+        }
+        return redirect('home')->with('error','Unauthorized Access!');
+    }
 
 
 

@@ -4,41 +4,33 @@
     <div class="col-lg-12">
         <div class="card m-b-30">
             <div class="card-header">
-                <h5 class="card-title">Edit <a href="{{route('category.show',$category->id)}}" class="h5">{{$category->title}}</a></h5>
+                <h5 class="card-title">Edit <a href="{{route('subcategory.show',$category->id)}}" class="h5">{{$subcategory->title}}</a></h5>
             </div>
             <div class="card-body">
                 @include('partials.alert')
-                <form action="{{route('category.update',$category->id)}}" method="POST">
+                <form action="{{route('subcategory.update',$subcategory->id)}}" method="POST">
                     @csrf
                     @method('PUT')
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="title">title</label>
-                            <input type="text" class="form-control" id="title" placeholder="Title" name="title" value="{{$category->title}}">
+                            <input type="text" class="form-control" id="title" placeholder="Title" name="title" value="{{$subcategory->title}}">
                         </div>
                         <div class="form-group col-md-6">
                             <label for="short_code">short_code</label>
-                            <input type="text" class="form-control" id="short_code" name="short_code" placeholder="Short Code" value="{{$category->short_code}}">
+                            <input type="text" class="form-control" id="short_code" name="short_code" placeholder="Short Code" value="{{$subcategory->short_code}}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="description">description</label>
-                        <textarea type="text" class="form-control" id="description" placeholder="Description" name="description">{{$category->description}}</textarea>
+                        <textarea type="text" class="form-control" id="description" placeholder="Description" name="description">{{$subcategory->description}}</textarea>
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{$category->is_active ? 'checked' : ''}}>
+                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{$subcategory->is_active ? 'checked' : ''}}>
                                 <label class="form-check-label" for="is_active">
                                     Active
-                                </label>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-2">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" {{$category->is_featured ? 'checked' : ''}}>
-                                <label class="form-check-label" for="is_featured">
-                                    Featured
                                 </label>
                             </div>
                         </div>
