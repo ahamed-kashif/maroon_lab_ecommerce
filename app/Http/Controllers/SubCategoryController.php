@@ -97,8 +97,10 @@ class SubCategoryController extends Controller
                 if($SubCategory == null){
                     return redirect()->back()->with('error','Subcategory not exists!');
                 }
+                $categories = Category::all();
                 return view('subcategory.edit')->with([
-                    'subcategory' => $SubCategory
+                    'subcategory' => $SubCategory,
+                    'categories' => $categories
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -119,7 +121,7 @@ class SubCategoryController extends Controller
                     $subcategory->delete();
                     return redirect(route('subcategory.index'))->with('success','successfully deleted!');
                 }catch (\Exception $e){
-                    return redirect()->back()->withErrors($e);
+                    return redirect()->back()->withErrors($e->getMessage());
                 }
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -138,7 +140,8 @@ class SubCategoryController extends Controller
                 }
                 $request->validate([
                     'title' => 'required|max:20',
-                    'short_code' => 'required|max:5'
+                    'short_code' => 'required|max:5',
+                    'category_id' => 'required|int'
                 ]);
                 $subcategory->title = $request->title;
                 $subcategory->short_code = $request->short_code;
@@ -146,13 +149,13 @@ class SubCategoryController extends Controller
                     $subcategory->description = $request->description;
                 }
                 $subcategory->is_active = $request->has('is_active');
-
+                $subcategory->category_id = $request->category_id;
 
                 try{
                     $subcategory->save();
                     return redirect(route('subcategory.index'))->with('success','successfully updated!');
                 }catch (\Exception $e){
-                    return redirect()->back()->withErrors($e);
+                    return redirect()->back()->withErrors($e->getMessage());
                 }
             }else{
                 return redirect()->back()->with('error','wrong url!');
