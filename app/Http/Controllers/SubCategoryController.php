@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Models\SubCategory;
 
@@ -29,7 +30,10 @@ class SubCategoryController extends Controller
     public function create()
     {
         if(auth()->user()->can('create subcategory')){
-            return view('subcategory.create');
+            $categories = Category::all();
+            return view('subcategory.create')->with([
+                'categories' => $categories
+            ]);
         }else{
             return redirect('home')->with('error','Unauthorized Access');
         }
@@ -38,10 +42,13 @@ class SubCategoryController extends Controller
 
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'title' => 'required|max:20|unique:sub_categories',
-            'short_code' => 'required|max:5'
+            'short_code' => 'required|max:5',
+            'category_id' => 'required|int'
         ]);
+
 
         $subcategory = new SubCategory;
 
@@ -52,7 +59,7 @@ class SubCategoryController extends Controller
             $subcategory->description = $request->description;
         }
         $subcategory->is_active = $request->has('is_active');
-        $subcategory->category_id = 1;
+        $subcategory->category_id = $request->category_id;
 
         try{
             $subcategory->save();
