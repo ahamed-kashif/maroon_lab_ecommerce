@@ -10,7 +10,8 @@
                     </span>
 
                 </h3>
-                <small>{{$subcategory->short_code}}</small>
+                <small>Short Code:  {{$subcategory->short_code}}</small><br>
+                <small class="form-group">Category: <span>{{$subcategory->category->title}}</span></small>
             </div>
             <div class="card-body">
                 <p>{{$subcategory->description}}</p>
