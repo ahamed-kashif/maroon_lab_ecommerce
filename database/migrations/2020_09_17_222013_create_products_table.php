@@ -18,6 +18,7 @@ class CreateProductsTable extends Migration
             $table->string('title');
             $table->string('SKU')->unique()->nullable();
             $table->string('description');
+            $table->json('tags');
             $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->float('weight_in_kg')->nullable();
