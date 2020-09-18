@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@include('extras.select2css-extra')
 @section('content')
     <!-- Start col -->
     <div class="col-lg-12">
@@ -34,7 +35,15 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="form-group">
+                        <label for="category_id">Select category</label>
+                        <select class="select2-single form-control" name="category_id" id="category_id" required>
+                            <option>Select any category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}">{{$category->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <button type="submit" class="btn btn-primary">SUBMIT</button>
                 </form>
             </div>
@@ -42,3 +51,4 @@
     </div>
     <!-- End col -->
 @endsection
+@include('extras.select2js-extra')
