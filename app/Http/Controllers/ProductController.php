@@ -39,6 +39,19 @@ class ProductController extends Controller
     }
 
     /**
+     * initial stage of storing. Store a newly created resource in session.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function session_store(Request $request)
+    {
+        $request->validate([
+
+        ]);
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
@@ -48,6 +61,7 @@ class ProductController extends Controller
     {
         //
     }
+
 
     /**
      * Display the specified resource.
