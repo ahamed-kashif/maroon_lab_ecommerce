@@ -21,6 +21,7 @@
                         <li><a href="#">Hospital</a></li>
                         <li><a href="#">Crypto</a></li>
                         <li><a href="{{route('category.index')}}">Categories</a></li>
+                        <li><a href="{{route('subcategory.index')}}">Sub-Categories</a></li>
                     </ul>
                 </li>
                 <li>

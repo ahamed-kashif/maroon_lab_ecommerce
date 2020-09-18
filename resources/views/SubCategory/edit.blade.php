@@ -4,7 +4,7 @@
     <div class="col-lg-12">
         <div class="card m-b-30">
             <div class="card-header">
-                <h5 class="card-title">Edit <a href="{{route('subcategory.show',$category->id)}}" class="h5">{{$subcategory->title}}</a></h5>
+                <h5 class="card-title">Edit <a href="{{route('subcategory.show',$subcategory->id)}}" class="h5">{{$subcategory->title}}</a></h5>
             </div>
             <div class="card-body">
                 @include('partials.alert')
@@ -34,6 +34,15 @@
                                 </label>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="category_id">Select category</label>
+                        <select class="select2-single form-control" name="category_id" id="category_id" required>
+                            <option>Select any category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}" {{$category->id == $subcategory->category_id ? 'selected':''}}>{{$category->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-warning-rgba">

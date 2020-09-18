@@ -13,4 +13,8 @@ class Category extends Model
     public function scopeFeatured($q){
         return $q->where('is_featured','=',1);
     }
+
+    public function subcategories(){
+        return $this->hasMany(Category::class,'category_id');
+    }
 }
