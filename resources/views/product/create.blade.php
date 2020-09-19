@@ -18,13 +18,13 @@
                                 <div class="form-group row">
                                     <label for="productTitle" class="col-sm-12 col-form-label">Product Title</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title">
+                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Description</label>
                                     <div class="col-sm-12">
-                                        <div class="summernote">This is demo product.</div>
+                                        <textarea class="summernote" name="description">This is demo product.</textarea>
                                     </div>
                                 </div>
                             </form>
@@ -42,7 +42,6 @@
                                     <div class="nav flex-column nav-pills" id="v-pills-product-tab" role="tablist" aria-orientation="vertical">
                                         <a class="nav-link mb-2 active" id="v-pills-general-tab" data-toggle="pill" href="#v-pills-general" role="tab" aria-controls="v-pills-general" aria-selected="true"><i class="feather icon-feather mr-2"></i>General</a>
                                         <a class="nav-link mb-2" id="v-pills-stock-tab" data-toggle="pill" href="#v-pills-stock" role="tab" aria-controls="v-pills-stock" aria-selected="false"><i class="feather icon-box mr-2"></i>Stock</a>
-                                        <a class="nav-link mb-2" id="v-pills-shipping-tab" data-toggle="pill" href="#v-pills-shipping" role="tab" aria-controls="v-pills-shipping" aria-selected="false"><i class="feather icon-truck mr-2"></i>Shipping</a>
                                         <a class="nav-link mb-2" id="v-pills-advanced-tab" data-toggle="pill" href="#v-pills-advanced" role="tab" aria-controls="v-pills-advanced" aria-selected="false"><i class="feather icon-settings mr-2"></i>Advanced</a>
                                     </div>
                                 </div>
@@ -53,75 +52,55 @@
                                 <div class="card-body">
                                     <div class="tab-content" id="v-pills-product-tabContent">
                                         <div class="tab-pane fade show active" id="v-pills-general" role="tabpanel" aria-labelledby="v-pills-general-tab">
-                                            <form>
-                                                <div class="form-group row">
-                                                    <label for="regularPrice" class="col-sm-4 col-form-label">Price($)</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="regularPrice" placeholder="100">
-                                                    </div>
+
+                                            <div class="form-group row">
+                                                <label for="regularPrice" class="col-sm-4 col-form-label">Price(&#2547)</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="regularPrice" placeholder="100" name="price">
                                                 </div>
-                                                <div class="form-group row mb-0">
-                                                    <label for="salePrice" class="col-sm-4 col-form-label">Sale Price($)</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="salePrice" placeholder="50">
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row mb-0">
+                                                <label for="salePrice" class="col-sm-4 col-form-label">Sale Price(&#2547)</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="salePrice" placeholder="50" name="sale_price">
                                                 </div>
-                                            </form>
+                                            </div>
+
                                         </div>
                                         <div class="tab-pane fade" id="v-pills-stock" role="tabpanel" aria-labelledby="v-pills-stock-tab">
-                                            <form>
-                                                <div class="form-group row">
-                                                    <label for="sku" class="col-sm-4 col-form-label">SKU</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="sku" placeholder="SKU001">
-                                                    </div>
+
+                                            <div class="form-group row">
+                                                <label for="sku" class="col-sm-4 col-form-label">SKU</label>
+                                                <div class="col-sm-8">
+                                                    <input type="text" class="form-control" id="sku" placeholder="SKU001" name="sku">
                                                 </div>
-                                                <div class="form-group row">
-                                                    <label for="stockStatus" class="col-sm-4 col-form-label">Stock Status</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control" id="stockStatus">
-                                                            <option value="instock">In Stock</option>
-                                                            <option value="outofstock">Out of Stock</option>
-                                                        </select>
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row">
+                                                <label for="stockStatus" class="col-sm-4 col-form-label">Stock Status</label>
+                                                <div class="col-sm-8">
+                                                    <select class="form-control" id="stockStatus" name="in_stock">
+                                                        <option value="instock" value=true>In Stock</option>
+                                                        <option value="outofstock" value=false>Out of Stock</option>
+                                                    </select>
                                                 </div>
-                                                <div class="form-group row mb-0">
-                                                    <label for="stockQuantity" class="col-sm-4 col-form-label">Quantity</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="stockQuantity" placeholder="100">
-                                                    </div>
+                                            </div>
+                                            <div class="form-group row mb-0">
+                                                <label for="stockQuantity" class="col-sm-4 col-form-label">Quantity</label>
+                                                <div class="col-sm-8">
+                                                    <input type="number" class="form-control" id="stockQuantity" placeholder="100" name="quantity">
                                                 </div>
-                                            </form>
-                                        </div>
-                                        <div class="tab-pane fade" id="v-pills-shipping" role="tabpanel" aria-labelledby="v-pills-shipping-tab">
-                                            <form>
-                                                <div class="form-group row">
-                                                    <label for="weight" class="col-sm-4 col-form-label">Weight(kg)</label>
-                                                    <div class="col-sm-8">
-                                                        <input type="text" class="form-control" id="weight" placeholder="0">
-                                                    </div>
-                                                </div>
-                                                <div class="form-group row mb-0">
-                                                    <label for="shippingClass" class="col-sm-4 col-form-label">Shipping Class</label>
-                                                    <div class="col-sm-8">
-                                                        <select class="form-control" id="shippingClass">
-                                                            <option value="noshipping">No Shipping</option>
-                                                            <option value="freeshipping">Free Shipping</option>
-                                                            <option value="fixedshiping">Fixed Shipping</option>
-                                                        </select>
-                                                    </div>
-                                                </div>
-                                            </form>
+                                            </div>
+
                                         </div>
                                         <div class="tab-pane fade" id="v-pills-advanced" role="tabpanel" aria-labelledby="v-pills-advanced-tab">
-                                            <form>
-                                                <div class="form-group row mb-0">
-                                                    <label for="purchaseNote" class="col-sm-3 col-form-label">Purchase note</label>
-                                                    <div class="col-sm-9">
-                                                        <textarea class="form-control" name="purchaseNote" id="purchaseNote" rows="3" placeholder="Purchase note"></textarea>
-                                                    </div>
+
+                                            <div class="form-group row mb-0">
+                                                <label for="purchaseNote" class="col-sm-3 col-form-label">Purchase note</label>
+                                                <div class="col-sm-9">
+                                                    <textarea class="form-control" name="purchaseNote" id="purchaseNote" rows="3" placeholder="Purchase note" name="purchase_note"></textarea>
                                                 </div>
-                                            </form>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
