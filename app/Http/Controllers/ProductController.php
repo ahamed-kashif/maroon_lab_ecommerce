@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Image;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller
 {
@@ -46,9 +48,7 @@ class ProductController extends Controller
      */
     public function session_store(Request $request)
     {
-        $request->validate([
-
-        ]);
+        dd($request->all());
     }
 
     /**
@@ -59,7 +59,14 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required|string|max:20',
+            'description' => 'required|string',
+            'price' => 'required|numeric',
+            'salePrice' => 'nullable|numeric',
+            'images.*' => 'nullable|image|dimensions:ratio=12/13,min_width=600,min_height=650,max_width=1200,max_height=1300'
+        ]);
+        dd($request->all());
     }
 
 

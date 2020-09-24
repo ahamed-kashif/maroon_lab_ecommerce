@@ -3,8 +3,7 @@
     @include('extras.product-css')
 @endsection
 @section('content')
-    @include('partials.alert')
-    <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('product.store')}}" method="post">
         @csrf
         <div class="contentbar">
             <!-- Start row -->
@@ -20,28 +19,16 @@
                                 <div class="form-group row">
                                     <label for="productTitle" class="col-sm-12 col-form-label">Product Title</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title" required>
+                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Description</label>
                                     <div class="col-sm-12">
-                                        <textarea class="summernote" name="description" placeholder="description" required></textarea>
+                                        <textarea class="summernote" name="description">This is demo product.</textarea>
                                     </div>
                                 </div>
                             </form>
-                        </div>
-                    </div>
-                    <div class="card m-b-30">
-                        <div class="card-header">
-                            <h5 class="card-title">Product Image Gallery</h5>
-                        </div>
-                        <div class="card-body image-container">
-
-                        </div>
-                        <div class="card-footer">
-                            <label>select images are of jpeg,jpg or png formatted</label>
-                            <input type="file" class="btn-lg btn-block image" name="images[]" accept="image/png, image/jpeg, image/jpf" multiple title="upload">
                         </div>
                     </div>
                     <div class="card m-b-30">
@@ -70,7 +57,7 @@
                                             <div class="form-group row">
                                                 <label for="regularPrice" class="col-sm-4 col-form-label">Price(&#2547)</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="regularPrice" placeholder="100" name="price" required>
+                                                    <input type="text" class="form-control" id="regularPrice" placeholder="100" name="price">
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-0">
@@ -92,7 +79,7 @@
                                             <div class="form-group row">
                                                 <label for="stockStatus" class="col-sm-4 col-form-label">Stock Status</label>
                                                 <div class="col-sm-8">
-                                                    <select class="form-control" id="stockStatus" name="in_stock" required>
+                                                    <select class="form-control" id="stockStatus" name="in_stock">
                                                         <option value="instock" value=true>In Stock</option>
                                                         <option value="outofstock" value=false>Out of Stock</option>
                                                     </select>
@@ -215,6 +202,25 @@
                             </div>
                         </div>
                     </div>
+                    <div class="card m-b-30">
+                        <div class="card-header">
+                            <h5 class="card-title">Product Image Gallery</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="d-inline-block mb-1">
+                                <img src="assets/images/ecommerce/product_gallery_01.jpg" alt="Rounded Image" class="img-fluid rounded">
+                            </div>
+                            <div class="d-inline-block mb-1">
+                                <img src="assets/images/ecommerce/product_gallery_02.jpg" alt="Rounded Image" class="img-fluid rounded">
+                            </div>
+                            <div class="d-inline-block mb-1">
+                                <img src="assets/images/ecommerce/product_gallery_03.jpg" alt="Rounded Image" class="img-fluid rounded">
+                            </div>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" class="btn btn-primary-rgba btn-lg btn-block">Add Gallery</button>
+                        </div>
+                    </div>
                 </div>
                 <!-- End col -->
             </div>
@@ -225,41 +231,23 @@
 @section('js')
     @include('extras.product-js')
     <script>
-        $(document).ready(function() {
-            let $imagesContainer = $('.image-container');
-            $imagesContainer.hide();
-            $('.image').change(function () {
-                if (typeof (FileReader) != "undefined") {
-                    $imagesContainer.html('');
-                    $imagesContainer.show();
-                    let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png|)$/;
-                    $($(this)[0].files).each(function () {
-                        let file = $(this);
-                        if (regex.test(file[0].name.toLowerCase())) {
-                            let reader = new FileReader();
-                            reader.onload = function (e) {
-                                let imageContainer = $('<div />')
-                                imageContainer.addClass('d-inline-block')
-                                    .addClass('mb-1')
-                                let img = $('<img />');
-                                img.addClass('img-fluid rounded').addClass('p-2')
-                                img.attr('style', 'height:100px;width: 100px');
-                                img.attr('src', e.target.result);
-                                console.log(e.target.result);
-                                imageContainer.append(img);
-                                $imagesContainer.append(imageContainer);
-                            }
-                            reader.readAsDataURL(file[0]);
-                        } else {
-                            alert(file[0].name + " is not a valid image file.");
-                            $imagesContainer.html("");
-                            return false;
-                        }
-                    });
-                } else {
-                    alert("This browser does not support HTML5 FileReader.");
-                }
+        $(document).ready(function(){
+            let $selectedCategories = [];
+            $.each($(".category"), function(){
+                $(this).change(function(){
+                    if(this.checked){
+                        $selectedCategories.push($(this).val());
+                        console.log($selectedCategories);
+                    }else{
+                        let removeItem = $(this).val();
+                        $selectedCategories = jQuery.grep($selectedCategories, function(value) {
+                            return value != removeItem;
+                        });
+                        console.log($selectedCategories);
+                    }
+                });
             });
+
         });
     </script>
 @endsection
