@@ -79,6 +79,31 @@
                                                     <input type="text" class="form-control" id="salePrice" placeholder="50" name="sale_price">
                                                 </div>
                                             </div>
+                                            <div class="form-group row mb-0 mt-2 p-2">
+                                                <div class="col-sm-8">
+                                                    <div class="form-row">
+                                                        <div class="col-sm-6 ">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active">
+                                                                <label class="form-check-label" for="is_active">
+                                                                    Active
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured">
+                                                                <label class="form-check-label" for="is_featured">
+                                                                    Featured
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
 
                                         </div>
                                         <div class="tab-pane fade" id="v-pills-stock" role="tabpanel" aria-labelledby="v-pills-stock-tab">
@@ -93,8 +118,8 @@
                                                 <label for="stockStatus" class="col-sm-4 col-form-label">Stock Status</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control" id="stockStatus" name="in_stock" required>
-                                                        <option value="instock" value=true>In Stock</option>
-                                                        <option value="outofstock" value=false>Out of Stock</option>
+                                                        <option value="instock">In Stock</option>
+                                                        <option value="outofstock">Out of Stock</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -111,7 +136,7 @@
                                             <div class="form-group row mb-0">
                                                 <label for="purchaseNote" class="col-sm-3 col-form-label">Purchase note</label>
                                                 <div class="col-sm-9">
-                                                    <textarea class="form-control" name="purchaseNote" id="purchaseNote" rows="3" placeholder="Purchase note" name="purchase_note"></textarea>
+                                                    <textarea class="form-control" name="purchase_note" id="purchaseNote" rows="3" placeholder="Purchase note" name="purchase_note"></textarea>
                                                 </div>
                                             </div>
 
