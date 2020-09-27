@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Image;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller
@@ -35,9 +36,11 @@ class ProductController extends Controller
     {
         $categories = Category::all();
         $subcategories = SubCategory::all();
+        $product = Product::find(16);
         return view('product.create')->with([
             'categories' => $categories,
-            'subcategories' => $subcategories
+            'subcategories' => $subcategories,
+            'product' => $product
         ]);
     }
 
@@ -60,7 +63,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $image = $request->file('images')[0]->store('public/images/products');
+//        $url = Storage::url($request->file('images')[0]->store('public/images/products'));
+//        dd($url);
         $request->validate([
             'title' => 'required|string|max:20',
             'description' => 'required|string',
@@ -101,8 +105,9 @@ class ProductController extends Controller
             }
             if($request->has('images')){
                 foreach ($request->file('images') as $img){
+
                     $product->images()->create([
-                       'url' =>  $img->store('public/images/products')
+                       'url' =>  Storage::url($img->store('public/images/products'))
                     ]);
                 }
             }
