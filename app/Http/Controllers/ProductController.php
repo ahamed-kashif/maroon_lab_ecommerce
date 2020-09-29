@@ -24,7 +24,11 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //
+        $products = Product::all();
+        //dd(Product::find(17)->categories()->get());
+        return view('product.index')->with([
+           'products' => $products
+        ]);
     }
 
     /**
@@ -138,7 +142,12 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        //
+        $product = Product::find($id);
+        $categories = Category::all();
+        return view('product.edit')->with([
+           'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     /**
@@ -161,6 +170,12 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $product = Product::find($id);
+        try{
+            $product->delete();
+            return redirect()->route('product.index')->with('success','successfully deleted');
+        }catch(\Exception $e){
+            return redirect()->route('product.index')->withErrors($e->getMessage());
+        }
     }
 }

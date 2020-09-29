@@ -19,13 +19,13 @@
                                 <div class="form-group row">
                                     <label for="productTitle" class="col-sm-12 col-form-label">Product Title</label>
                                     <div class="col-sm-12">
-                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title">
+                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title" value="{{$product->title}}">
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Description</label>
                                     <div class="col-sm-12">
-                                        <textarea class="summernote" name="description">This is demo product.</textarea>
+                                        <textarea class="summernote" name="description">{{$product->description}}</textarea>
                                     </div>
                                 </div>
                             </form>
@@ -57,13 +57,13 @@
                                             <div class="form-group row">
                                                 <label for="regularPrice" class="col-sm-4 col-form-label">Price(&#2547)</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="regularPrice" placeholder="100" name="price">
+                                                    <input type="text" class="form-control" id="regularPrice" placeholder="100" name="price" value="{{$product->price}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-0">
                                                 <label for="salePrice" class="col-sm-4 col-form-label">Sale Price(&#2547)</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="salePrice" placeholder="50" name="sale_price">
+                                                    <input type="text" class="form-control" id="salePrice" name="sale_price" value="{{$product->discounted_price}}">
                                                 </div>
                                             </div>
 
@@ -73,22 +73,22 @@
                                             <div class="form-group row">
                                                 <label for="sku" class="col-sm-4 col-form-label">SKU</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="sku" placeholder="SKU001" name="sku">
+                                                    <input type="text" class="form-control" id="sku" name="sku" value="{{$product->sku}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="stockStatus" class="col-sm-4 col-form-label">Stock Status</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control" id="stockStatus" name="in_stock">
-                                                        <option value="instock" value=true>In Stock</option>
-                                                        <option value="outofstock" value=false>Out of Stock</option>
+                                                        <option value="instock" value={{$product->in_stock ? true : false}}>In Stock</option>
+                                                        <option value="outofstock" value={{!$product->in_stock ? true : false}}>Out of Stock</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-0">
                                                 <label for="stockQuantity" class="col-sm-4 col-form-label">Quantity</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" class="form-control" id="stockQuantity" placeholder="100" name="quantity">
+                                                    <input type="number" class="form-control" id="stockQuantity" name="quantity" value="{{$product->quantity}}">
                                                 </div>
                                             </div>
 
@@ -98,7 +98,7 @@
                                             <div class="form-group row mb-0">
                                                 <label for="purchaseNote" class="col-sm-3 col-form-label">Purchase note</label>
                                                 <div class="col-sm-9">
-                                                    <textarea class="form-control" name="purchaseNote" id="purchaseNote" rows="3" placeholder="Purchase note" name="purchase_note"></textarea>
+                                                    <textarea class="form-control" name="purchaseNote" id="purchaseNote" rows="3" name="purchase_note">{{$product->purchase_note}}</textarea>
                                                 </div>
                                             </div>
 
@@ -110,8 +110,8 @@
                     </div>
                     <div class="card m-b-30">
                         <div class="card-header">
-                            <h6 class="card-subtitle">If you are satisfied hit the save button..</h6>
-                            <button class="btn btn-outline-primary btn-lg btn-block" type="submit"><i class="feather icon-save mr-2"></i>SAVE</button>
+                            <h6 class="card-subtitle">If you are satisfied hit the update button..</h6>
+                            <button class="btn btn-outline-warning btn-lg btn-block" type="submit"><i class="feather icon-upload mr-2"></i>Update</button>
                         </div>
                     </div>
                 </div>
@@ -126,7 +126,7 @@
                             @if($categories->count() != 0)
                                 @foreach($categories as $category)
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input category" id="{{$category->id}}" name="category_id[]" value="{{$category->id}}">
+                                        <input type="checkbox" class="custom-control-input category" id="{{$category->id}}" name="category_id[]" value="{{$category->id}}" {{$product->categories->contains($category) ? 'checked':''}}>
                                         <label class="custom-control-label" for="{{$category->id}}">{{$category->title}}</label>
                                     </div>
                                 @endforeach
@@ -231,23 +231,40 @@
 @section('js')
     @include('extras.product-js')
     <script>
-        $(document).ready(function(){
-            let $selectedCategories = [];
-            $.each($(".category"), function(){
-                $(this).change(function(){
-                    if(this.checked){
-                        $selectedCategories.push($(this).val());
-                        console.log($selectedCategories);
-                    }else{
-                        let removeItem = $(this).val();
-                        $selectedCategories = jQuery.grep($selectedCategories, function(value) {
-                            return value != removeItem;
-                        });
-                        console.log($selectedCategories);
-                    }
-                });
+        $(document).ready(function() {
+            let $imagesContainer = $('.image-container');
+            $('.image').change(function () {
+                if (typeof (FileReader) != "undefined") {
+                    $imagesContainer.html('');
+                    $imagesContainer.show();
+                    let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png|)$/;
+                    $($(this)[0].files).each(function () {
+                        let file = $(this);
+                        if (regex.test(file[0].name.toLowerCase())) {
+                            let reader = new FileReader();
+                            reader.onload = function (e) {
+                                let imageContainer = $('<div />')
+                                imageContainer.addClass('d-inline-block')
+                                    .addClass('mb-1')
+                                let img = $('<img />');
+                                img.addClass('img-fluid rounded').addClass('p-2')
+                                img.attr('style', 'height:100px;width: 100px');
+                                img.attr('src', e.target.result);
+                                console.log(e.target.result);
+                                imageContainer.append(img);
+                                $imagesContainer.append(imageContainer);
+                            }
+                            reader.readAsDataURL(file[0]);
+                        } else {
+                            alert(file[0].name + " is not a valid image file.");
+                            $imagesContainer.html("");
+                            return false;
+                        }
+                    });
+                } else {
+                    alert("This browser does not support HTML5 FileReader.");
+                }
             });
-
         });
     </script>
 @endsection
