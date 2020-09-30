@@ -34,7 +34,7 @@
                                     <tr>
                                         <td>{{$product->title}}</td>
                                         <td>
-                                            @if($product->active_status)
+                                            @if($product->is_active)
                                                 <span class="text-success">Active</span>
                                             @else
                                                 <span class="text-danger">Inactive</span>
@@ -48,7 +48,7 @@
                                                 {{ $item->title.', ' }}
                                                 @endforeach
                                             @else
-                                            No category assigned!
+                                                <blockquote class="text-warning">No category assigned!</blockquote>
                                             @endif
                                         </td>
                                         <td>yet tobe developed</td>

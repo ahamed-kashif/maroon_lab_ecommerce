@@ -7,20 +7,22 @@ use App\Models\Product;
 use App\Models\Image;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\Console\Input\Input;
+use File;
 
 class ProductController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+//    public function __construct()
+//    {
+//        $this->middleware('auth');
+//    }
 
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function index()
     {
@@ -34,7 +36,7 @@ class ProductController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function create()
     {
@@ -48,22 +50,12 @@ class ProductController extends Controller
         ]);
     }
 
-    /**
-     * initial stage of storing. Store a newly created resource in session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function session_store(Request $request)
-    {
-        dd($request->all());
-    }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Response
      */
     public function store(Request $request)
     {
@@ -127,7 +119,7 @@ class ProductController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function show($id)
     {
@@ -138,7 +130,7 @@ class ProductController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function edit($id)
     {
@@ -151,11 +143,43 @@ class ProductController extends Controller
     }
 
     /**
+     * delete the the specified product's specified image.
+     *
+     *
+     * @param $product_id
+     * @param $image_id
+     * @return string[]
+     */
+    public function destroy_image($product_id, $image_id)
+    {
+        $response = [];
+        try{
+            $product = Product::find($product_id);
+            $image = Image::find($image_id);
+            $response['data'] = $image;
+            if($product->images->contains($image)){
+                if(File::exists(public_path($image->url))){
+                    File::delete(public_path($image->url));
+                }else{
+                    $response['message'] = 'image does not exists';
+                }
+            }else{
+                $response['message'] = 'this image does not belongs to the specified product';
+            }
+            $product->images()->detach($image_id);
+            $image->delete();
+            $response['message'] = 'Successfully deleted this image';
+        }catch(\Exception $e){
+            $response['message'] = $e->getMessage();
+        }
+        return $response;
+    }
+    /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param Request $request
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function update(Request $request, $id)
     {
@@ -166,12 +190,19 @@ class ProductController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Response
      */
     public function destroy($id)
     {
         $product = Product::find($id);
         try{
+            foreach($product->images()->get() as $img){
+                if(File::exists(public_path($img->url))){
+                    File::delete(public_path($img->url));
+                }
+            }
+            $product->images()->detach();
+            $product->categories()->detach();
             $product->delete();
             return redirect()->route('product.index')->with('success','successfully deleted');
         }catch(\Exception $e){

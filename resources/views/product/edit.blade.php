@@ -15,20 +15,47 @@
                             <h5 class="card-title">Product Detail</h5>
                         </div>
                         <div class="card-body">
-                            <form>
-                                <div class="form-group row">
-                                    <label for="productTitle" class="col-sm-12 col-form-label">Product Title</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title" value="{{$product->title}}">
-                                    </div>
+                            <div class="form-group row">
+                                <label for="productTitle" class="col-sm-12 col-form-label">Product Title</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title" value="{{$product->title}}">
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-form-label">Description</label>
-                                    <div class="col-sm-12">
-                                        <textarea class="summernote" name="description">{{$product->description}}</textarea>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label">Description</label>
+                                <div class="col-sm-12">
+                                    <textarea class="summernote" name="description">{{$product->description}}</textarea>
                                 </div>
-                            </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card m-b-30">
+                        <div class="card-header">
+                            <h5 class="card-title">Product Image Gallery</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                @if($product->images()->count() != 0)
+                                    @foreach($product->images()->get() as $img)
+                                        <span class="pull-right clickable close-icon cross" data-effect="fadeOut">
+                                            <img class="img-fluid rounded p-2" style="height:100px;width: 100px" src="{{asset($img->url)}}"/>
+                                            <a class="delete_image" id="{{$img->id}}" href="#">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </span>
+                                    @endforeach
+                                @else
+                                    <h5>No image uploaded yet!</h5>
+                                @endif
+                            </div>
+                            <div class="row  image-container">
+
+                            </div>
+
+                        </div>
+                        <div class="card-footer">
+                            <label>select images are of jpeg,jpg or png formatted</label>
+                            <input type="file" class="btn-lg btn-block image" name="images[]" accept="image/png, image/jpeg, image/jpf" multiple title="upload">
                         </div>
                     </div>
                     <div class="card m-b-30">
@@ -80,8 +107,8 @@
                                                 <label for="stockStatus" class="col-sm-4 col-form-label">Stock Status</label>
                                                 <div class="col-sm-8">
                                                     <select class="form-control" id="stockStatus" name="in_stock">
-                                                        <option value="instock" value={{$product->in_stock ? true : false}}>In Stock</option>
-                                                        <option value="outofstock" value={{!$product->in_stock ? true : false}}>Out of Stock</option>
+                                                        <option value="instock" value={{$product->in_stock ? 'selected' : ''}}>In Stock</option>
+                                                        <option value="outofstock" >Out of Stock</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -202,25 +229,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card m-b-30">
-                        <div class="card-header">
-                            <h5 class="card-title">Product Image Gallery</h5>
-                        </div>
-                        <div class="card-body">
-                            <div class="d-inline-block mb-1">
-                                <img src="assets/images/ecommerce/product_gallery_01.jpg" alt="Rounded Image" class="img-fluid rounded">
-                            </div>
-                            <div class="d-inline-block mb-1">
-                                <img src="assets/images/ecommerce/product_gallery_02.jpg" alt="Rounded Image" class="img-fluid rounded">
-                            </div>
-                            <div class="d-inline-block mb-1">
-                                <img src="assets/images/ecommerce/product_gallery_03.jpg" alt="Rounded Image" class="img-fluid rounded">
-                            </div>
-                        </div>
-                        <div class="card-footer">
-                            <button type="button" class="btn btn-primary-rgba btn-lg btn-block">Add Gallery</button>
-                        </div>
-                    </div>
                 </div>
                 <!-- End col -->
             </div>
@@ -230,13 +238,13 @@
 @endsection
 @section('js')
     @include('extras.product-js')
+    <script src="{{asset('js/restapi.js')}}"></script>
     <script>
         $(document).ready(function() {
             let $imagesContainer = $('.image-container');
             $('.image').change(function () {
                 if (typeof (FileReader) != "undefined") {
                     $imagesContainer.html('');
-                    $imagesContainer.show();
                     let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png|)$/;
                     $($(this)[0].files).each(function () {
                         let file = $(this);
@@ -265,6 +273,24 @@
                     alert("This browser does not support HTML5 FileReader.");
                 }
             });
+            $('.delete_image').on('click',function(){
+                let url = '{{route('product.image.destroy',[$product->id,'image_id'])}}';
+                url = url.replace('image_id', $(this).attr('id'));
+                let parent = $(this).parent();
+                let deleteImage =$.ajax({
+                    dataType: 'json',
+                    type : 'delete',
+                    url : url,
+                });
+                deleteImage.done(function(data){
+                    console.log(data);
+                    parent.remove();
+                });
+                deleteImage.fail(function(data){
+                    alert('something went wrong!');
+                    parent.remove();
+                });
+             });
         });
     </script>
 @endsection
