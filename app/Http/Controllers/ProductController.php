@@ -14,10 +14,6 @@ use File;
 
 class ProductController extends Controller
 {
-//    public function __construct()
-//    {
-//        $this->middleware('auth');
-//    }
 
     /**
      * Display a listing of the resource.
@@ -27,7 +23,6 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        //dd(Product::find(17)->categories()->get());
         return view('product.index')->with([
            'products' => $products
         ]);
@@ -59,8 +54,6 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-//        $url = Storage::url($request->file('images')[0]->store('public/images/products'));
-//        dd($url);
         $request->validate([
             'title' => 'required|string|max:20',
             'description' => 'required|string',
@@ -114,17 +107,6 @@ class ProductController extends Controller
 
     }
 
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.

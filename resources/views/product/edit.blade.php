@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('css')
     @include('extras.product-css')
+    @include('extras.sweetalert2-css')
 @endsection
 @section('content')
     <form action="{{route('product.store')}}" method="post">
@@ -39,7 +40,7 @@
                                     @foreach($product->images()->get() as $img)
                                         <span class="pull-right clickable close-icon cross" data-effect="fadeOut">
                                             <img class="img-fluid rounded p-2" style="height:100px;width: 100px" src="{{asset($img->url)}}"/>
-                                            <a class="delete_image" id="{{$img->id}}" href="#">
+                                            <a class="delete_image" id="{{$img->id}}" href="javaScript:void(0);">
                                                 <i class="fa fa-times"></i>
                                             </a>
                                         </span>
@@ -238,6 +239,7 @@
 @endsection
 @section('js')
     @include('extras.product-js')
+    @include('extras.sweetalert2-js')
     <script src="{{asset('js/restapi.js')}}"></script>
     <script>
         $(document).ready(function() {
@@ -279,15 +281,26 @@
                 let parent = $(this).parent();
                 let deleteImage =$.ajax({
                     dataType: 'json',
-                    type : 'delete',
+                    type : 'DELETE',
+                    data: {api_token: $api_token},
                     url : url,
                 });
+
                 deleteImage.done(function(data){
-                    console.log(data);
                     parent.remove();
+                    swal(
+                        {
+                            title: 'Nice Work!',
+                            text: data.message,
+                            type: 'success',
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                    )
                 });
                 deleteImage.fail(function(data){
-                    alert('something went wrong!');
+                    alert(data.message);
                     parent.remove();
                 });
              });
