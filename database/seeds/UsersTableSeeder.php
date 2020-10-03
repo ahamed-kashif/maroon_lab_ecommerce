@@ -21,6 +21,7 @@ class UsersTableSeeder extends Seeder
                 'name'	=>	'Mr. Admin',
                 'email'		=>	'admin@maroon.lab',
                 'mobile_number' => '01783511730',
+                'api_token' => Hash::make(rand()),
                 'password'	=>	Hash::make('12345678')
             ]
         );
