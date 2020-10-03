@@ -4,8 +4,10 @@
     @include('extras.sweetalert2-css')
 @endsection
 @section('content')
-    <form action="{{route('product.store')}}" method="post">
+    @include('partials.alert')
+    <form action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="contentbar">
             <!-- Start row -->
             <div class="row">
@@ -92,6 +94,31 @@
                                                 <label for="salePrice" class="col-sm-4 col-form-label">Sale Price(&#2547)</label>
                                                 <div class="col-sm-8">
                                                     <input type="text" class="form-control" id="salePrice" name="sale_price" value="{{$product->discounted_price}}">
+                                                </div>
+                                            </div>
+                                            <div class="form-group row mb-0 mt-2 p-2">
+                                                <div class="col-sm-8">
+                                                    <div class="form-row">
+                                                        <div class="col-sm-6 ">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{$product->is_active?'checked':''}}>
+                                                                <label class="form-check-label" for="is_active">
+                                                                    Active
+                                                                </label>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="form-check">
+                                                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" {{$product->is_featured?'checked':''}}>
+                                                                <label class="form-check-label" for="is_featured">
+                                                                    Featured
+                                                                </label>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
                                                 </div>
                                             </div>
 
