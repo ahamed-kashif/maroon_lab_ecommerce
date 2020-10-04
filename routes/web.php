@@ -20,5 +20,11 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('category','CategoryController');
 Route::resource('subcategory','SubCategoryController');
-Route::resource('product','ProductController');
-Route::get('store','StoreController@index')->name('store.index');
+Route::prefix('product')->middleware('auth')->group(function () {
+    Route::get('/', 'Productcontroller@index')->name('product.index');
+    Route::get('/create', 'Productcontroller@create')->name('product.create');
+    Route::post('/', 'Productcontroller@store')->name('product.store');
+    Route::get('/edit/{id}', 'Productcontroller@edit')->name('product.edit');
+    Route::put('/{id}', 'Productcontroller@update')->name('product.update');
+    Route::delete('/{id}', 'Productcontroller@destroy')->name('product.destroy');
+});
