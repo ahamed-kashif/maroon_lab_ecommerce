@@ -21,4 +21,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('category','CategoryController');
 Route::resource('subcategory','SubCategoryController');
 Route::resource('product','ProductController');
-Route::get('store','StoreController@index');
+Route::get('store','StoreController@index')->name('store.index');
