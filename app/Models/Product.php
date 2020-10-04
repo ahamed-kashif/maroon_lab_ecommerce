@@ -18,4 +18,7 @@ class Product extends Model
     public function images(){
         return $this->morphToMany(Image::class,'imageable');
     }
+    public function scopeActive($query){
+        return $query->where('is_active',1);
+    }
 }
