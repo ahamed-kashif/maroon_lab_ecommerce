@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('css')
+    @include('extras.select2css-extra')
+@endsection
 @section('content')
     <!-- Start col -->
     <div class="col-lg-12">
@@ -35,6 +38,15 @@
                             </div>
                         </div>
                     </div>
+                    <div class="form-group">
+                        <label for="category_id">Select category</label>
+                        <select class="select2-single form-control" name="category_id" id="category_id" required>
+                            <option>Select any category</option>
+                            @foreach($categories as $category)
+                                <option value="{{$category->id}}" {{$category->id == $subcategory->category_id ? 'selected':''}}>{{$category->title}}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
                     <button type="submit" class="btn btn-warning-rgba">
                         <i class="feather icon-upload mr-2"></i>
@@ -45,4 +57,7 @@
         </div>
     </div>
     <!-- End col -->
+@endsection
+@section('js')
+    @include('extras.select2js-extra')
 @endsection

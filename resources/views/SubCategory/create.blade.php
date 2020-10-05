@@ -1,5 +1,7 @@
 @extends('layouts.app')
-@include('extras.select2css-extra')
+@section('css')
+    @include('extras.select2css-extra')
+@endsection
 @section('content')
     <!-- Start col -->
     <div class="col-lg-12">
@@ -51,4 +53,6 @@
     </div>
     <!-- End col -->
 @endsection
-@include('extras.select2js-extra')
+@section('js')
+    @include('extras.select2js-extra')
+@endsection
