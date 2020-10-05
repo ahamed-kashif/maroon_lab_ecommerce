@@ -28,3 +28,6 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::put('/{id}', 'Productcontroller@update')->name('product.update');
     Route::delete('/{id}', 'Productcontroller@destroy')->name('product.destroy');
 });
+Route::prefix('shop')->group(function(){
+   Route::get('/', 'StoreController@index')->name('store.index');
+});
