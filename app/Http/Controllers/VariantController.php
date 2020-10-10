@@ -125,7 +125,7 @@ class VariantController extends Controller
     {
         $request->validate([
             'title' => 'required|max:20',
-            'code' => 'required|max:30',
+            'value' => 'required|max:30',
         ]);
 
         if(is_numeric($id)){
@@ -134,7 +134,7 @@ class VariantController extends Controller
                 return redirect()->back()->with('error','Variant not exists!');
             }
             $variant->title = $request->title;
-            $variant->code = $request->code;
+            $variant->value = $request->value;
             try{
                 $variant->save();
                 return redirect(route('variant.index'))->with('success','successfully updated!');
