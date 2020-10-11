@@ -2,7 +2,7 @@
 @section('content')
     <div class="contentbar mt-0">
         <!-- Start row -->
-        <div class="row">
+        <div class="row mt-1">
             <!-- Start col -->
             <div class="col-lg-11 col-xl-12">
                 <div class="card m-b-30">
@@ -14,9 +14,9 @@
                         <div class="row align-items-center ecommerce-sortby">
                             <!-- Start col -->
                             <div class="col-md-12 col-lg-12 col-xl-4">
-                                <select class="form-control" id="productSortBy">
-                                    <option>Price - Low to High</option>
-                                    <option>Price - High to Low</option>
+                                <select class="form-control" id="productSortBy" onchange="location = this.value;">
+                                    <option value="{{route('store.index',['price' => 'asc'])}}" {{isset($_GET['price']) && $_GET['price'] === 'asc' ? 'selected' : ''}}>Price - Low to High</option>
+                                    <option value="{{route('store.index',['price' => 'desc'])}}" {{isset($_GET['price']) && $_GET['price'] === 'desc' ? 'selected' : ''}}>Price - High to Low</option>
                                     <option>Newest</option>
                                     <option>Popularity</option>
                                     <option>Average Rating</option>
@@ -33,7 +33,7 @@
                                     <div class="col-lg-6 col-xl-4">
                                         <div class="product-bar m-b-30">
                                             <div class="product-head">
-                                                <a href="#">
+                                                <a href="{{route('store.product.show', $product->id)}}">
                                                     @if($product->images()->count() != 0)
                                                         <img src="{{asset($product->images()->first()->url) }}" class="img-fluid" alt="product">
                                                     @else

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 
@@ -12,10 +13,16 @@ class StoreController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::active()->paginate(12);
-        //dd($products->has('images'));
+        $products = Product::active();
+        if($request->has('category')){
+            $category = $request->category;
+            $products = $products->whereHas('categories',  function($q) use ($category){
+                $q->where('category_id',$category);
+            });
+        }
+        $products = $products->paginate(12);
         return view('store.index')->with([
             'products' => $products
         ]);
@@ -48,9 +55,12 @@ class StoreController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function product($id)
     {
-        //
+        $product = Product::find($id);
+        return view('store.product_show')->with([
+            'product' => $product
+        ]);
     }
 
     /**
