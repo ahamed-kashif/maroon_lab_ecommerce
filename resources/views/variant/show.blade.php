@@ -4,9 +4,9 @@
         <div class="card m-b-30">
             <div class="card-header">
                 <h3 class="card-title">
-                    {{$variant->title}}</h3>
+                    {{$variant->value}}</h3>
+                <small>{{$variant->varianttype->title}}</small>
 
-                <small>{{$variant->code}}</small>
             </div>
             <div class="card-body">
                 <div class="col-md-6 col-lg-6">

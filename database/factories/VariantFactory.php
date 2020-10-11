@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Variant::class, function (Faker $faker) {
     return [
-        'title' => $faker->userName,
-        'code' => $faker->streetSuffix,
+        'value' => $faker->userName,
+        'variant_type_id' => 1,
         //'short_code' => $faker->streetSuffix,
         //'category_id' => 2
     ];

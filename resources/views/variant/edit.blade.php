@@ -13,13 +13,19 @@
                     @method('PUT')
                     <div class="form-row">
                         <div class="form-group col-md-6">
-                            <label for="title">title</label>
-                            <input type="text" class="form-control" id="title" placeholder="Title" name="title" value="{{$variant->title}}">
+                            <label for="value">value</label>
+                            <input type="text" class="form-control" id="value" placeholder="Value" name="value" value="{{$variant->value}}">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="code">code</label>
-                            <input type="text" class="form-control" id="code" name="code" placeholder="Code" value="{{$variant->code}}">
-                        </div>
+
+                    </div>
+                    <div class="form-group">
+                        <label for="category_id">Select Variant Type</label>
+                        <select class="select2-single form-control" name="variant_type_id" id="variant_type_id" required>
+                            <option>Select any variant</option>
+                            @foreach($variantTypes as $variantT)
+                                <option value="{{$variantT->id}}" {{$variantT->id == $variant->variant_type_id ? 'selected' : ''}}>{{$variantT->title}}</option>
+                            @endforeach
+                        </select>
                     </div>
 
                     <button type="submit" class="btn btn-warning-rgba">

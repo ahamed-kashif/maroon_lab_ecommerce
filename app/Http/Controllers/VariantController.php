@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Variant;
+use App\Models\VariantType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\View\View;
 
 class VariantController extends Controller
 {
@@ -39,12 +42,12 @@ class VariantController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
+     * @return view
      */
     public function create()
     {
         if(auth()->user()->can('create variant')){
-            $variant = Variant::all();
+            $variant = VariantType::all();
             return view('variant.create')->with([
                 'variants' => $variant
             ]);
@@ -65,13 +68,13 @@ class VariantController extends Controller
     {
 
         $request->validate([
-            'title' => 'required|max:20',
-            'code' => 'required|max:30',
+            'value' => 'required|max:20',
+
         ]);
 
         $variant = new Variant;
-        $variant->title = $request->title;
-        $variant->code = $request->code;
+        $variant->value = $request->value;
+        $variant->variant_type_id = $request->variant_type_id;
 
         try{
             $variant->save();
@@ -84,8 +87,8 @@ class VariantController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\variant  $variant
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @param    $id
+     * @return view|Redirect
      */
     public function show($id){
         if(auth()->user()->can('show subcategory')){
@@ -116,11 +119,13 @@ class VariantController extends Controller
         if(auth()->user()->can('show variant')){
             if(is_numeric($id)){
                 $variant = Variant::find($id);
+                $variantTypes = VariantType::all();
                 if($variant == null){
                     return redirect()->back()->with('error','Variant not exists!');
                 }
                 return view('variant.edit')->with([
-                    'variant' => $variant
+                    'variant' => $variant,
+                    'variantTypes' => $variantTypes
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -140,8 +145,8 @@ class VariantController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required|max:20',
-            'code' => 'required|max:30',
+            'value' => 'required|max:20',
+
         ]);
 
         if(auth()->user()->can('update variant')){
@@ -150,8 +155,8 @@ class VariantController extends Controller
                 if($variant == null){
                     return redirect()->back()->with('error','Variant not exists!');
                 }
-                $variant->title = $request->title;
-                $variant->code = $request->code;
+                $variant->value = $request->value;
+                $variant->variant_type_id = $request->variant_type_id;
                 try{
                     $variant->save();
                     return redirect(route('variant.index'))->with('success','successfully updated!');
