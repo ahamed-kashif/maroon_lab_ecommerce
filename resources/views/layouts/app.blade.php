@@ -83,6 +83,7 @@
     @yield('js')
     <!-- Switchery js -->
     <script src="{{asset('plugins/switchery/switchery.min.js')}}"></script>
+    <script src="{{asset('js/custom/custom-switchery.js')}}"></script>
     <!-- Core js -->
     <script src="{{asset('js/core.js')}}"></script>
     <!-- End js -->

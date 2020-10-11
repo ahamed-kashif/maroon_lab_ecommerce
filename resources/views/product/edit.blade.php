@@ -1,11 +1,13 @@
 @extends('layouts.app')
 @section('css')
     @include('extras.product-css')
+    @include('extras.sweetalert2-css')
 @endsection
 @section('content')
     @include('partials.alert')
-    <form action="{{route('product.store')}}" method="post" enctype="multipart/form-data">
+    <form action="{{route('product.update',$product->id)}}" method="post" enctype="multipart/form-data">
         @csrf
+        @method('PUT')
         <div class="contentbar">
             <!-- Start row -->
             <div class="row">
@@ -16,27 +18,42 @@
                             <h5 class="card-title">Product Detail</h5>
                         </div>
                         <div class="card-body">
-                            <form>
-                                <div class="form-group row">
-                                    <label for="productTitle" class="col-sm-12 col-form-label">Product Title</label>
-                                    <div class="col-sm-12">
-                                        <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title" required>
-                                    </div>
+                            <div class="form-group row">
+                                <label for="productTitle" class="col-sm-12 col-form-label">Product Title</label>
+                                <div class="col-sm-12">
+                                    <input type="text" class="form-control font-20" id="productTitle" placeholder="Title" name="title" value="{{$product->title}}">
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-12 col-form-label">Description</label>
-                                    <div class="col-sm-12">
-                                        <textarea class="summernote" name="description" placeholder="description" required></textarea>
-                                    </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-form-label">Description</label>
+                                <div class="col-sm-12">
+                                    <textarea class="summernote" name="description">{{$product->description}}</textarea>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                     <div class="card m-b-30">
                         <div class="card-header">
                             <h5 class="card-title">Product Image Gallery</h5>
                         </div>
-                        <div class="card-body image-container">
+                        <div class="card-body">
+                            <div class="row">
+                                @if($product->images()->count() != 0)
+                                    @foreach($product->images()->get() as $img)
+                                        <span class="pull-right clickable close-icon cross" data-effect="fadeOut">
+                                            <img class="img-fluid rounded p-2" style="height:100px;width: 100px" src="{{asset($img->url)}}"/>
+                                            <a class="delete_image" id="{{$img->id}}" href="javaScript:void(0);">
+                                                <i class="fa fa-times"></i>
+                                            </a>
+                                        </span>
+                                    @endforeach
+                                @else
+                                    <h5>No image uploaded yet!</h5>
+                                @endif
+                            </div>
+                            <div class="row  image-container">
+
+                            </div>
 
                         </div>
                         <div class="card-footer">
@@ -70,13 +87,13 @@
                                             <div class="form-group row">
                                                 <label for="regularPrice" class="col-sm-4 col-form-label">Price(&#2547)</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="regularPrice" placeholder="100" name="price" required>
+                                                    <input type="text" class="form-control" id="regularPrice" placeholder="100" name="price" value="{{$product->price}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-0">
                                                 <label for="salePrice" class="col-sm-4 col-form-label">Sale Price(&#2547)</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="salePrice" placeholder="50" name="sale_price">
+                                                    <input type="text" class="form-control" id="salePrice" name="sale_price" value="{{$product->discounted_price}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-0 mt-2 p-2">
@@ -84,7 +101,7 @@
                                                     <div class="form-row">
                                                         <div class="col-sm-6 ">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active">
+                                                                <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{$product->is_active?'checked':''}}>
                                                                 <label class="form-check-label" for="is_active">
                                                                     Active
                                                                 </label>
@@ -92,7 +109,7 @@
                                                         </div>
                                                         <div class="col-sm-6">
                                                             <div class="form-check">
-                                                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured">
+                                                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" {{$product->is_featured?'checked':''}}>
                                                                 <label class="form-check-label" for="is_featured">
                                                                     Featured
                                                                 </label>
@@ -111,22 +128,22 @@
                                             <div class="form-group row">
                                                 <label for="sku" class="col-sm-4 col-form-label">SKU</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="sku" placeholder="SKU001" name="sku">
+                                                    <input type="text" class="form-control" id="sku" name="sku" value="{{$product->sku}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label for="stockStatus" class="col-sm-4 col-form-label">Stock Status</label>
                                                 <div class="col-sm-8">
-                                                    <select class="form-control" id="stockStatus" name="in_stock" required>
-                                                        <option value="instock">In Stock</option>
-                                                        <option value="outofstock">Out of Stock</option>
+                                                    <select class="form-control" id="stockStatus" name="in_stock">
+                                                        <option value="instock" value={{$product->in_stock ? 'selected' : ''}}>In Stock</option>
+                                                        <option value="outofstock" >Out of Stock</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row mb-0">
                                                 <label for="stockQuantity" class="col-sm-4 col-form-label">Quantity</label>
                                                 <div class="col-sm-8">
-                                                    <input type="number" class="form-control" id="stockQuantity" placeholder="100" name="quantity">
+                                                    <input type="number" class="form-control" id="stockQuantity" name="quantity" value="{{$product->quantity}}">
                                                 </div>
                                             </div>
 
@@ -136,7 +153,7 @@
                                             <div class="form-group row mb-0">
                                                 <label for="purchaseNote" class="col-sm-3 col-form-label">Purchase note</label>
                                                 <div class="col-sm-9">
-                                                    <textarea class="form-control" name="purchase_note" id="purchaseNote" rows="3" placeholder="Purchase note" name="purchase_note"></textarea>
+                                                    <textarea class="form-control" name="purchaseNote" id="purchaseNote" rows="3" name="purchase_note">{{$product->purchase_note}}</textarea>
                                                 </div>
                                             </div>
 
@@ -148,8 +165,8 @@
                     </div>
                     <div class="card m-b-30">
                         <div class="card-header">
-                            <h6 class="card-subtitle">If you are satisfied hit the save button..</h6>
-                            <button class="btn btn-outline-primary btn-lg btn-block" type="submit"><i class="feather icon-save mr-2"></i>SAVE</button>
+                            <h6 class="card-subtitle">If you are satisfied hit the update button..</h6>
+                            <button class="btn btn-outline-warning btn-lg btn-block" type="submit"><i class="feather icon-upload mr-2"></i>Update</button>
                         </div>
                     </div>
                 </div>
@@ -164,7 +181,7 @@
                             @if($categories->count() != 0)
                                 @foreach($categories as $category)
                                     <div class="custom-control custom-checkbox">
-                                        <input type="checkbox" class="custom-control-input category" id="{{$category->id}}" name="category_id[]" value="{{$category->id}}">
+                                        <input type="checkbox" class="custom-control-input category" id="{{$category->id}}" name="category_id[]" value="{{$category->id}}" {{$product->categories->contains($category) ? 'checked':''}}>
                                         <label class="custom-control-label" for="{{$category->id}}">{{$category->title}}</label>
                                     </div>
                                 @endforeach
@@ -249,14 +266,14 @@
 @endsection
 @section('js')
     @include('extras.product-js')
+    @include('extras.sweetalert2-js')
+    <script src="{{asset('js/restapi.js')}}"></script>
     <script>
         $(document).ready(function() {
             let $imagesContainer = $('.image-container');
-            $imagesContainer.hide();
             $('.image').change(function () {
                 if (typeof (FileReader) != "undefined") {
                     $imagesContainer.html('');
-                    $imagesContainer.show();
                     let regex = /^([a-zA-Z0-9\s_\\.\-:])+(.jpg|.jpeg|.png|)$/;
                     $($(this)[0].files).each(function () {
                         let file = $(this);
@@ -285,6 +302,35 @@
                     alert("This browser does not support HTML5 FileReader.");
                 }
             });
+            $('.delete_image').on('click',function(){
+                let url = '{{route('product.image.destroy',[$product->id,'image_id'])}}';
+                url = url.replace('image_id', $(this).attr('id'));
+                let parent = $(this).parent();
+                let deleteImage =$.ajax({
+                    dataType: 'json',
+                    type : 'DELETE',
+                    data: {api_token: $api_token},
+                    url : url,
+                });
+
+                deleteImage.done(function(data){
+                    parent.remove();
+                    swal(
+                        {
+                            title: 'Nice Work!',
+                            text: data.message,
+                            type: 'success',
+                            showCancelButton: false,
+                            showConfirmButton: false,
+                            timer: 1500
+                        }
+                    )
+                });
+                deleteImage.fail(function(data){
+                    alert(data.message);
+                    parent.remove();
+                });
+             });
         });
     </script>
 @endsection

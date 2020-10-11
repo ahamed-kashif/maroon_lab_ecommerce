@@ -13,12 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-Route::middleware('auth:api')->get('/test',function(){
-   if(auth()){
-       return "ok";
-   }
-    return "bal";
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::middleware('auth:api')->delete('/product/{product_id}/image/{image_id}', 'ProductController@destroy_image')->name('product.image.destroy');
