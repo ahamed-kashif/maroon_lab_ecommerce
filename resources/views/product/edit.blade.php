@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('css')
-    @include('extras.product-css')
+    @include('extras.summernote-css')
     @include('extras.sweetalert2-css')
 @endsection
 @section('content')
@@ -265,7 +265,9 @@
     </form>
 @endsection
 @section('js')
-    @include('extras.product-js')
+    @include('extras.summernote-js')
+    <!-- eCommerce Page js -->
+    <script src="{{asset('js/custom/custom-ecommerce-product-detail-page.js')}}"></script>
     @include('extras.sweetalert2-js')
     <script src="{{asset('js/restapi.js')}}"></script>
     <script>

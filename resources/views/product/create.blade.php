@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('css')
-    @include('extras.product-css')
+    @include('extras.summernote-css')
 @endsection
 @section('content')
     @include('partials.alert')
@@ -248,7 +248,9 @@
     </form>
 @endsection
 @section('js')
-    @include('extras.product-js')
+    @include('extras.summernote-js')
+    <!-- eCommerce Page js -->
+    <script src="{{asset('js/custom/custom-ecommerce-product-detail-page.js')}}"></script>
     <script>
         $(document).ready(function() {
             let $imagesContainer = $('.image-container');
