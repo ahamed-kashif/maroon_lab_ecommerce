@@ -66,7 +66,7 @@
                                     </div>
                                 </div>
                                 <div class="button-list mt-5 mb-5">
-                                    <button type="button" class="btn btn-danger-rgba font-18"><i class="feather icon-heart"></i></button>
+{{--                                    <button type="button" class="btn btn-danger-rgba font-18"><i class="feather icon-heart"></i></button>--}}
                                     <button type="button" class="btn btn-primary-rgba font-18"><i class="feather icon-shopping-bag mr-2"></i>Add to Cart</button>
                                     <button type="button" class="btn btn-success font-17">Buy Now</button>
                                 </div>
