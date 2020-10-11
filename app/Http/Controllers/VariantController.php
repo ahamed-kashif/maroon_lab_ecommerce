@@ -24,30 +24,42 @@ class VariantController extends Controller
 
     public function index()
     {
-        $variant = Variant::all();
-        return view('variant.index')->with([
-            'variants' => $variant
-        ]);
+        if(auth()->user()->can('index variant')){
+            $variant = Variant::all();
+            return view('variant.index')->with([
+                'variants' => $variant
+            ]);
+        }
+        else{
+            return redirect('home')->with('error','Unauthorized Access');
+        }
+
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Http\Response|\Illuminate\View\View
      */
     public function create()
     {
-        $variant = Variant::all();
-        return view('variant.create')->with([
-            'variants' => $variant
-        ]);
+        if(auth()->user()->can('create variant')){
+            $variant = Variant::all();
+            return view('variant.create')->with([
+                'variants' => $variant
+            ]);
+        }
+        else{
+            return redirect('home')->with('error','Unauthorized Access');
+        }
+
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -73,9 +85,10 @@ class VariantController extends Controller
      * Display the specified resource.
      *
      * @param  \App\variant  $variant
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function show($id){
+        if(auth()->user()->can('show subcategory')){
             if(is_numeric($id)){
                 $variant = Variant::find($id);
                 if($variant == null){
@@ -87,7 +100,7 @@ class VariantController extends Controller
             }else{
                 return redirect()->back()->with('error','wrong url!');
             }
-
+        }
         return redirect('home')->with('error','Unauthorized Access!');
     }
 
@@ -95,13 +108,13 @@ class VariantController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\variant  $variant
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function edit($id)
     {
 
-
-        if(is_numeric($id)){
+        if(auth()->user()->can('show variant')){
+            if(is_numeric($id)){
                 $variant = Variant::find($id);
                 if($variant == null){
                     return redirect()->back()->with('error','Variant not exists!');
@@ -112,6 +125,9 @@ class VariantController extends Controller
             }else{
                 return redirect()->back()->with('error','wrong url!');
             }
+        }
+        return redirect('home')->with('error','Unauthorized Access!');
+
     }
 
     /**
@@ -119,54 +135,62 @@ class VariantController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\variant  $variant
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
      */
     public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required|max:20',
-            'value' => 'required|max:30',
+            'code' => 'required|max:30',
         ]);
 
-        if(is_numeric($id)){
-            $variant = Variant::find($id);
-            if($variant == null){
-                return redirect()->back()->with('error','Variant not exists!');
+        if(auth()->user()->can('update variant')){
+            if(is_numeric($id)){
+                $variant = Variant::find($id);
+                if($variant == null){
+                    return redirect()->back()->with('error','Variant not exists!');
+                }
+                $variant->title = $request->title;
+                $variant->code = $request->code;
+                try{
+                    $variant->save();
+                    return redirect(route('variant.index'))->with('success','successfully updated!');
+                }catch (\Exception $e){
+                    return redirect()->back()->withErrors($e);
+                }
+            }else{
+                return redirect()->back()->with('error','wrong url!');
             }
-            $variant->title = $request->title;
-            $variant->value = $request->value;
-            try{
-                $variant->save();
-                return redirect(route('variant.index'))->with('success','successfully updated!');
-            }catch (\Exception $e){
-                return redirect()->back()->withErrors($e);
-            }
-        }else{
-            return redirect()->back()->with('error','wrong url!');
         }
+        return redirect('home')->with('error','Unauthorized Access!');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\variant  $variant
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy($id)
     {
-        if(is_numeric($id)){
-            $variant = Variant::find($id);
-            if($variant == null){
-                return redirect()->back()->with('error','Variant not exists!');
+        if(auth()->user()->can('delete variant')){
+            if(is_numeric($id)){
+                $variant = Variant::find($id);
+                if($variant == null){
+                    return redirect()->back()->with('error','Variant not exists!');
+                }
+                try{
+                    $variant->delete();
+                    return redirect(route('variant.index'))->with('success','successfully deleted!');
+                }catch (\Exception $e){
+                    return redirect()->back()->withErrors($e);
+                }
+            }else{
+                return redirect()->back()->with('error','wrong url!');
             }
-            try{
-                $variant->delete();
-                return redirect(route('variant.index'))->with('success','successfully deleted!');
-            }catch (\Exception $e){
-                return redirect()->back()->withErrors($e);
-            }
-        }else{
-            return redirect()->back()->with('error','wrong url!');
         }
+        return redirect('home')->with('error','Unauthorized Access!');
+
     }
 }

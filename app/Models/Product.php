@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Image;
+use App\Models\Variant;
 use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
@@ -17,5 +18,8 @@ class Product extends Model
     }
     public function images(){
         return $this->morphToMany(Image::class,'imageable');
+    }
+    public function variantItems(){
+        return $this->morphToMany(Variant::class,'variantable');
     }
 }

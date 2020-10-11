@@ -16,7 +16,7 @@ class CreateVariantsTable extends Migration
         Schema::create('variants', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('title')->unique();
-            $table->string('value')->nullable();
+            $table->string('code')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
