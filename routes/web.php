@@ -29,3 +29,4 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::delete('/{id}', 'Productcontroller@destroy')->name('product.destroy');
 });
 Route::resource('variant','VariantController');
+Route::resource('shipping_method','ShippingMethodController');
