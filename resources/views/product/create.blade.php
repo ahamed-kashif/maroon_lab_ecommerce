@@ -175,7 +175,7 @@
                     </div>
                     <div class="card m-b-30">
                         <div class="card-header">
-                            <h5 class="card-title">Color</h5>
+                            <h5 class="card-title">Variannts</h5>
                         </div>
                         <div class="card-body pt-3">
                             <div class="custom-checkbox-button">

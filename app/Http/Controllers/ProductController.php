@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Image;
 use App\Models\SubCategory;
+use App\Models\Variant;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
@@ -42,11 +43,12 @@ class ProductController extends Controller
         if(auth()->user()->can('create product')){
             $categories = Category::all();
             $subcategories = SubCategory::all();
-            $product = Product::find(16);
+            $variants = Variant::all()->groupBy('type');
+
             return view('product.create')->with([
                 'categories' => $categories,
                 'subcategories' => $subcategories,
-                'product' => $product
+                'variants' => $variants
             ]);
         }else{
             return redirect()->route('home')->with('error','Unauthorized access!');
