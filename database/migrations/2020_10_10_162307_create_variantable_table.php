@@ -13,10 +13,10 @@ class CreateVariantableTable extends Migration
      */
     public function up()
     {
-        Schema::create('variantable', function (Blueprint $table) {
-            $table->bigIncrements('id');
+        Schema::create('variantables', function (Blueprint $table) {
+            $table->bigIncrements('variant_id');
             $table->unsignedBigInteger('variantable_id');
-            $table->String('variantable_tpye');
+            $table->String('variantable_type');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateVariantableTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('variantable');
+        Schema::dropIfExists('variantables');
     }
 }
