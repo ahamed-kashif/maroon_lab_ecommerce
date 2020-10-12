@@ -3,10 +3,9 @@
     <div class="col-lg-12">
         <div class="card m-b-30">
             <div class="card-header">
-                <h3 class="card-title">
-                    {{$variant->value}}</h3>
-                <small>{{$variant->varianttype->title}}</small>
-
+                <h3 class="card-title">{{$variant->type}}</h3><br><br>
+                <span><small><b>Value:</b>{{$variant->value}}</small></span><br>
+                <span><small><b>Unit:</b>{{$variant->unit}}</small></span>
             </div>
             <div class="card-body">
                 <div class="col-md-6 col-lg-6">

@@ -13,6 +13,15 @@
                 @include('partials.alert')
                 <form action="{{route('variant.store')}}" method="POST">
                     @csrf
+                    <div class="form-group">
+                        <label for="type">Select Variant Type</label>
+                        <select class="select2-single-dynamic form-control " name="type" id="type" required>
+                            <option>Select any variant type or create one</option>
+                            @foreach($variants as $variant)
+                                <option value="{{$variant->type}}">{{$variant->type}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="value">Value</label>
@@ -20,11 +29,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="category_id">Select Variant Type</label>
-                        <select class="select2-single form-control" name="variant_type_id" id="variant_type_id" required>
-                            <option>Select any variant</option>
+                        <label for="unit">Select Variant unit</label>
+                        <select class="select2-single-dynamic form-control" name="unit" id="unit" required>
+                            <option>Select any unit or create one</option>
                             @foreach($variants as $variant)
-                                <option value="{{$variant->id}}">{{$variant->title}}</option>
+                                <option value="{{$variant->unit}}">{{$variant->unit}}</option>
                             @endforeach
                         </select>
                     </div>

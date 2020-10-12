@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('css')
+    @include('extras.select2css-extra')
+@endsection
 @section('content')
     <!-- Start col -->
     <div class="col-lg-12">
@@ -11,6 +14,15 @@
                 <form action="{{route('variant.update',$variant->id)}}" method="POST">
                     @csrf
                     @method('PUT')
+                    <div class="form-group">
+                        <label for="type">Select Variant Type</label>
+                        <select class="select2-single-dynamic form-control" name="type" id="type" required>
+                            <option>Select any variant</option>
+                            @foreach($variants as $variantT)
+                                <option value="{{$variantT->type}}" {{$variantT->type == $variant->type ? 'selected' : ''}}>{{$variantT->type}}</option>
+                            @endforeach
+                        </select>
+                    </div>
                     <div class="form-row">
                         <div class="form-group col-md-6">
                             <label for="value">value</label>
@@ -19,11 +31,11 @@
 
                     </div>
                     <div class="form-group">
-                        <label for="category_id">Select Variant Type</label>
-                        <select class="select2-single form-control" name="variant_type_id" id="variant_type_id" required>
-                            <option>Select any variant</option>
-                            @foreach($variantTypes as $variantT)
-                                <option value="{{$variantT->id}}" {{$variantT->id == $variant->variant_type_id ? 'selected' : ''}}>{{$variantT->title}}</option>
+                        <label for="unit">Select Variant Unit</label>
+                        <select class="select2-single-dynamic form-control" name="unit" id="unit" required>
+                            <option>Select any variant unit</option>
+                            @foreach($variants as $variantT)
+                                <option value="{{$variantT->unit}}" {{$variantT->unit == $variant->unit ? 'selected' : ''}}>{{$variantT->unit}}</option>
                             @endforeach
                         </select>
                     </div>
@@ -37,4 +49,7 @@
         </div>
     </div>
     <!-- End col -->
+@endsection
+@section('js')
+    @include('extras.select2js-extra')
 @endsection

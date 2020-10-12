@@ -28,6 +28,4 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::put('/{id}', 'Productcontroller@update')->name('product.update');
     Route::delete('/{id}', 'Productcontroller@destroy')->name('product.destroy');
 });
-
-Route::resource('variant_type','VariantTypeController');
 Route::resource('variant','VariantController');

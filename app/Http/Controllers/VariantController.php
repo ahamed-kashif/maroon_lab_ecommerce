@@ -10,21 +10,16 @@ use Illuminate\View\View;
 
 class VariantController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-
-
-
-
+    /**
+     * Display a listing of the resource.
+     *
+     * @return view|Redirect
+     */
     public function index()
     {
         if(auth()->user()->can('index variant')){
@@ -47,9 +42,9 @@ class VariantController extends Controller
     public function create()
     {
         if(auth()->user()->can('create variant')){
-            $variant = VariantType::all();
+            $variants = Variant::all();
             return view('variant.create')->with([
-                'variants' => $variant
+                'variants' => $variants
             ]);
         }
         else{
@@ -61,21 +56,22 @@ class VariantController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  Request  $request
+     * @return Redirect
      */
     public function store(Request $request)
     {
 
         $request->validate([
-            'value' => 'required|max:20',
-
+            'type' => 'required',
+            'value' => 'required',
+            'unit' => 'required'
         ]);
 
         $variant = new Variant;
+        $variant->type = $request->type;
         $variant->value = $request->value;
-        $variant->variant_type_id = $request->variant_type_id;
-
+        $variant->unit = $request->unit;
         try{
             $variant->save();
             return redirect(route('variant.index'))->with('success','successfully stored');
@@ -91,7 +87,7 @@ class VariantController extends Controller
      * @return view|Redirect
      */
     public function show($id){
-        if(auth()->user()->can('show subcategory')){
+        if(auth()->user()->can('show variant')){
             if(is_numeric($id)){
                 $variant = Variant::find($id);
                 if($variant == null){
@@ -110,22 +106,22 @@ class VariantController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\variant  $variant
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @param  int $id
+     * @return view|Redirect
      */
     public function edit($id)
     {
 
-        if(auth()->user()->can('show variant')){
+        if(auth()->user()->can('edit variant')){
             if(is_numeric($id)){
                 $variant = Variant::find($id);
-                $variantTypes = VariantType::all();
+                $variants = Variant::all();
                 if($variant == null){
                     return redirect()->back()->with('error','Variant not exists!');
                 }
                 return view('variant.edit')->with([
                     'variant' => $variant,
-                    'variantTypes' => $variantTypes
+                    'variants' => $variants
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -138,15 +134,16 @@ class VariantController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\variant  $variant
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Http\RedirectResponse|\Illuminate\Http\Response|\Illuminate\Routing\Redirector
+     * @param  Request  $request
+     * @param  int $id
+     * @return Redirect
      */
     public function update(Request $request, $id)
     {
         $request->validate([
-            'value' => 'required|max:20',
-
+            'type' => 'required',
+            'value' => 'required',
+            'unit' => 'required'
         ]);
 
         if(auth()->user()->can('update variant')){
@@ -155,8 +152,9 @@ class VariantController extends Controller
                 if($variant == null){
                     return redirect()->back()->with('error','Variant not exists!');
                 }
+                $variant->type = $request->type;
                 $variant->value = $request->value;
-                $variant->variant_type_id = $request->variant_type_id;
+                $variant->unit = $request->unit;
                 try{
                     $variant->save();
                     return redirect(route('variant.index'))->with('success','successfully updated!');
@@ -174,8 +172,8 @@ class VariantController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\variant  $variant
-     * @return \Illuminate\Http\RedirectResponse
+     * @param  int $id
+     * @return Redirect
      */
     public function destroy($id)
     {
