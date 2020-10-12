@@ -14,7 +14,7 @@ class CreateVariantableTable extends Migration
     public function up()
     {
         Schema::create('variantables', function (Blueprint $table) {
-            $table->bigIncrements('variant_id');
+            $table->unsignedBigInteger('variant_id');
             $table->unsignedBigInteger('variantable_id');
             $table->String('variantable_type');
             $table->timestamps();
