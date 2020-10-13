@@ -19,7 +19,7 @@ class Product extends Model
     public function images(){
         return $this->morphToMany(Image::class,'imageable');
     }
-    public function variantItems(){
-        return $this->morphToMany(Variant::class,'variantable');
+    public function variants(){
+        return $this->morphToMany(Variant::class,'variantable', 'variantables');
     }
 }

@@ -2,6 +2,8 @@
 @section('css')
     @include('extras.product-css')
     @include('extras.sweetalert2-css')
+    @include('extras.select2css-extra')
+    @include('extras.tagsinput-css')
 @endsection
 @section('content')
     @include('partials.alert')
@@ -192,43 +194,18 @@
                     </div>
                     <div class="card m-b-30">
                         <div class="card-header">
-                            <h5 class="card-title">Color</h5>
+                            <h5 class="card-title">Variant</h5>
                         </div>
                         <div class="card-body pt-3">
-                            <div class="custom-checkbox-button">
-                                <div class="form-check-inline checkbox-primary">
-                                    <input type="checkbox" id="customCheckboxInline5" name="customCheckboxInline2" checked>
-                                    <label for="customCheckboxInline5"></label>
-                                </div>
-                                <div class="form-check-inline checkbox-secondary">
-                                    <input type="checkbox" id="customCheckboxInline6" name="customCheckboxInline2">
-                                    <label for="customCheckboxInline6"></label>
-                                </div>
-                                <div class="form-check-inline checkbox-success">
-                                    <input type="checkbox" id="customCheckboxInline7" name="customCheckboxInline2">
-                                    <label for="customCheckboxInline7"></label>
-                                </div>
-                                <div class="form-check-inline checkbox-danger">
-                                    <input type="checkbox" id="customCheckboxInline8" name="customCheckboxInline2">
-                                    <label for="customCheckboxInline8"></label>
-                                </div>
-                                <div class="form-check-inline checkbox-warning">
-                                    <input type="checkbox" id="customCheckboxInline9" name="customCheckboxInline2">
-                                    <label for="customCheckboxInline9"></label>
-                                </div>
-                                <div class="form-check-inline checkbox-info">
-                                    <input type="checkbox" id="customCheckboxInline10" name="customCheckboxInline2">
-                                    <label for="customCheckboxInline10"></label>
-                                </div>
-                                <div class="form-check-inline checkbox-light">
-                                    <input type="checkbox" id="customCheckboxInline11" name="customCheckboxInline2">
-                                    <label for="customCheckboxInline11"></label>
-                                </div>
-                                <div class="form-check-inline checkbox-dark">
-                                    <input type="checkbox" id="customCheckboxInline12" name="customCheckboxInline2">
-                                    <label for="customCheckboxInline12"></label>
-                                </div>
-                            </div>
+                            <select class="select2-multi-select form-control" name="variants[]" multiple="multiple">
+                                @foreach($variants->groupBy('type') as $key => $variant)
+                                    <optgroup label="{{$key}}">
+                                        @foreach($variant as $item)
+                                            <option value="{{$item->id}}" {{$product->variants->contains($item) ? 'selected' : ''}}>{{$item->value.'  '.$item->unit}}</option>
+                                        @endforeach
+                                    </optgroup>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                     <div class="card m-b-30">
@@ -267,6 +244,8 @@
 @section('js')
     @include('extras.product-js')
     @include('extras.sweetalert2-js')
+    @include('extras.select2js-extra')
+    @include('extras.tagsinput-js')
     <script src="{{asset('js/restapi.js')}}"></script>
     <script>
         $(document).ready(function() {
@@ -314,17 +293,31 @@
                 });
 
                 deleteImage.done(function(data){
-                    parent.remove();
-                    swal(
-                        {
-                            title: 'Nice Work!',
-                            text: data.message,
-                            type: 'success',
-                            showCancelButton: false,
-                            showConfirmButton: false,
-                            timer: 1500
-                        }
-                    )
+                    console.log(data);
+                    if(data.message === 'Successfully deleted this image'){
+                        parent.remove();
+                        swal(
+                            {
+                                title: 'Nice Work!',
+                                text: data.message,
+                                type: 'success',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1500
+                            }
+                        )
+                    }else{
+                        swal(
+                            {
+                                title: 'oh snap!',
+                                text: data.message,
+                                type: 'warning',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 1500
+                            }
+                        )
+                    }
                 });
                 deleteImage.fail(function(data){
                     alert(data.message);

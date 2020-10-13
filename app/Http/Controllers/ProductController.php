@@ -43,8 +43,8 @@ class ProductController extends Controller
         if(auth()->user()->can('create product')){
             $categories = Category::all();
             $subcategories = SubCategory::all();
-            $variants = Variant::all()->groupBy('type');
-
+            $variants = Variant::all();
+            //dd($variants);
             return view('product.create')->with([
                 'categories' => $categories,
                 'subcategories' => $subcategories,
@@ -70,6 +70,7 @@ class ProductController extends Controller
             'description' => 'required|string',
             'price' => 'required|numeric',
             'salePrice' => 'nullable|numeric',
+            'variants.*' => 'nullable',
             'images.*' => 'nullable|image|dimensions:ratio=12/13,min_width=600,min_height=650,max_width=1200,max_height=1300'
         ]);
         $product = new Product;
@@ -111,6 +112,10 @@ class ProductController extends Controller
                     ]);
                 }
             }
+            if($request->has('variants')){
+                $variants = Variant::whereIn('id',$request->input('variants'))->get();
+                $product->variants()->attach($variants->pluck('id'));
+            }
             return redirect()->back()->with('success','stored successfully');
         }catch (\Exception $e){
             return redirect()->back()->with('error',$e->getCode().':'.$e->getMessage());
@@ -134,9 +139,11 @@ class ProductController extends Controller
                     return redirect()->back()->with('error', 'product not exists!');
                 }
                 $categories = Category::all();
+                $variants = Variant::all();
                 return view('product.edit')->with([
                     'product' => $product,
-                    'categories' => $categories
+                    'categories' => $categories,
+                    'variants' => $variants
                 ]);
             }else{
                 return redirect()->back()->withErrors('wrong url!');
@@ -240,6 +247,11 @@ class ProductController extends Controller
                                 'url' =>  Storage::url($img->store('public/images/products'))
                             ]);
                         }
+                    }
+                    if($request->has('variants')){
+                        $product->variants()->sync($request->input('variants'));
+                    }else{
+                        $product->variants()->detach();
                     }
                     return redirect()->route('product.index')->with('success','updated successfully');
                 }catch (\Exception $e){
