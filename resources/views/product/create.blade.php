@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('css')
-    @include('extras.product-css')
+    @include('extras.product-add-css')
     @include('extras.select2css-extra')
     @include('extras.tagsinput-css')
 @endsection
@@ -225,7 +225,7 @@
     </form>
 @endsection
 @section('js')
-    @include('extras.product-js')
+    @include('extras.product-add-js')
     @include('extras.select2js-extra')
     @include('extras.tagsinput-js')
     <script>
