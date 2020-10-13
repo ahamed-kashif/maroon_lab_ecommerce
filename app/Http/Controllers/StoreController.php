@@ -10,12 +10,12 @@ class StoreController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return view
      */
     public function index(Request $request)
     {
-        $products = Product::active()->orderBy('price')->orderBy('discounted_price');
+        $products = Product::active();
         if($request->has('price')) {
             if ($request->has('category')) {
                 $category = $request->category;
@@ -25,8 +25,12 @@ class StoreController extends Controller
             }
             $priceOrder = $request->price;
             if($priceOrder == 'desc'){
-                $products = $products->orderBy('price','desc')->orderBy('discounted_price','desc');
+                $products = $products->orderBy('price','desc');
+            }else{
+                $products= $products->orderBy('price','asc');
             }
+        }else{
+            $products= $products->orderBy('price','asc');
         }
         $products = $products->paginate(12);
         return view('store.index')->with([
@@ -63,10 +67,17 @@ class StoreController extends Controller
      */
     public function product($id)
     {
-        $product = Product::find($id);
-        return view('store.product_show')->with([
-            'product' => $product
-        ]);
+        if(is_numeric($id)){
+            $product = Product::find($id);
+            if($product == null){
+                return redirect()->route('store.index')->with('error','Product Does not exist..');
+            }
+            return view('store.product_show')->with([
+                'product' => $product
+            ]);
+        }
+        return redirect()->route('store.index')->with('error','URL does not exists!');
+
     }
 
     /**

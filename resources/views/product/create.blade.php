@@ -26,6 +26,12 @@
                                     </div>
                                 </div>
                                 <div class="form-group row">
+                                    <label class="col-sm-12 col-form-label">Short Description</label>
+                                    <div class="col-sm-12">
+                                        <textarea class="summernote short" name="short_description" placeholder="short description" required></textarea>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
                                     <label class="col-sm-12 col-form-label">Description</label>
                                     <div class="col-sm-12">
                                         <textarea class="summernote" name="description" placeholder="description" required></textarea>

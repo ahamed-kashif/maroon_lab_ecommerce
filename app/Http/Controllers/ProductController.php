@@ -75,6 +75,7 @@ class ProductController extends Controller
         ]);
         $product = new Product;
         $product->title = $request->input('title');
+        $product->short_description = $request->input('short_description');
         $product->description = $request->input('description');
         $product->price = $request->input('price');
         if($request->has('sale_price')){
@@ -213,6 +214,7 @@ class ProductController extends Controller
                     return redirect()->back()->with('error','product does not exists!');
                 }
                 $product->title = $request->input('title');
+                $product->short_description = $request->input('short_description');
                 $product->description = $request->input('description');
                 $product->price = $request->input('price');
                 if($request->has('sale_price')){
