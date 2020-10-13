@@ -29,3 +29,7 @@ Route::prefix('product')->middleware('auth')->group(function () {
     Route::delete('/{id}', 'Productcontroller@destroy')->name('product.destroy');
 });
 Route::resource('variant','VariantController');
+Route::prefix('shop')->group(function(){
+   Route::get('/','StoreController@index')->name('store.index');
+   Route::get('/product/{product}','StoreController@product')->name('store.product.show');
+});

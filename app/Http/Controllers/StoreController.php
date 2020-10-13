@@ -53,7 +53,7 @@ class StoreController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view
      */
     public function product($id)
     {
