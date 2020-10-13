@@ -18,7 +18,7 @@
                         <label for="type">Select Variant Type</label>
                         <select class="select2-single-dynamic form-control" name="type" id="type" required>
                             <option>Select any variant</option>
-                            @foreach($variants as $variantT)
+                            @foreach($variants->unique('type') as $variantT)
                                 <option value="{{$variantT->type}}" {{$variantT->type == $variant->type ? 'selected' : ''}}>{{$variantT->type}}</option>
                             @endforeach
                         </select>
@@ -34,7 +34,7 @@
                         <label for="unit">Select Variant Unit</label>
                         <select class="select2-single-dynamic form-control" name="unit" id="unit" required>
                             <option>Select any variant unit</option>
-                            @foreach($variants as $variantT)
+                            @foreach($variants->unique('unit') as $variantT)
                                 <option value="{{$variantT->unit}}" {{$variantT->unit == $variant->unit ? 'selected' : ''}}>{{$variantT->unit}}</option>
                             @endforeach
                         </select>
