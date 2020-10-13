@@ -28,43 +28,34 @@
 {{--                                    <i class="feather icon-star"></i>--}}
 {{--                                    <span class="ml-2">25 Ratings</span>--}}
 {{--                                </p>--}}
-                                <p class="text-primary font-26 f-w-7 my-3"><sup class="font-16">৳</sup>{{$product->price}}</p>
+                                @if($product->is_sale())
+                                    <span>
+                                        <p class="text-primary font-26 f-w-7 my-3">
+                                            <del class="mr-2">
+                                                <small>
+                                                    <sup class="font-10">৳</sup>{{$product->price}}
+                                                </small>
+                                            </del>
+                                            <span class="text-success-gradient">
+                                                <sup class="font-16 text-success-gradient">৳</sup>{{$product->discounted_price}}
+                                            </span>
+                                        </p>
+                                    </span>
+                                @else
+                                    <p class="text-primary font-26 f-w-7 my-3"><sup class="font-16">৳</sup>{{$product->price}}</p>
+                                @endif
                                 <div class="mb-4 summer_text">{!!$product->description !!}</div>
-                                <div class="custom-radio-button mt-3">
-                                    <h6>Select Color</h6>
-                                    <div class="form-check-inline radio-primary">
-                                        <input type="radio" id="customRadioInline5" name="customRadioInline2" class="" checked>
-                                        <label for="customRadioInline5"></label>
+                                @foreach($product->variants->groupBy('type') as $key => $variant)
+                                    <div class="mt-3">
+                                        <h6>Select {{$key}}</h6>
+                                        <div class="form-check form-check-inline">
+                                            @foreach($variant as $item)
+                                                <input class="form-check-input" type="checkbox" name="variants[]" value="{{$item->id}}">
+                                                <label class="form-check-label mr-2" for="inlineCheckbox1">{{$item->id.' '.$item->unit}}</label>
+                                            @endforeach
+                                        </div>
                                     </div>
-                                    <div class="form-check-inline radio-secondary">
-                                        <input type="radio" id="customRadioInline6" name="customRadioInline2" class="">
-                                        <label for="customRadioInline6"></label>
-                                    </div>
-                                    <div class="form-check-inline radio-success">
-                                        <input type="radio" id="customRadioInline7" name="customRadioInline2" class="">
-                                        <label for="customRadioInline7"></label>
-                                    </div>
-                                    <div class="form-check-inline radio-danger">
-                                        <input type="radio" id="customRadioInline8" name="customRadioInline2" class="">
-                                        <label for="customRadioInline8"></label>
-                                    </div>
-                                    <div class="form-check-inline radio-warning">
-                                        <input type="radio" id="customRadioInline9" name="customRadioInline2" class="">
-                                        <label for="customRadioInline9"></label>
-                                    </div>
-                                    <div class="form-check-inline radio-info">
-                                        <input type="radio" id="customRadioInline10" name="customRadioInline2" class="">
-                                        <label for="customRadioInline10"></label>
-                                    </div>
-                                    <div class="form-check-inline radio-light">
-                                        <input type="radio" id="customRadioInline11" name="customRadioInline2" class="">
-                                        <label for="customRadioInline11"></label>
-                                    </div>
-                                    <div class="form-check-inline radio-dark">
-                                        <input type="radio" id="customRadioInline12" name="customRadioInline2" class="">
-                                        <label for="customRadioInline12"></label>
-                                    </div>
-                                </div>
+                                @endforeach
                                 <div class="button-list mt-5 mb-5">
 {{--                                    <button type="button" class="btn btn-danger-rgba font-18"><i class="feather icon-heart"></i></button>--}}
                                     <button type="button" class="btn btn-primary-rgba font-18"><i class="feather icon-shopping-bag mr-2"></i>Add to Cart</button>
@@ -377,4 +368,12 @@
 @endsection
 @section('js')
     @include('extras.slick-js')
+    <script>
+        $(document).ready(function(){
+            let count = {{$product->variants->groupBy('type')->count()}};
+            $('input[type="checkbox"]').on('change', function() {
+                $(this).siblings('input[type="checkbox"]').prop('checked', false);
+            });
+        });
+    </script>
 @endsection

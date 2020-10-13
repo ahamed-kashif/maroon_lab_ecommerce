@@ -3,13 +3,14 @@
         @foreach($product->images()->get() as $img)
             <div class="product-preview">
                 <img src="{{asset($img->url) }}" class="img-fluid" alt="Product">
-                <p><span class="badge badge-success font-14">25% off</span></p>
+                @if($product->is_sale())
+                    <p><span class="badge badge-success font-14">Sale</span></p>
+                @endif
             </div>
         @endforeach
     @else
         <div class="product-preview">
             <img src="{{asset('images/ecommerce/no_image.png')}}" class="img-fluid" alt="Product">
-            <p><span class="badge badge-primary font-14">New</span></p>
         </div>
     @endif
 </div>
