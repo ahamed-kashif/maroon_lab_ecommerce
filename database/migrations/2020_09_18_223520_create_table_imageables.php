@@ -28,6 +28,6 @@ class CreateTableImageables extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('table_imageables');
+        Schema::dropIfExists('imageables');
     }
 }

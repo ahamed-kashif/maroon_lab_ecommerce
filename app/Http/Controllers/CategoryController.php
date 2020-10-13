@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\View\View;
 
 class CategoryController extends Controller
 {
@@ -37,6 +38,7 @@ class CategoryController extends Controller
     public function create()
     {
         if(auth()->user()->can('create category')){
+            $categories = Category::all();
             return view('category.create');
         }else{
             return redirect('home')->with('error','Unauthorized Access');
