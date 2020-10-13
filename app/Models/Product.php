@@ -22,4 +22,13 @@ class Product extends Model
     public function variants(){
         return $this->morphToMany(Variant::class,'variantable', 'variantables');
     }
+    public function scopeActive($query){
+        return $query->where('is_active',1);
+    }
+    public function is_sale(){
+        if($this->discounted_price != null){
+            return true;
+        }
+        return false;
+    }
 }
