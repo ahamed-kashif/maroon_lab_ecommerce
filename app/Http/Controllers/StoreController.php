@@ -15,12 +15,18 @@ class StoreController extends Controller
      */
     public function index(Request $request)
     {
-        $products = Product::active();
-        if($request->has('category')){
-            $category = $request->category;
-            $products = $products->whereHas('categories',  function($q) use ($category){
-                $q->where('category_id',$category);
-            });
+        $products = Product::active()->orderBy('price')->orderBy('discounted_price');
+        if($request->has('price')) {
+            if ($request->has('category')) {
+                $category = $request->category;
+                $products = $products->whereHas('categories', function ($q) use ($category) {
+                    $q->where('category_id', $category);
+                });
+            }
+            $priceOrder = $request->price;
+            if($priceOrder == 'desc'){
+                $products = $products->orderBy('price','desc')->orderBy('discounted_price','desc');
+            }
         }
         $products = $products->paginate(12);
         return view('store.index')->with([

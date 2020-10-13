@@ -3,9 +3,7 @@
         @foreach($product->images()->get() as $img)
             <div class="product-preview">
                 <img src="{{asset($img->url) }}" class="img-fluid" alt="Product">
-                @if($product->is_sale())
-                    <p><span class="badge badge-success font-14">Sale</span></p>
-                @endif
+                @include('partials.partials-sale_tag',$product)
             </div>
         @endforeach
     @else

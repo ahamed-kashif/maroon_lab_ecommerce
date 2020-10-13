@@ -37,6 +37,7 @@
                                                         <img src="{{asset('images/ecommerce/no_image.png') }}" class="img-fluid" alt="product">
                                                     @endif
                                                 </a>
+                                                @include('partials.partials-sale_tag',$product)
 {{--                                                <p><span class="badge badge-success font-14">25% off</span></p>--}}
                                             </div>
                                             <div class="product-body py-3">
@@ -80,11 +81,11 @@
 {{--                                                            <h5 class="f-w-7 mb-0"><sup class="font-14">৳</sup>{{$product->price}}</h5>--}}
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
-                                                        <div class="text-right">
-                                                            <button type="button" class="btn btn-primary-rgba font-18"><i class="feather icon-shopping-bag"></i></button>
-                                                        </div>
-                                                    </div>
+{{--                                                    <div class="col-6">--}}
+{{--                                                        <div class="text-right">--}}
+{{--                                                            <button type="button" class="btn btn-primary-rgba font-18"><i class="feather icon-shopping-bag"></i></button>--}}
+{{--                                                        </div>--}}
+{{--                                                    </div>--}}
                                                 </div>
                                             </div>
                                         </div>
