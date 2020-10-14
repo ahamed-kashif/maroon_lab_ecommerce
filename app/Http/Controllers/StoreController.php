@@ -17,12 +17,6 @@ class StoreController extends Controller
     {
         $products = Product::active();
         if($request->has('price')) {
-            if ($request->has('category')) {
-                $category = $request->category;
-                $products = $products->whereHas('categories', function ($q) use ($category) {
-                    $q->where('category_id', $category);
-                });
-            }
             $priceOrder = $request->price;
             if($priceOrder == 'desc'){
                 $products = $products->orderBy('price','desc');
@@ -39,25 +33,35 @@ class StoreController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
+     * Show the list of categorized products.
+     * @param int $id
+     * @param Request $request
+     * @return view
      */
-    public function create()
+    public function category(Request $request, $id)
     {
-        //
+        $category = Category::find($id);
+        if($category->has('products')){
+            $products = $category->products();
+            if($request->has('price')) {
+                $priceOrder = $request->price;
+                if($priceOrder == 'desc'){
+                    $products = $products->orderBy('price','desc');
+                }else{
+                    $products= $products->orderBy('price','asc');
+                }
+            }else{
+                $products= $products->orderBy('price','asc');
+            }
+            $products = $products->paginate(12);
+            return view('store.index')->with([
+                'products' => $products
+            ]);
+        }
+        return redirect()->route('store.index')->with('error','no product exists in this category..');
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -70,7 +74,6 @@ class StoreController extends Controller
         if(is_numeric($id)){
             $product = Product::find($id);
             $products = Product::active()->where('id','!=',$product->id)->orderBy('created_at','desc')->orderBy('updated_at','desc')->limit(4)->get();
-            //dd($product->related_products()->get()->toArray());
             if($product == null){
                 return redirect()->route('store.index')->with('error','Product Does not exist..');
             }
@@ -82,39 +85,5 @@ class StoreController extends Controller
         }
         return redirect()->route('store.index')->with('error','URL does not exists!');
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }

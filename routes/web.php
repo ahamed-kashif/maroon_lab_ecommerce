@@ -32,4 +32,5 @@ Route::resource('variant','VariantController');
 Route::prefix('shop')->group(function(){
    Route::get('/','StoreController@index')->name('store.index');
    Route::get('/product/{product}','StoreController@product')->name('store.product.show');
+   Route::get('/category/{category}','StoreController@category')->name('store.category');
 });

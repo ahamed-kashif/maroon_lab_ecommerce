@@ -8,6 +8,7 @@
                 <div class="card m-b-30">
                     <div class="card-header">
                         <h5 class="card-title">Shop</h5>
+                        @include('partials.alert')
                     </div>
                     <div class="card-body">
                         <!-- Start row -->
@@ -15,8 +16,8 @@
                             <!-- Start col -->
                             <div class="col-md-12 col-lg-12 col-xl-4">
                                 <select class="form-control" id="productSortBy" onchange="location = this.value;">
-                                    <option value="{{route('store.index',['price' => 'asc'])}}" {{isset($_GET['price']) && $_GET['price'] === 'asc' ? 'selected' : ''}}>Price - Low to High</option>
-                                    <option value="{{route('store.index',['price' => 'desc'])}}" {{isset($_GET['price']) && $_GET['price'] === 'desc' ? 'selected' : ''}}>Price - High to Low</option>
+                                    <option value="{{request()->url().'?price=asc'}}" {{isset($_GET['price']) && $_GET['price'] === 'asc' ? 'selected' : ''}}>Price - Low to High</option>
+                                    <option value="{{request()->url().'?price=desc'}}" {{isset($_GET['price']) && $_GET['price'] === 'desc' ? 'selected' : ''}}>Price - High to Low</option>
                                 </select>
                             </div>
                             <!-- End col -->

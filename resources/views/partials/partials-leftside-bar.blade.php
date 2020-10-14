@@ -38,7 +38,7 @@
                         <li>
                             @foreach(categories() as $item)
                                 <li>
-                                    <a href="{{route('store.index', ['category' => $item])}}">
+                                    <a href="{{route('store.category', $item->id)}}">
                                         {{$item->title}}
                                     </a>
                                 </li>
