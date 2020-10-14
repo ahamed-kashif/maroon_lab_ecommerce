@@ -31,4 +31,9 @@ class Product extends Model
         }
         return false;
     }
+    public function scopeRelated_products(){
+        return $this->active()->whereHas('categories', function($q){
+            $q->whereIn('categories.id',$this->categories->pluck('id')->toArray());
+        })->where('id','!=',$this->id);
+    }
 }

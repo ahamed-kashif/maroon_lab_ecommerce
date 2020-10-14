@@ -69,11 +69,15 @@ class StoreController extends Controller
     {
         if(is_numeric($id)){
             $product = Product::find($id);
+            $products = Product::active()->where('id','!=',$product->id)->orderBy('created_at','desc')->orderBy('updated_at','desc')->limit(4)->get();
+            //dd($product->related_products()->get()->toArray());
             if($product == null){
                 return redirect()->route('store.index')->with('error','Product Does not exist..');
             }
             return view('store.product_show')->with([
-                'product' => $product
+                'product' => $product,
+                'products' => $products
+
             ]);
         }
         return redirect()->route('store.index')->with('error','URL does not exists!');
