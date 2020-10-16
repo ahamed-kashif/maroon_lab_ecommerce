@@ -136,7 +136,7 @@
                                             <div class="form-group row">
                                                 <label for="sku" class="col-sm-4 col-form-label">SKU</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" id="sku" name="sku" value="{{$product->sku}}">
+                                                    <input type="text" class="form-control" id="sku" name="sku" value="{{$product->SKU}}">
                                                 </div>
                                             </div>
                                             <div class="form-group row">

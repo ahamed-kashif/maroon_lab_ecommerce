@@ -202,10 +202,11 @@ class ProductController extends Controller
     {
         if(auth()->user()->can('edit product')){
             $request->validate([
-                'title' => 'required|string|max:20',
+                'title' => 'required|string|max:50',
                 'description' => 'required|string',
                 'price' => 'required|numeric',
                 'salePrice' => 'nullable|numeric',
+                'sku' => 'nullable|string|max:60',
                 'images.*' => 'nullable|image|dimensions:ratio=12/13,min_width=600,min_height=650,max_width=1200,max_height=1300'
             ]);
             if(is_numeric($id)){
