@@ -35,7 +35,16 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="form-row">
+                        <div class="form-group col-md-2">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="is_featured" name="is_featured" {{$category->is_featured ? 'checked' : ''}}>
+                                <label class="form-check-label" for="is_featured">
+                                    Featured
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <button type="submit" class="btn btn-warning-rgba">
                         <i class="feather icon-upload mr-2"></i>
                         <span class="text-alias">Update</span>

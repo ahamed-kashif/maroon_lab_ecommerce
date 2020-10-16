@@ -50,7 +50,7 @@
 {{--            @include('partials.partials-breadcrumb')--}}
             <!-- End Breadcrumbbar -->
                 <!-- Start Contentbar -->
-                <div class="contentbar my-lg-5 my-md-5 my-xl-5 my-sm-5">
+                <div class="contentbar my-lg-2 my-md-2 my-xl-2 my-sm-2">
                     <!-- Start row -->
                     <div class="row my-5">
                         <!-- Start col -->
@@ -83,6 +83,7 @@
     @yield('js')
     <!-- Switchery js -->
     <script src="{{asset('plugins/switchery/switchery.min.js')}}"></script>
+    <script src="{{asset('js/custom/custom-switchery.js')}}"></script>
     <!-- Core js -->
     <script src="{{asset('js/core.js')}}"></script>
     <!-- End js -->

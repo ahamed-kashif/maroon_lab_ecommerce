@@ -16,12 +16,17 @@
                         <img src="{{asset('images/svg-icon/dashboard.svg')}}" class="img-fluid" alt="dashboard"><span>Dashboard</span><i class="feather icon-chevron-right pull-right"></i>
                     </a>
                     <ul class="vertical-submenu">
-                        <li><a href="#">CRM</a></li>
-                        <li><a href="#">eCommerce</a></li>
-                        <li><a href="#">Hospital</a></li>
-                        <li><a href="#">Crypto</a></li>
-                        <li><a href="{{route('category.index')}}">Categories</a></li>
-                        <li><a href="{{route('subcategory.index')}}">Sub-Categories</a></li>
+                        <li><a href="#">Store</a></li>
+                        <li>
+                            <a href="#">eCommerce</a>
+                            <ul class="vertical-submenu">
+                                <li><a href="{{route('product.create')}}">Add Product</a></li>
+                                <li><a href="{{route('product.index')}}">Products</a></li>
+                                <li><a href="{{route('category.index')}}">Categories</a></li>
+                                <li><a href="{{route('subcategory.index')}}">Sub-Categories</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Orders</a></li>
                     </ul>
                 </li>
                 <li>
@@ -29,17 +34,15 @@
                         <i class="fa fa-shopping-bag"></i><span>Shop</span><i class="feather icon-chevron-right pull-right"></i>
                     </a>
                     <ul class="vertical-submenu">
+                        <li><a href="{{route('store.index')}}">All Products</a></li>
                         <li>
-                            <a href="#">Category</a>
-                            <ul class="vertical-submenu">
-                                @foreach(categories() as $item)
+                            @foreach(categories() as $item)
                                 <li>
-                                    <a href="{{route('category.show', $item)}}">
+                                    <a href="{{route('store.category', $item->id)}}">
                                         {{$item->title}}
                                     </a>
                                 </li>
-                                @endforeach
-                            </ul>
+                            @endforeach
                         </li>
                         <li><a href="#">eCommerce</a></li>
                         <li><a href="#">Hospital</a></li>

@@ -17,9 +17,8 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('SKU')->unique()->nullable();
+            $table->string('short_description');
             $table->string('description');
-            $table->json('tags');
-            $table->unsignedBigInteger('category_id')->nullable();
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->float('weight_in_kg')->nullable();
             $table->float('dimension_in_meter_cube')->nullable();
@@ -34,11 +33,7 @@ class CreateProductsTable extends Migration
             $table->timestamp('sale_ended_at')->nullable();
             $table->timestamps();
 
-            $table->foreign('category_id')
-                ->references('id')
-                ->on('categories')
-                ->onUpdate('cascade')
-                ->onDelete('set null');
+
             $table->foreign('sub_category_id')
                 ->references('id')
                 ->on('sub_categories')
