@@ -19,7 +19,21 @@ class Product extends Model
     public function images(){
         return $this->morphToMany(Image::class,'imageable');
     }
-    public function variantItems(){
-        return $this->morphToMany(Variant::class,'variantable');
+    public function variants(){
+        return $this->morphToMany(Variant::class,'variantable', 'variantables');
+    }
+    public function scopeActive($query){
+        return $query->where('is_active',1);
+    }
+    public function is_sale(){
+        if($this->discounted_price != null){
+            return true;
+        }
+        return false;
+    }
+    public function scopeRelated_products(){
+        return $this->active()->whereHas('categories', function($q){
+            $q->whereIn('categories.id',$this->categories->pluck('id')->toArray());
+        })->where('id','!=',$this->id);
     }
 }
