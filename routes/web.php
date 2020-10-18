@@ -36,3 +36,4 @@ Route::prefix('shop')->group(function(){
 });
 
 Route::resource('shipping_method','ShippingMethodController');
+Route::resource('payment_method','PaymentMethodController');

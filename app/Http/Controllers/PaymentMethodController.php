@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ShippingMethod;
-
+use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
-class ShippingMethodController extends Controller
+class PaymentMethodController extends Controller
 {
+
 
     public function __construct()
     {
         $this->middleware('auth');
     }
 
-
     /**
      * Display a listing of the resource.
      *
+
      * @return view
      */
     public function index()
     {
-        if(auth()->user()->can('index shipping_method')){
-            $Shipping_Method = ShippingMethod::all();
-            return view('shipping_method.index')->with([
-                'shipping_methods' => $Shipping_Method
+        if(auth()->user()->can('index payment_method')){
+            $payment_Method = PaymentMethod::all();
+            return view('payment_method.index')->with([
+                'payment_methods' => $payment_Method
             ]);
         }else{
             return redirect('home')->with('error','Unauthorized Access');
@@ -40,11 +40,9 @@ class ShippingMethodController extends Controller
      */
     public function create()
     {
-        if(auth()->user()->can('create shipping_method')){
-            $Shipping_Method = ShippingMethod::all();
-            return view('shipping_method.create')->with([
-                'shipping_methods' => $Shipping_Method
-            ]);
+        if(auth()->user()->can('create payment_method')){
+            $payment_Method = PaymentMethod::all();
+            return view('payment_method.create');
         }
         else{
             return redirect('home')->with('error','Unauthorized Access');
@@ -55,28 +53,29 @@ class ShippingMethodController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
-     *  @return view
+     * @param $request
+     * @return view
      */
     public function store(Request $request)
     {
         $request->validate([
             'title' => 'required',
-            'phone_number' => ['required','min:11','max:11']
+            'username' => 'required',
+            'password' => ['required','min:8']
 
         ]);
 
-        $Shipping_Method = new ShippingMethod;
-        $Shipping_Method->title = $request->title;
-        $Shipping_Method->phone_number = $request->phone_number;
+        $payment_Method = new PaymentMethod();
+        $payment_Method->title = $request->title;
+        $payment_Method->username = $request->username;
+        $payment_Method->password = $request->password;
 
         try{
-            $Shipping_Method->save();
-            return redirect(route('shipping_method.index'))->with('success','successfully stored');
+            $payment_Method->save();
+            return redirect(route('payment_method.index'))->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
-
 
     }
 
@@ -88,14 +87,14 @@ class ShippingMethodController extends Controller
      */
     public function show($id)
     {
-        if(auth()->user()->can('show shipping_method')){
+        if(auth()->user()->can('show payment_method')){
             if(is_numeric($id)){
-                $Shipping_Method = ShippingMethod::find($id);
-                if($Shipping_Method == null){
-                    return redirect()->back()->with('error','Shipping method not exists!');
+                $payment_Method = PaymentMethod::find($id);
+                if($payment_Method == null){
+                    return redirect()->back()->with('error','Payment method not exists!');
                 }
-                return view('shipping_method.show')->with([
-                    'Shipping_Methods' => $Shipping_Method
+                return view('payment_method.show')->with([
+                    'Payment_Methods' => $payment_Method
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -113,49 +112,56 @@ class ShippingMethodController extends Controller
     public function edit($id)
     {
 
-        if(auth()->user()->can('edit shipping_method')){
+        if(auth()->user()->can('edit payment_method')){
             if(is_numeric($id)){
-                $Shipping_Method = ShippingMethod::find($id);
-                if($Shipping_Method == null){
-                    return redirect()->back()->with('error','Shipping Method not exists!');
+                $payment_Method = PaymentMethod::find($id);
+                if($payment_Method == null){
+                    return redirect()->back()->with('error','Payment Method not exists!');
                 }
-                return view('shipping_method.edit')->with([
-                    'Shipping_Methods' => $Shipping_Method,
+                return view('payment_method.edit')->with([
+                    'Payment_Methods' => $payment_Method,
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+
+
+
+
+
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     * @param $request
+     * @param $id
+     * @return view
      */
     public function update(Request $request, $id)
     {
         $request->validate([
             'title' => 'required',
-            'phone_number' => 'required',
+            'username' => 'required',
+            'password' => ['required','min:8']
 
         ]);
 
-        if(auth()->user()->can('update shipping_method')){
+        if(auth()->user()->can('update payment_method')){
             if(is_numeric($id)){
-                $Shipping_Method = ShippingMethod::find($id);
-                if($Shipping_Method == null){
-                    return redirect()->back()->with('error','Shipping Method not exists!');
+                $payment_Method = PaymentMethod::find($id);
+                if($payment_Method == null){
+                    return redirect()->back()->with('error','Payment Method not exists!');
                 }
-                $Shipping_Method->title = $request->title;
-                $Shipping_Method->phone_number = $request->phone_number;
+                $payment_Method->title = $request->title;
+                $payment_Method->username = $request->username;
+                $payment_Method->password = $request->password;
 
                 try{
-                    $Shipping_Method->save();
-                    return redirect(route('shipping_method.index'))->with('success','successfully updated!');
+                    $payment_Method->save();
+                    return redirect(route('payment_method.index'))->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e);
                 }
@@ -164,25 +170,33 @@ class ShippingMethodController extends Controller
             }
         }
         return redirect('home')->with('error','Unauthorized Access!');
+
+
+
+
+
+
+
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     *@param $id
+     * @return view
      */
     public function destroy($id)
     {
-        if(auth()->user()->can('delete shipping_method')){
+        if(auth()->user()->can('delete payment_method')){
             if(is_numeric($id)){
-                $Shipping_Method = ShippingMethod::find($id);
-                if($Shipping_Method == null){
+                $payment_Method = PaymentMethod::find($id);
+                if($payment_Method == null){
                     return redirect()->back()->with('error','Payment Method not exists!');
                 }
                 try{
-                    $Shipping_Method->delete();
-                    return redirect(route('shipping_method.index'))->with('success','successfully deleted!');
+                    $payment_Method->delete();
+                    return redirect(route('payment_method.index'))->with('success','successfully deleted!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e);
                 }
@@ -192,4 +206,5 @@ class ShippingMethodController extends Controller
         }
         return redirect('home')->with('error','Unauthorized Access!');
     }
+
 }

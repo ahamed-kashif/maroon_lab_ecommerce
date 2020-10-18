@@ -17,5 +17,6 @@ class DatabaseSeeder extends Seeder
         $this->call(ProductsTableSeeder::class);
         $this->call(VariantSeeder::class);
         $this->call(ShippingMethodSeeder::class);
+        $this->call(PaymentMethodSeeder::class);
     }
 }
