@@ -48,7 +48,11 @@
                         @endforeach
                         </tbody>
                         <tfoot>
+                        <tr>
+                            <th>Tile</th>
+                            <th>Phone Number</th>
 
+                        </tr>
                         </tfoot>
                     </table>
                 </div>

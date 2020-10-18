@@ -61,7 +61,7 @@ class ShippingMethodController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'phone_number' => 'required',
+            'phone_number' => ['required','min:11','max:11']
 
         ]);
 

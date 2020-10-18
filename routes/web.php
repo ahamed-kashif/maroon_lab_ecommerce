@@ -34,3 +34,5 @@ Route::prefix('shop')->group(function(){
    Route::get('/product/{product}','StoreController@product')->name('store.product.show');
    Route::get('/category/{category}','StoreController@category')->name('store.category');
 });
+
+Route::resource('shipping_method','ShippingMethodController');
