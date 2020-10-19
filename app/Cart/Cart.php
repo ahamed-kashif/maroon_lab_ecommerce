@@ -59,6 +59,7 @@ class Cart
     }
 
     public function bill(){
+        $this->bill = 0;
         foreach ($this->items as $item){
             $this->bill = $this->bill + $item->amount();
         }

@@ -19,7 +19,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cart = Session::get('cart');
+        $cart = Session::forget('cart');
         Session::save();
         dd($cart);
         //return $cart;
@@ -54,6 +54,9 @@ class CartController extends Controller
         }
 
         $quantity = $request->input('quantity');
+        if($quantity <= 0){
+            return redirect()->back()->with('error','please select atleast one item');
+        }
         if(Session::has('cart')){
             $cart = $request->session()->get('cart');
             $request->session()->forget('cart');
