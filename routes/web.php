@@ -34,3 +34,8 @@ Route::prefix('shop')->group(function(){
    Route::get('/product/{product}','StoreController@product')->name('store.product.show');
    Route::get('/category/{category}','StoreController@category')->name('store.category');
 });
+Route::prefix('cart')->group(function(){
+   Route::get('/', 'CartController@index')->name('cart.index');
+   Route::post('/add_product/{product}', 'CartController@add_product')->name('cart.product.add');
+   Route::get('/update_item', 'CartController@update_item')->name('cart.product.update');
+});
