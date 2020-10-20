@@ -37,5 +37,7 @@ Route::prefix('shop')->group(function(){
 Route::prefix('cart')->group(function(){
    Route::get('/', 'CartController@index')->name('cart.index');
    Route::post('/add_product/{product}', 'CartController@add_product')->name('cart.product.add');
-   Route::get('/update_item', 'CartController@update_item')->name('cart.product.update');
+   Route::post('/update_item/{product}', 'CartController@update_item')->name('cart.product.update');
+   Route::delete('/remove_item/{product}', 'CartController@remove_item')->name('cart.product.remove');
+   Route::post('/update', 'CartController@update_cart')->name('cart.update');
 });

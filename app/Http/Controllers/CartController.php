@@ -8,35 +8,53 @@ use App\Models\Product;
 use App\Models\Variant;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
 class CartController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display cart session.
      *
-     * @return \Illuminate\Http\Response
+     * @return Redirect|view
      */
     public function index()
     {
-        $cart = Session::forget('cart');
-        Session::save();
-        dd($cart);
-        //return $cart;
+        if(!session()->has('cart')){
+            return redirect()->route('store.index')->withErrors('your cart is empty!');
+        }
+        $cart = session()->get('cart');
+
+        return view('cart.index')->with([
+            'cart' => $cart
+        ]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * update cart with special order notes.
      *
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @return Redirect
      */
-    public function create()
+    public function update_cart(Request $request)
     {
-        //
+        $request->validate([
+           'specialNotes' => 'required'
+        ]);
+        if(session()->has('cart')){
+            $cart = session()->get('cart');
+            session()->forget('cart');
+            session()->save();
+            $cart->order_note = $request->specialNotes;
+            session()->put('cart',$cart);
+            session()->save();
+            return  redirect()->back()->with('success','order notes updated');
+        }
+        return redirect()->back()->with('error','cart does not exist');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * add product to cart session.
      *
      * @param  Request  $request
      * @param  int $id
@@ -69,44 +87,66 @@ class CartController extends Controller
         $request->session()->put('cart',$cart);
         $request->session()->save();
         if(!$added){
-            return redirect()->back()->with('error','product already added');
+            return redirect()->route('store.index')->with('error','product already added');
         }
         return redirect()->back()->with('success','added product!');
     }
 
     /**
-     * Display the specified resource.
+     * update the specified product's quantity in cart.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param  Request $request
+     * @return string[]
      */
-    public function update_item(Request $request)
+    public function update_item(Request $request, $id)
     {
+        $request->validate([
+           'qty' => 'required'
+        ]);
         if(session()->has('cart')){
-            $item = new Item(Product::find($request->product), Variant::whereIn('id',$request->variants));
-            $cart = session()->get('cart');
-            session()->forget('cart');
+            foreach(session()->get('cart')->items() as $item){
+                if($item->product()->id == $id){
+                    //forget the session
+                    $cart = session()->get('cart');
+                    session()->forget('cart');
+                    //update cart
+                    $cart->update_item($item,$request->qty);
+                    session()->put('cart',$cart);
+                    session()->save();
 
-            if(in_array($item,$cart->items())){
-                $cart->update_item($item,$request->quantity);
+                    return ['message'=> 'updated', 'amount' => $item->amount()];
+                }
             }
-
-            Session::put('cart',$cart);
-            $request->session()->save();
-            dd($cart);
-            return $cart;
+            return ['message'=> 'requested product not found'];
         }
+        return ['message'=> 'cart does not exist'];
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * remove specified item from cart.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return Redirect
      */
-    public function remove_item(Request $request)
+    public function remove_item($id)
     {
-        //
+        $product = Product::find($id);
+        if(!session()->has('cart')){
+            return redirect()->route('store.index')->with('error','cart does not exists');
+        }
+        $cart = session()->get('cart');
+        foreach ($cart->items() as $item){
+            if($item->product()->id == $id){
+                session()->forget('cart');
+                session()->save();
+                $cart->remove_item($item);
+                session()->put('cart',$cart);
+                session()->save();
+                return redirect()->back()->with('success','removed this item from cart..');
+            }
+        }
+        return redirect()->back()->with('error','requested item not found in this cart');
     }
 
     /**

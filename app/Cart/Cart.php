@@ -3,21 +3,36 @@
 namespace App\Cart;
 
 use App\Cart\Item;
+use Illuminate\Support\Facades\Redirect;
+use Symfony\Component\Routing\Annotation\Route;
 
 
 class Cart
 {
     private $items = [];
-    private $bill = 0;
+    public $order_note = "";
 
     public function _construct(){
 
     }
 
+    /**
+     * get items array of this cart.
+     *
+     * @return array
+     */
     public function items(){
         return $this->items;
     }
 
+    /**
+     * add product as item in this cart.
+     *
+     * @param Item $item
+     * @param int $quantity
+     *
+     * @return boolean
+     */
     public function add_item(Item $item, $quantity)
     {
         try{
@@ -34,6 +49,14 @@ class Cart
         }
     }
 
+    /**
+     * update quantity of specified item.
+     *
+     * @param Item $item
+     * @param int $qty
+     *
+     * @return boolean
+     */
     public function update_item(Item $item, $qty){
         if(in_array($item, $this->items)){
             $key = array_search($item,$this->items);
@@ -46,23 +69,55 @@ class Cart
         return false;
     }
 
+    /**
+     * remove specified item from this cart.
+     *
+     * @param Item $item
+     * @return boolean
+     */
     public function remove_item(Item $item){
         if(in_array($item, $this->items)){
             $key = array_search($item,$this->items);
             //removing item
             unset($this->items[$key]);
             //indexing items array
-            $this->items = array_values($this->item);
+            $this->items = array_values($this->items);
             return true;
         }
         return false;
     }
 
-    public function bill(){
-        $this->bill = 0;
-        foreach ($this->items as $item){
-            $this->bill = $this->bill + $item->amount();
+    /**
+     * get total amount of this cart without sale.
+     *
+     * @return float
+     */
+    public function total(){
+        $total = 0;
+        foreach($this->items as $item){
+            $total = $total + $item->total();
         }
-        return $this->bill;
+        return $total;
+    }
+    /**
+     * get total amount of this cart with sale.
+     *
+     * @return float
+     */
+    public function bill(){
+        $bill =0;
+        foreach ($this->items as $item){
+            $bill = $bill + $item->amount();
+        }
+        return $bill;
+    }
+
+    /**
+     * get discounted amount of this cart.
+     *
+     * @return float
+     */
+    public function discount(){
+        return $this->total() - $this->bill();
     }
 }

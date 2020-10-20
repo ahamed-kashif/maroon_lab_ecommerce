@@ -10,7 +10,9 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="notoficationlink">
                 <div class="notification-dropdown-title">
-                    <h4>Cart Items</h4>
+                    <a href="{{route('cart.index')}}">
+                        <h4>Cart Items</h4>
+                    </a>
                 </div>
                 <ul class="list-unstyled">
                     @if(session()->has('cart'))
@@ -36,7 +38,7 @@
                             <span class="action-icon badge badge-success-inverse">Bill</span>
                             <div class="media-body">
                                 <h5 class="action-title">Total bill of this cart: ৳{{session()->get('cart')->bill()}}</h5>
-                                <p><span class="timing">Go to <a href="{{route('store.index')}}">Checkout</a> or <a href="{{route('store.index')}}">Shop</a> more.</span></p>
+                                <p><span class="timing">Go to <a href="{{route('cart.index')}}">Checkout</a> or <a href="{{route('store.index')}}">Shop</a> more.</span></p>
                             </div>
                         </li>
                     @else
