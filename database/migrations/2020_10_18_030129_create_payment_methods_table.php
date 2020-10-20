@@ -16,8 +16,8 @@ class CreatePaymentMethodsTable extends Migration
         Schema::create('payment_methods', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->String('title');
-            $table->String('username')->nullable();
-            $table->String('password')->nullable();
+            $table->char('short_code',5);
+            $table->boolean('is_active')->default(false);
             $table->string('api_token')->nullable();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();

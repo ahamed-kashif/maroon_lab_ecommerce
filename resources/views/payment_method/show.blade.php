@@ -3,9 +3,14 @@
     <div class="col-lg-12">
         <div class="card m-b-30">
             <div class="card-header">
-                <h3 class="card-title">{{$Payment_Methods->title}}</h3><br><br>
-                <span><small><b>Username:</b>{{$Payment_Methods->username}}</small></span><br>
+                <h3 class="card-title">
+                {{$Payment_Methods->title}}
+                <span class="badge {{$Payment_Methods->is_active ? 'badge-success' : 'badge-secondary'}}">
+                        {{$Payment_Methods->is_active ? 'active' : 'inactive'}}
+                    </span>
 
+                </h3>
+                <small>Short Code:  {{$Payment_Methods->short_code}}</small><br>
             </div>
             <div class="card-body">
                 <div class="col-md-6 col-lg-6">

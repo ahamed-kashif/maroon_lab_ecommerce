@@ -19,13 +19,20 @@
                             <label for="title">title</label>
                             <input type="text" class="form-control" id="title" placeholder="Title" name="title" value="{{$Payment_Methods->title}}">
                         </div>
+
                         <div class="form-group col-md-6">
-                            <label for="username">Username</label>
-                            <input type="text" class="form-control" id="username" name="username" placeholder="username" value="{{$Payment_Methods->username}}">
+                            <label for="short_code">short_code</label>
+                            <input type="text" class="form-control" id="short_code" name="short_code" placeholder="Short Code" value="{{$Payment_Methods->short_code}}">
                         </div>
-                        <div class="form-group col-md-6">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="password" value="{{$Payment_Methods->password}}">
+                        <div class="form-row">
+                            <div class="form-group col-md-2">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="is_active" name="is_active" {{$Payment_Methods->is_active ? 'checked' : ''}}>
+                                    <label class="form-check-label" for="is_active">
+                                        Active
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

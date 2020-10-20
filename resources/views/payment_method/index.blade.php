@@ -24,7 +24,9 @@
                         <thead>
                         <tr>
                             <th>Title</th>
-                            <th>Username</th>
+                            <th>Short Code</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -35,7 +37,10 @@
                                         {{__($payment_method->title)}}
                                     </a>
                                 </td>
-                                <td>{{$payment_method->username}}</td>
+                                <td>{{$payment_method->short_code}}</td>
+                                <td>
+                                    {{$payment_method->is_active ? 'active' : 'inactive'}}
+                                </td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-link" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal-"></i></button>
@@ -50,8 +55,9 @@
                         <tfoot>
                         <tr>
                             <th>Title</th>
-                            <th>Username</th>
-
+                            <th>Short Code</th>
+                            <th>Status</th>
+                            <th>Action</th>
                         </tr>
                         </tfoot>
                     </table>

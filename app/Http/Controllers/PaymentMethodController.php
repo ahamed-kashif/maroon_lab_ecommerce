@@ -60,15 +60,15 @@ class PaymentMethodController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'username' => 'required',
-            'password' => ['required','min:8']
+            'short_code' => 'required',
+
 
         ]);
 
         $payment_Method = new PaymentMethod();
         $payment_Method->title = $request->title;
-        $payment_Method->username = $request->username;
-        $payment_Method->password = $request->password;
+        $payment_Method->short_code = $request->short_code;
+        $payment_Method->is_active = $request->has('is_active');
 
         try{
             $payment_Method->save();
@@ -144,8 +144,8 @@ class PaymentMethodController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'username' => 'required',
-            'password' => ['required','min:8']
+            'short_code' => 'required',
+
 
         ]);
 
@@ -156,8 +156,8 @@ class PaymentMethodController extends Controller
                     return redirect()->back()->with('error','Payment Method not exists!');
                 }
                 $payment_Method->title = $request->title;
-                $payment_Method->username = $request->username;
-                $payment_Method->password = $request->password;
+                $payment_Method->short_code = $request->short_code;
+                $payment_Method->is_active = $request->has('is_active');
 
                 try{
                     $payment_Method->save();
