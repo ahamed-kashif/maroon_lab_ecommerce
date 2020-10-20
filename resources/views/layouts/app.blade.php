@@ -112,16 +112,20 @@
                                 item.text(data[i])
                                 item.appendTo(list)
                             }
-                            searchBox.html(list)
+                            searchBox.html(list);
                         }
                     });
                 }
+            });
+            $('.search').focusout(function(){
+               $('.search-list').fadeOut();
             });
 
             $(document).on('click', '.search-item', function(){
                 //console.log($(this).text());
                 $('#search').val($(this).text());
-                $('.search-list').html("");
+                $('.search-list').html("")
+                                .fadeOut();
             });
 
         });
