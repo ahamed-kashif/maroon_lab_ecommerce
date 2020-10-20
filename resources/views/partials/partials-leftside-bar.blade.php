@@ -24,6 +24,7 @@
                                 <li><a href="{{route('product.index')}}">Products</a></li>
                                 <li><a href="{{route('category.index')}}">Categories</a></li>
                                 <li><a href="{{route('subcategory.index')}}">Sub-Categories</a></li>
+                                <li><a href="{{route('shipping_method.index')}}">Shipping-Method</a></li>
                             </ul>
                         </li>
                         <li><a href="#">Orders</a></li>
