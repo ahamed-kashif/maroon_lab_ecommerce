@@ -87,6 +87,48 @@
     <!-- Core js -->
     <script src="{{asset('js/core.js')}}"></script>
     <!-- End js -->
+    <script>
+        $(document).ready(function(){
+            $('.search').keyup(function(){
+                let query = $(this).val();
+                if(query != '')
+                {
+                    $.ajax({
+                        url:"{{ route('search.fetch') }}",
+                        method:"get",
+                        data:{query:query},
+                        success:function(data){
+                            //console.log(data);
+                            let searchBox = $('.search-list');
+                            searchBox.fadeIn();
+                            let list = $('<ul></ul>');
+                            list.addClass('list-group')
+                                .attr('style', 'display: block; position: relative; z-index: 1')
+                            for(let i=0; i<data.length;i++){
+                                let item = $('<li></li>');
+                                item.addClass('list-group-item')
+                                    .addClass('search-item')
+                                    .css('cursor','pointer')
+                                item.text(data[i])
+                                item.appendTo(list)
+                            }
+                            searchBox.html(list);
+                        }
+                    });
+                }
+            });
+            $('.search').focusout(function(){
+               $('.search-list').fadeOut();
+            });
 
+            $(document).on('click', '.search-item', function(){
+                //console.log($(this).text());
+                $('#search').val($(this).text());
+                $('.search-list').html("")
+                                .fadeOut();
+            });
+
+        });
+    </script>
 </body>
 </html>

@@ -7,7 +7,7 @@
             <div class="col-lg-11 col-xl-12">
                 <div class="card m-b-30">
                     <div class="card-header">
-                        <h5 class="card-title">Shop</h5>
+                        <h5 class="card-title md-2">Shop</h5><br>
                         @include('partials.alert')
                     </div>
                     <div class="card-body">

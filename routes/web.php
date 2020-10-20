@@ -34,5 +34,12 @@ Route::prefix('shop')->group(function(){
    Route::get('/product/{product}','StoreController@product')->name('store.product.show');
    Route::get('/category/{category}','StoreController@category')->name('store.category');
 });
-
-Route::resource('shipping_method','ShippingMethodController');
+Route::prefix('cart')->group(function(){
+   Route::get('/', 'CartController@index')->name('cart.index');
+   Route::post('/add_product/{product}', 'CartController@add_product')->name('cart.product.add');
+   Route::post('/update_item/{product}', 'CartController@update_item')->name('cart.product.update');
+   Route::delete('/remove_item/{product}', 'CartController@remove_item')->name('cart.product.remove');
+   Route::post('/update', 'CartController@update_cart')->name('cart.update');
+});
+Route::get('search','SearchController@index')->name('search.index');
+Route::get('search/fetch','SearchController@fetch')->name('search.fetch');
