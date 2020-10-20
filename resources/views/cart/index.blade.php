@@ -16,7 +16,7 @@
                     @include('partials.alert')
                     <div class="card-body">
                         <div class="row justify-content-center">
-                            <div class="col-lg-10 col-xl-8">
+                            <div class="col-lg-12 col-xl-10">
                                 <div class="cart-container">
                                     <div class="cart-head">
                                         <div class="table-responsive">
@@ -55,7 +55,18 @@
                                                                         @endif
                                                                     </a>
                                                                 </td>
-                                                                <td>{{$item->product()->title}}</td>
+                                                                <td>
+                                                                    {{$item->product()->title}}
+                                                                    @if(count($item->variants())>0)
+                                                                        <br>
+                                                                        @foreach($item->variants() as $v)
+                                                                            <span class="badge-pill badge-info-inverse">{{$v->value.' '.$v->unit}}</span>
+                                                                        @endforeach
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+
+                                                                </td>
                                                                 <td>
                                                                     <div class="form-group mb-0">
                                                                         <input type="number" class="form-control cart-qty qty" name="cartQty1" id="cartQty1" value="{{$item->getQty()}}" data-id="{{$item->product()->id}}">
