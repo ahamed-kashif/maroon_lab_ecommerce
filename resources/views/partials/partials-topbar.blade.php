@@ -45,13 +45,14 @@
                     </li>
                     <li class="list-inline-item">
                         <div class="searchbar">
-                            <form>
+                            <form action="{{route('search.index')}}" method="get">
                                 <div class="input-group">
-                                    <input type="search" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="button-addon2">
+                                    <input type="text" id="search" name="query" class="form-control search" placeholder="Search" aria-label="Search" aria-describedby="button-addon2" autocomplete="off">
                                     <div class="input-group-append">
                                         <button class="btn" type="submit" id="button-addon2"><img src="{{asset('images/svg-icon/search.svg')}}" class="img-fluid" alt="search"></button>
                                     </div>
                                 </div>
+                                <div class="search-list"></div>
                             </form>
                         </div>
                     </li>
@@ -98,3 +99,4 @@
     </div>
     <!-- End row -->
 </div>
+
