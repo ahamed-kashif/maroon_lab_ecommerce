@@ -46,3 +46,6 @@ Route::get('search/fetch','SearchController@fetch')->name('search.fetch');
 Route::resource('shipping_method','ShippingMethodController');
 Route::resource('payment_method','PaymentMethodController');
 Route::get('users_list', 'UsersListController@index')->name('user.list');
+Route::prefix('transaction')->group(function(){
+    Route::get('/','TransactionController@index')->name('transaction.index');
+});
