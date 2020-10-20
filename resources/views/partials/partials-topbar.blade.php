@@ -59,6 +59,9 @@
             </div>
             <div class="infobar">
                 <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                        @include('partials.partials-cart')
+                    </li>
                 @guest
                     <li class="list-inline-item">
                         <a class="nav-link btn-outline-primary btn-sm" href="{{ route('login') }}">

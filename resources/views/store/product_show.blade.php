@@ -14,6 +14,7 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="col-lg-6 col-xl-5">
+                                @include('partials.alert')
                                 @include('partials.partials-product-preview',[
                                     'product' => $product
                                 ])
@@ -45,7 +46,8 @@
                                 @else
                                     <p class="text-primary font-26 f-w-7 my-3"><sup class="font-16">৳</sup>{{$product->price}}</p>
                                 @endif
-                                <form>
+                                <form action="{{route('cart.product.add', $product->id)}}" method="POST">
+                                    @csrf
                                     <div class="mb-4 summer_text">{!!$product->short_description !!}</div>
                                     @foreach($product->variants->groupBy('type') as $key => $variant)
                                         <div class="mt-3">
@@ -58,13 +60,14 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                    <div class="mt-4 col-sm-3 ml-0 p-0 ">
+                                    <div class="mt-4 col-sm-2 col-md-2 col-lg-2 ml-0 p-0 ">
                                         <h5 class="card-title mr-2" for="inlineCheckbox1">Quantity</h5>
-                                        <input type="text" class="form-control" id="touchspin-empty-value" name="touchspin-empty-value" value="1" min="1" max="500">
+                                        <input type="text" class="form-control" id="touchspin-vertical-btn" name="quantity" value="1" min="1" max="500">
                                     </div>
                                     <div class="button-list mt-5 mb-5">
                                         {{--                                    <button type="button" class="btn btn-danger-rgba font-18"><i class="feather icon-heart"></i></button>--}}
-                                        <button type="button" class="btn btn-primary-rgba font-18"><i class="feather icon-shopping-bag mr-2"></i>Add to Cart</button>
+
+                                        <button type="submit" class="btn btn-primary-rgba font-18"><i class="feather icon-shopping-bag mr-2"></i>Add to Cart</button>
                                         <button type="button" class="btn btn-success font-17">Buy Now</button>
                                     </div>
                                 </form>
