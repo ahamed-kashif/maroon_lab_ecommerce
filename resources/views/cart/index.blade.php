@@ -58,14 +58,10 @@
                                                                 <td>
                                                                     {{$item->product()->title}}
                                                                     @if(count($item->variants())>0)
-                                                                        <br>
                                                                         @foreach($item->variants() as $v)
                                                                             <span class="badge-pill badge-info-inverse">{{$v->value.' '.$v->unit}}</span>
                                                                         @endforeach
                                                                     @endif
-                                                                </td>
-                                                                <td>
-
                                                                 </td>
                                                                 <td>
                                                                     <div class="form-group mb-0">
