@@ -46,4 +46,4 @@ Route::get('search/fetch','SearchController@fetch')->name('search.fetch');
 
 
 
-Route::get('users_list', 'UsersListController@index')->name('list');
+Route::get('users_list', 'UsersListController@index')->name('user.list');
