@@ -43,7 +43,5 @@ Route::prefix('cart')->group(function(){
 });
 Route::get('search','SearchController@index')->name('search.index');
 Route::get('search/fetch','SearchController@fetch')->name('search.fetch');
-
-
-
-Route::get('users_list', 'UsersListController@index')->name('user.list');
+Route::resource('shipping_method','ShippingMethodController');
+Route::resource('payment_method','PaymentMethodController');
