@@ -38,9 +38,6 @@ class CartController extends Controller
      */
     public function update_cart(Request $request)
     {
-        $request->validate([
-           'specialNotes' => 'required'
-        ]);
         if(session()->has('cart')){
             $cart = session()->get('cart');
             session()->forget('cart');
