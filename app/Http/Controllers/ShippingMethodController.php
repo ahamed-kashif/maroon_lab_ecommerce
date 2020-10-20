@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ShippingMethod;
 
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ShippingMethodController extends Controller
 {
@@ -35,7 +36,7 @@ class ShippingMethodController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return view
      */
     public function create()
     {
@@ -51,8 +52,8 @@ class ShippingMethodController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     *  @return view
      */
     public function store(Request $request)
     {
@@ -84,8 +85,8 @@ class ShippingMethodController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *  @return view
      */
     public function show($id)
     {
@@ -93,7 +94,7 @@ class ShippingMethodController extends Controller
             if(is_numeric($id)){
                 $Shipping_Method = ShippingMethod::find($id);
                 if($Shipping_Method == null){
-                    return redirect()->back()->with('error','Variant not exists!');
+                    return redirect()->back()->with('error','Shipping method not exists!');
                 }
                 return view('shipping_method.show')->with([
                     'Shipping_Methods' => $Shipping_Method
@@ -108,8 +109,8 @@ class ShippingMethodController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  $id
-     * @return \Illuminate\Http\Response
+     * @param $id
+     *  @return view
      */
     public function edit($id)
     {
@@ -133,7 +134,7 @@ class ShippingMethodController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @param  $id
      * @return \Illuminate\Http\Response
      */
@@ -184,7 +185,7 @@ class ShippingMethodController extends Controller
             if(is_numeric($id)){
                 $Shipping_Method = ShippingMethod::find($id);
                 if($Shipping_Method == null){
-                    return redirect()->back()->with('error','Variant not exists!');
+                    return redirect()->back()->with('error','Payment Method not exists!');
                 }
                 try{
                     $Shipping_Method->delete();
