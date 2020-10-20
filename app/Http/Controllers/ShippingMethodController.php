@@ -41,10 +41,7 @@ class ShippingMethodController extends Controller
     public function create()
     {
         if(auth()->user()->can('create shipping_method')){
-            $Shipping_Method = ShippingMethod::all();
-            return view('shipping_method.create')->with([
-                'shipping_methods' => $Shipping_Method
-            ]);
+            return view('shipping_method.create');
         }
         else{
             return redirect('home')->with('error','Unauthorized Access');
@@ -62,14 +59,19 @@ class ShippingMethodController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'phone_number' => ['required','min:11','max:11']
-
+            'phone_number' => ['required','min:11','max:11'],
+            'short_code' => 'required|max:5',
         ]);
 
         $Shipping_Method = new ShippingMethod;
         $Shipping_Method->title = $request->title;
         $Shipping_Method->phone_number = $request->phone_number;
-
+        $Shipping_Method->short_code = $request->short_code;
+        if($request->has('active')){
+            $Shipping_Method->is_active = true;
+        }else{
+            $Shipping_Method->is_active = false;
+        }
         try{
             $Shipping_Method->save();
             return redirect(route('shipping_method.index'))->with('success','successfully stored');
@@ -120,7 +122,7 @@ class ShippingMethodController extends Controller
                     return redirect()->back()->with('error','Shipping Method not exists!');
                 }
                 return view('shipping_method.edit')->with([
-                    'Shipping_Methods' => $Shipping_Method,
+                    'Shipping_Method' => $Shipping_Method,
                 ]);
             }else{
                 return redirect()->back()->with('error','wrong url!');
@@ -140,8 +142,8 @@ class ShippingMethodController extends Controller
     {
         $request->validate([
             'title' => 'required',
-            'phone_number' => 'required',
-
+            'phone_number' => 'required|min:11|max:11',
+            'short_code' => 'required|max:5'
         ]);
 
         if(auth()->user()->can('update shipping_method')){
@@ -152,7 +154,12 @@ class ShippingMethodController extends Controller
                 }
                 $Shipping_Method->title = $request->title;
                 $Shipping_Method->phone_number = $request->phone_number;
-
+                $Shipping_Method->short_code = $request->short_code;
+                if($request->has('active')){
+                    $Shipping_Method->is_active = true;
+                }else{
+                    $Shipping_Method->is_active = false;
+                }
                 try{
                     $Shipping_Method->save();
                     return redirect(route('shipping_method.index'))->with('success','successfully updated!');

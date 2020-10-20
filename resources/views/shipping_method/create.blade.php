@@ -16,8 +16,20 @@
                             <input type="text" class="form-control" id="title" placeholder="Title" name="title" required>
                         </div>
                         <div class="form-group col-md-6">
-                            <label for="phone_number">Phone Number</label>
-                            <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="phone_number" required>
+                            <label for="short_code">Short Code</label>
+                            <input type="text" class="form-control" id="phone_number" name="short_code" placeholder="short code" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone_number">Phone Number</label>
+                        <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="phone_number" required>
+                    </div>
+                    <div class="form-group col-md-2">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="active" name="active">
+                            <label class="form-check-label" for="=active">
+                                Active
+                            </label>
                         </div>
                     </div>
 

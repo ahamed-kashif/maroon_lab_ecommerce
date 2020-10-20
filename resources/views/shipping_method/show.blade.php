@@ -3,9 +3,15 @@
     <div class="col-lg-12">
         <div class="card m-b-30">
             <div class="card-header">
-                <h3 class="card-title">{{$Shipping_Methods->title}}</h3><br><br>
+                <h3 class="card-title">
+                    {{$Shipping_Methods->title}}
+                    <span class="badge {{$Shipping_Methods->is_active ? 'badge-success' : 'badge-secondary'}}">
+                        {{$Shipping_Methods->is_active ? 'active' : 'inactive'}}
+                    </span>
+                </h3>
+                <span><small>Short Code: {{$Shipping_Methods->short_code}}</small></span>
+                <br><br>
                 <span><small><b>Phone Number:</b>{{$Shipping_Methods->phone_number}}</small></span><br>
-
             </div>
             <div class="card-body">
                 <div class="col-md-6 col-lg-6">

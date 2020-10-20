@@ -25,6 +25,8 @@
                         <tr>
                             <th>Title</th>
                             <th>Phone Number</th>
+                            <th>Active</th>
+                            <th>Action</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -36,6 +38,7 @@
                                     </a>
                                 </td>
                                 <td>{{$shipping_method->phone_number}}</td>
+                                <td>{{$shipping_method->is_active ? 'active' : 'inactive'}}</td>
                                 <td>
                                     <div class="dropdown">
                                         <button class="btn btn-link" type="button" id="CustomdropdownMenuButton8" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="feather icon-more-horizontal-"></i></button>
@@ -51,7 +54,8 @@
                         <tr>
                             <th>Title</th>
                             <th>Phone Number</th>
-
+                            <th>Active</th>
+                            <th>Action</th>
                         </tr>
                         </tfoot>
                     </table>
