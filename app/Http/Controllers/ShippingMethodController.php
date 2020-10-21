@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ShippingMethod;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class ShippingMethodController extends Controller
@@ -71,6 +72,11 @@ class ShippingMethodController extends Controller
             $Shipping_Method->is_active = true;
         }else{
             $Shipping_Method->is_active = false;
+        }
+        if($request->has('default')){
+            $Shipping_Method->default = true;
+        }else{
+            $Shipping_Method->default = false;
         }
         try{
             $Shipping_Method->save();
@@ -143,7 +149,7 @@ class ShippingMethodController extends Controller
         $request->validate([
             'title' => 'required',
             'phone_number' => 'required|min:11|max:11',
-            'short_code' => 'required|max:5'
+            'short_code' => 'required|max:5',
         ]);
 
         if(auth()->user()->can('update shipping_method')){
@@ -159,6 +165,11 @@ class ShippingMethodController extends Controller
                     $Shipping_Method->is_active = true;
                 }else{
                     $Shipping_Method->is_active = false;
+                }
+                if($request->has('default')){
+                    $Shipping_Method->default = true;
+                }else{
+                    $Shipping_Method->default = false;
                 }
                 try{
                     $Shipping_Method->save();
