@@ -34,7 +34,7 @@ class CheckoutController extends Controller
         $payment_methods = PaymentMethod::active()->get();
         return view('checkout.create')->with([
             'shipping_methods' => $shipping_methods,
-            '$payment_methods' => $payment_methods
+            'payment_methods' => $payment_methods
         ]);
     }
 
