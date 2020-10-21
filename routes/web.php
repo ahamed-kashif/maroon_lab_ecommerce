@@ -49,3 +49,6 @@ Route::get('users_list', 'UsersListController@index')->name('user.list');
 Route::prefix('transaction')->group(function(){
     Route::get('/','TransactionController@index')->name('transaction.index');
 });
+Route::prefix('checkout')->group(function(){
+   Route::get('create','CheckoutController@create')->name('checkout.create');
+});

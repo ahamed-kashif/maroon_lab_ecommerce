@@ -16,9 +16,11 @@ class CreateShippingDetailsTable extends Migration
         Schema::create('shipping_details', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
+            $table->string('name');
             $table->string('contact_number');
-            $table->string('billing_address');
+            $table->string('address');
             $table->string('city');
+            $table->string('district');
             $table->string('post_code');
             $table->timestamps();
 

@@ -17,10 +17,6 @@ class CreateOrdersTable extends Migration
             $table->bigIncrements('id');
             $table->string('code');
             $table->unsignedBigInteger('user_id');
-            $table->string('contact');
-            $table->string('shipping_address');
-            $table->string('city');
-            $table->string('post_code');
             $table->float('total');
             $table->float('discount');
             $table->unsignedBigInteger('transaction_id');
