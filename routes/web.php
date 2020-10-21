@@ -50,5 +50,5 @@ Route::prefix('transaction')->group(function(){
     Route::get('/','TransactionController@index')->name('transaction.index');
 });
 Route::prefix('checkout')->group(function(){
-   Route::get('create','CheckoutController@create')->name('checkout.create');
+   Route::get('create','CheckoutController@create')->middleware('cart')->name('checkout.create');
 });

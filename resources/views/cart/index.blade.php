@@ -127,7 +127,7 @@
                                         </div>
                                         <div class="cart-footer text-right">
                                             <button type="submit" class="btn btn-primary-rgba my-1"><i class="feather icon-save mr-2"></i>Update Cart</button>
-                                            <a href="page-checkout.html" class="btn btn-success-rgba my-1">Proceed to Checkout<i class="feather icon-arrow-right ml-2"></i></a>
+                                            <a href="{{route('checkout.create')}}" class="btn btn-success-rgba my-1">Proceed to Checkout<i class="feather icon-arrow-right ml-2"></i></a>
                                         </div>
                                     </form>
                                 </div>
