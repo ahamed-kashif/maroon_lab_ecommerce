@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\PaymentMethod;
+use App\Models\ShippingDetails;
 use App\Models\ShippingMethod;
 use Illuminate\Http\Request;
+use Mockery\Exception;
 
 class CheckoutController extends Controller
 {
@@ -13,15 +15,6 @@ class CheckoutController extends Controller
         $this->middleware('auth');
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -39,14 +32,29 @@ class CheckoutController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Checkout happens here.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
+        if(!auth()->has_shipping_details()){
+           $shipping_details =new ShippingDetails;
+           $shipping_details->user_id = auth()->user()->id;
+           $shipping_details->name = $request->name;
+           $shipping_details->contact_number = $request->contact_number;
+           $shipping_details->address = $request->address;
+           $shipping_details->city = $request->city;
+           $shipping_details->district = $request->district;
+           $shipping_details->post_code = $request->post_code;
+           try{
+               $shipping_details->save();
+           }catch(Exception $e){
+               return redirect()->route('cart.inex')->with('error', $e->getMessage());
+           }
+        }
+
     }
 
     /**

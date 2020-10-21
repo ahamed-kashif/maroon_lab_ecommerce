@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->float('total');
             $table->float('discount');
+            $table->enum('status',['pending','confirmed','completed'])->default('pending');
             $table->unsignedBigInteger('transaction_id');
             $table->unsignedBigInteger('order_tracking_id');
             $table->timestamps();

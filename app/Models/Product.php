@@ -36,4 +36,7 @@ class Product extends Model
             $q->whereIn('categories.id',$this->categories->pluck('id')->toArray());
         })->where('id','!=',$this->id);
     }
+    public function orders(){
+        return $this->belongsToMany(Order::class,'order_product','product_id','order_id')->withPivot('quantity');
+    }
 }
