@@ -19,6 +19,10 @@ class AdminNotificationListener implements ShouldQueue
      */
     public function handle(NewUserRegisteredEvent $event)
     {
-        Mail::to('admin@maroon.lab')->send(new CustomerRegistrationMessage($event->user));
+        $admins = User::hasRole('admin|super-admin')->all();
+        foreach ($admins as $admin){
+            Mail::to($admin->email)->send(new CustomerRegistrationMessage($event->user));
+        }
+
     }
 }
