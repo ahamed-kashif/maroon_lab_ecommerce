@@ -53,7 +53,8 @@ class OrderController extends Controller
     public function show($id)
     {
         if(auth()->user()->can('show order')){
-            $order = Order::find($id);
+            $order = Order::with(['user','transaction.payment_method','order_tracking.shipping_method'])->find($id);
+            //dd($order);
             return view('order.admin.show')->with([
                 'order' => $order
             ]);

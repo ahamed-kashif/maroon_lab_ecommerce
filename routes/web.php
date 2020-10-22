@@ -54,3 +54,8 @@ Route::prefix('checkout')->group(function(){
    Route::post('/','CheckoutController@store')->name('checkout.store');
    Route::get('complete','CheckoutController@complete')->middleware('order')->name('checkout.complete');
 });
+Route::prefix('admin')->group(function(){
+   Route::prefix('order')->group(function (){
+     Route::get('/{order}','Admin\OrderController@show')->name('admin.order.show');
+   });
+});
