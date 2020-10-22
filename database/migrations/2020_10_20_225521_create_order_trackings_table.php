@@ -19,6 +19,7 @@ class CreateOrderTrackingsTable extends Migration
             $table->dateTime('processing_started_at')->nullable();
             $table->dateTime('shipping_started_at')->nullable();
             $table->dateTime('delivered_at')->nullable();
+            $table->enum('status',['pending','processing','shipping','delivered'])->default('pending');
             $table->timestamps();
 
             $table->foreign('shipping_method_id')

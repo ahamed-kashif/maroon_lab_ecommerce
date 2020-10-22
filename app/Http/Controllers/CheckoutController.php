@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\OrderTracking;
 use App\Models\PaymentMethod;
 use App\Models\ShippingDetails;
 use App\Models\ShippingMethod;
@@ -70,8 +71,17 @@ class CheckoutController extends Controller
             return redirect()->route('cart.index')->with('error','something bad happened in transaction!');
         }
 
+        //storing tracking details
+        $tracking =new OrderTracking;
+        $tracking->shipping_method = $request->shipping_method;
+        try{
+            $tracking->save();
+        }catch (Exception $e){
+            return redirect()->route('cart.index')->with('error','something bad happened with tracking');
+        }
 
-
+        //storing order
+        //$products
     }
 
     /**
