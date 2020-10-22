@@ -29,6 +29,6 @@ class OderReceived extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.admin.order.order_received')->subject('ORDER CODE: '.$this->order->code.' Arrived!');
+        return $this->markdown('emails.admin.order.order_received');
     }
 }

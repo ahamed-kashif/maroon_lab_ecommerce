@@ -18,6 +18,7 @@ class CustomerListener implements ShouldQueue
      */
     public function handle(OrderCreateEvent $event)
     {
-        Mail::to($event->order->user()->email)->send(new OderPlaced($event->order));
+        //dd($event->order->user());
+        Mail::to($event->order->user()->first()->email)->send(new OderPlaced($event->order));
     }
 }

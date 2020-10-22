@@ -29,6 +29,6 @@ class OderPlaced extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.user.order.order_placed')->subject('ORDER CODE: '.$this->order->code.' Placed!');
+        return $this->markdown('emails.user.order.order_placed');
     }
 }

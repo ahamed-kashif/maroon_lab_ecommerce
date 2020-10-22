@@ -7,6 +7,7 @@ use App\Mail\CustomerRegistrationMessage;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Mail;
+use App\User;
 
 class AdminNotificationListener implements ShouldQueue
 {
@@ -19,7 +20,7 @@ class AdminNotificationListener implements ShouldQueue
      */
     public function handle(NewUserRegisteredEvent $event)
     {
-        $admins = User::hasRole('admin|super-admin')->all();
+        $admins = User::role('super-admin')->get();
         foreach ($admins as $admin){
             Mail::to($admin->email)->send(new CustomerRegistrationMessage($event->user));
         }

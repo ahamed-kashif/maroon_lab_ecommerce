@@ -20,7 +20,7 @@ class AdminListener implements ShouldQueue
      */
     public function handle(OrderCreateEvent $event)
     {
-        $admins = User::hasRole('admin|super-admin')->all();
+        $admins = User::role('super-admin')->get();
         foreach ($admins as $admin){
             Mail::to($admin->email)->send(new OderReceived($event->order));
         }

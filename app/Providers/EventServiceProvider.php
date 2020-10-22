@@ -21,8 +21,8 @@ class EventServiceProvider extends ServiceProvider
             SendEmailVerificationNotification::class,
         ],
         NewUserRegisteredEvent::class => [
-            WelcomeNewCustomerListener::class,
-            AdminNotificationListener::class,
+            \App\Listeners\WelcomeNewCustomerListener::class,
+            \App\Listeners\AdminNotificationListener::class,
         ],
         OrderCreateEvent::class => [
             \App\Listeners\Order\Create\User\CustomerListener::class,
