@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Transaction extends Model
 {
     public function payment_method(){
-        $this->belongsTo(PaymentMethod::class,'payment_method_id','id');
+        return $this->belongsTo(PaymentMethod::class,'payment_method_id','id');
     }
 }

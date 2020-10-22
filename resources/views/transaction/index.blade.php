@@ -32,12 +32,12 @@
                                 <td>
                                     {{$transaction->code}}
                                 </td>
-                                <td>{{$transaction->payment_method()->title}}</td>
+                                <td>{{$transaction->payment_method->title}}</td>
                                 <td>
                                     {{$transaction->total_payable_amount}}
                                 </td>
                                 <td>
-                                    {{$transaction->staus}}
+                                    {{$transaction->status}}
                                 </td>
                             </tr>
                         @endforeach
