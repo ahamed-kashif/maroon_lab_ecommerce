@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PaymentMethod;
 use App\Models\ShippingDetails;
 use App\Models\ShippingMethod;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Mockery\Exception;
 
@@ -39,6 +40,9 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        $cart = session()->get('cart');
+
+        //one time shipping address storing
         if(!auth()->has_shipping_details()){
            $shipping_details =new ShippingDetails;
            $shipping_details->user_id = auth()->user()->id;
@@ -51,9 +55,22 @@ class CheckoutController extends Controller
            try{
                $shipping_details->save();
            }catch(Exception $e){
-               return redirect()->route('cart.inex')->with('error', $e->getMessage());
+               return redirect()->route('cart.index')->with('error', 'something bad happened during storing shipping address');
            }
         }
+
+        //storing transaction details
+        $transaction = new Transaction;
+        $transaction->code = strtoupper('TK'.uniqid()) ;
+        $transaction->payment_method_id = $request->payment_method;
+        $transaction->total_payable_amount = $cart->bill();
+        try{
+            $transaction->save();
+        }catch(Exception $e){
+            return redirect()->route('cart.index')->with('error','something bad happened in transaction!');
+        }
+
+
 
     }
 
