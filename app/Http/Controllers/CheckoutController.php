@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\Order\OrderCreateEvent;
+use App\Models\Order;
 use App\Models\OrderTracking;
 use App\Models\PaymentMethod;
 use App\Models\ShippingDetails;
@@ -41,10 +43,11 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request);
         $cart = session()->get('cart');
 
         //one time shipping address storing
-        if(!auth()->has_shipping_details()){
+        if(!auth()->user()->has_shipping_details()){
            $shipping_details =new ShippingDetails;
            $shipping_details->user_id = auth()->user()->id;
            $shipping_details->name = $request->name;
@@ -73,7 +76,7 @@ class CheckoutController extends Controller
 
         //storing tracking details
         $tracking =new OrderTracking;
-        $tracking->shipping_method = $request->shipping_method;
+        $tracking->shipping_method_id = $request->shipping_method;
         try{
             $tracking->save();
         }catch (Exception $e){
@@ -81,7 +84,42 @@ class CheckoutController extends Controller
         }
 
         //storing order
-        //$products
+        $order = new Order;
+        $order->code = strtoupper('OD'.uniqid());
+        $order->user_id = auth()->user()->id;
+        $order->total = $cart->total();
+        $order->discount = $cart->discount();
+        $order->shipping_to = $request->name;
+        $order->shipping_to_contact = $request->contact_number;
+        $order->shipping_address = $request->address;
+        $order->shipping_city = $request->city;
+        $order->shipping_district = $request->district;
+        $order->shipping_post_code = $request->post_code;
+        $order->transaction_id = $transaction->id;
+        $order->order_tracking_id = $tracking->id;
+
+        try{
+            $order->save();
+            foreach ($cart->items() as $item){
+                if(count($item->variants()) > 0){
+                    $order->products()->attach($item->product(),[
+                        'variants' => $item->variants(),
+                        'quantity' => $item->getQty()
+                    ]);
+                }else{
+                    $order->products()->attach($item->product(),[
+                        'quantity' => $item->getQty()
+                    ]);
+                }
+
+            }
+            event(new OrderCreateEvent(auth()->user()));
+            session()->forget('cart');
+            session()->save();
+            return view('checkout.complete');
+        }catch (Exception $e){
+            return redirect()->route('cart.index')->with('error',$e->getMessage());
+        }
     }
 
     /**

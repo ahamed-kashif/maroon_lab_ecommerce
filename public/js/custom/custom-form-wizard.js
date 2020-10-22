@@ -31,7 +31,7 @@ $(document).ready(function() {
       },
       onFinished: function (event, currentIndex)
       {
-          $("#vertical-form-wizard").submit();          
+          $("#vertical-form-wizard").submit();
       }
   });
   $('#basic-form-wizard .steps').prepend( "<div class='form-wizard-line'></div>" );

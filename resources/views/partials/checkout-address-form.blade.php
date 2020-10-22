@@ -27,11 +27,11 @@
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="contact_number">Mobile Number</label>
-            <input type="text" class="form-control shipping" id="contact_number" maxlength="11" value="{{auth()->user()->has_shipping_details() ? auth()->user()->shipping_address()->first()->contact_number : ''}}" {{auth()->user()->has_shipping_details() ? 'readonly' : ''}}>
+            <input type="text" class="form-control shipping" id="contact_number" name="contact_number" maxlength="11" value="{{auth()->user()->has_shipping_details() ? auth()->user()->shipping_address()->first()->contact_number : ''}}" {{auth()->user()->has_shipping_details() ? 'readonly' : ''}}>
         </div>
         <div class="form-group col-md-6">
             <label for="post_code">Postal Code</label>
-            <input type="text" class="form-control shipping" id="post_code" value="{{auth()->user()->has_shipping_details() ? auth()->user()->shipping_address()->first()->post_code : ''}}" {{auth()->user()->has_shipping_details() ? 'readonly' : ''}}>
+            <input type="text" class="form-control shipping" id="post_code" name="post_code" value="{{auth()->user()->has_shipping_details() ? auth()->user()->shipping_address()->first()->post_code : ''}}" {{auth()->user()->has_shipping_details() ? 'readonly' : ''}}>
         </div>
     </div>
 </section>

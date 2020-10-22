@@ -7,8 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $casts = [
+        'variants' => 'array'
+    ];
     public function products(){
-        return $this->belongsToMany(Product::class,'order_products','order_id','product_id')
+        return $this->belongsToMany(Product::class,'order_product','order_id','product_id')
                     ->withPivot('quantity');
     }
     public function transaction(){

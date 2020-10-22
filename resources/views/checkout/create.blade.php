@@ -8,18 +8,17 @@
             <div class="col-lg-12">
                 <div class="card m-b-30">
                     <div class="card-header">
-                        <h5 class="card-title">Multi Steps Checkout</h5>
+                        <h5 class="card-title">Checkout</h5>
                     </div>
                     <div class="card-body">
                         <div class="row justify-content-center">
                             <div class="col-md-8 col-lg-6 col-xl-5">
-                                <form>
-                                    <div id="basic-form-wizard">
-                                        <div>
-                                            @include('partials.checkout-address-form')
-                                            @include('partials.checkout-shipping-method-form')
-                                            @include('partials.checkout-payment-method-form')
-                                        </div>
+                                <form id="basic-form-wizard" action="{{route('checkout.store')}}" method="post">
+                                    @csrf
+                                    <div>
+                                        @include('partials.checkout-address-form')
+                                        @include('partials.checkout-shipping-method-form')
+                                        @include('partials.checkout-payment-method-form')
                                     </div>
                                 </form>
                             </div>
