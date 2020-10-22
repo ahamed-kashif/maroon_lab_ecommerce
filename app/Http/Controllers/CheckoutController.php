@@ -127,21 +127,28 @@ class CheckoutController extends Controller
             event(new OrderCreateEvent($order));
             session()->forget('cart');
             session()->save();
-            return view('checkout.complete');
+            session()->put('order',$order);
+            session()->save();
+            return redirect()->route('checkout.complete');
         }catch (Exception $e){
             return redirect()->route('cart.index')->with('error',$e->getMessage());
         }
     }
 
     /**
-     * Display the specified resource.
+     * checkout complete page.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     *
+     * @return view
      */
-    public function show($id)
+    public function complete()
     {
-        //
+        $order = session()->get('order');
+        session()->forget('order');
+        session()->save();
+        return view('checkout.complete')->with([
+            'order' => $order
+        ]);
     }
 
     /**

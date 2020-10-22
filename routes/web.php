@@ -51,5 +51,6 @@ Route::prefix('transaction')->group(function(){
 });
 Route::prefix('checkout')->group(function(){
    Route::get('create','CheckoutController@create')->middleware('cart')->name('checkout.create');
-   Route::post('create','CheckoutController@store')->name('checkout.store');
+   Route::post('/','CheckoutController@store')->name('checkout.store');
+   Route::get('complete','CheckoutController@complete')->middleware('order')->name('checkout.complete');
 });
