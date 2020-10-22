@@ -44,7 +44,17 @@ class CheckoutController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request);
+        $request->validate([
+           'name' => 'required',
+           'contact_number' => 'required|max:11',
+           'address' => 'required',
+           'city' => 'required',
+           'post_code' => 'required',
+           'district' => 'required',
+           'shipping_method' => 'required',
+           'payment_method' => 'required',
+        ]);
+
         $cart = session()->get('cart');
 
         //one time shipping address storing
