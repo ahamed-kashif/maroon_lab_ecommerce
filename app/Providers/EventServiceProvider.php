@@ -3,8 +3,7 @@
 namespace App\Providers;
 
 use App\Events\NewUserRegisteredEvent;
-use App\Listeners\AdminNotificationListener;
-use App\Listeners\WelcomeNewCustomerListener;
+use App\Events\Order\OrderCreateEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -24,7 +23,11 @@ class EventServiceProvider extends ServiceProvider
         NewUserRegisteredEvent::class => [
             WelcomeNewCustomerListener::class,
             AdminNotificationListener::class,
-        ]
+        ],
+        OrderCreateEvent::class => [
+            \App\Listeners\Order\Create\User\CustomerListener::class,
+            \App\Listeners\Order\Create\Admin\AdminListener::class,
+        ],
     ];
 
     /**
