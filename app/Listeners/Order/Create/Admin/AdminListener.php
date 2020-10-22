@@ -22,7 +22,7 @@ class AdminListener implements ShouldQueue
     {
         $admins = User::hasRole('admin|super-admin')->all();
         foreach ($admins as $admin){
-            Mail::to($admin->email)->send(new OderReceived($event->user));
+            Mail::to($admin->email)->send(new OderReceived($event->order));
         }
     }
 }

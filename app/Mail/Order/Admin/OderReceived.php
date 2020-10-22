@@ -11,14 +11,15 @@ class OderReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $order;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct($order)
     {
-        //
+        $this->order = $order;
     }
 
     /**
@@ -28,6 +29,6 @@ class OderReceived extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.admin.order.order_received');
+        return $this->markdown('emails.admin.order.order_received')->subject('ORDER CODE: '.$this->order->code.' Arrived!');
     }
 }

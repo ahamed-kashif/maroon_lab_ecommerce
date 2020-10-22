@@ -10,6 +10,7 @@ use App\Models\ShippingDetails;
 use App\Models\ShippingMethod;
 use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Mockery\Exception;
 
 class CheckoutController extends Controller
@@ -21,7 +22,7 @@ class CheckoutController extends Controller
 
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new checkout.
      *
      * @return view
      */
@@ -39,7 +40,7 @@ class CheckoutController extends Controller
      * Checkout happens here.
      *
      * @param  Request  $request
-     * @return \Illuminate\Http\Response
+     * @return view|Redirect
      */
     public function store(Request $request)
     {
@@ -113,7 +114,7 @@ class CheckoutController extends Controller
                 }
 
             }
-            event(new OrderCreateEvent(auth()->user()));
+            event(new OrderCreateEvent($order));
             session()->forget('cart');
             session()->save();
             return view('checkout.complete');

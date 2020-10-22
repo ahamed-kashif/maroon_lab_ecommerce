@@ -1,10 +1,9 @@
 @component('mail::message')
-# Introduction
+# Thank you for your order.
 
-The body of your message.
-
+Soon you will be contacted by us.To see your order click the button below.
 @component('mail::button', ['url' => ''])
-Button Text
+Your Order!
 @endcomponent
 
 Thanks,<br>

@@ -13,15 +13,15 @@ use Illuminate\Queue\SerializesModels;
 class OrderCreateEvent
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public $user;
+    public $order;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct($user)
+    public function __construct($order)
     {
-        $this->user = $user;
+        $this->order = $order;
     }
 
 }
