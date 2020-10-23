@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
-
+use PDF;
 class OrderController extends Controller
 {
     public function __construct()
@@ -73,9 +73,18 @@ class OrderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function invoice($id)
     {
-        //
+        if(is_numeric($id)) {
+            $order = Order::with(['user', 'transaction.payment_method', 'order_tracking.shipping_method', 'products.images'])->find($id);
+            if ($order != null) {
+                if (auth()->user()->can('show order')) {
+                    return view('checkout.invoice')->with([
+                        'order' => $order
+                    ]);
+                }
+            }
+        }
     }
 
     /**

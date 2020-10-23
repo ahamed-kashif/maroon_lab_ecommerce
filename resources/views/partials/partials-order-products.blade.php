@@ -47,11 +47,12 @@
         </div>
         <div class="row border-top pt-3">
             <div class="col-md-12 order-2 order-lg-1 col-lg-4 col-xl-6">
-                <div class="order-note">
-
-                    <h6>Note :</h6>
-                    <p>#</p>
-                </div>
+                @if($order->note != null)
+                    <div class="order-note">
+                        <h6>Note :</h6>
+                        <p>{{$order->note}}</p>
+                    </div>
+                @endif
             </div>
             <div class="col-md-12 order-1 order-lg-2 col-lg-8 col-xl-6">
                 <div class="order-total table-responsive ">

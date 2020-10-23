@@ -8,26 +8,7 @@
             <div class="col-lg-7 col-xl-8">
                 @include('partials.partials-order-details',['order'=>$order])
                 @include('partials.partials-order-products',['order'=>$order])
-                <div class="card m-b-30">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-7">
-                                <h5 class="card-title mb-0">Invoice PDF Details</h5>
-                            </div>
-                            <div class="col-5 text-right">
-                                <button type="button" class="btn btn-success py-1"><i class="feather icon-download mr-2"></i>Invoice</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="order-primary-detail">
-                            <h6>Current PDF Details</h6>
-                            <p class="mb-0">Invoice No : #986953</p>
-                            <p class="mb-0">Seller GST : 24HY87078641Z0</p>
-                            <p class="mb-0">Purchase GST : 24HG9878961Z1</p>
-                        </div>
-                    </div>
-                </div>
+                @include('partials.partials-order-invoice',['order' => $order])
             </div>
             <!-- End col -->
             <!-- Start col -->

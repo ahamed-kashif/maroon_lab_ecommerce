@@ -57,5 +57,6 @@ Route::prefix('checkout')->group(function(){
 Route::prefix('admin')->group(function(){
    Route::prefix('order')->group(function (){
      Route::get('/{order}','Admin\OrderController@show')->name('admin.order.show');
+     Route::get('/{order}/invoice','Admin\OrderController@invoice')->name('admin.order.invoice');
    });
 });

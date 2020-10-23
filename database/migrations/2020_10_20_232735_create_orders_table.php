@@ -19,6 +19,7 @@ class CreateOrdersTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->float('total');
             $table->float('discount');
+            $table->string('note')->nullable();
             $table->string('shipping_to');
             $table->string('shipping_to_contact');
             $table->string('shipping_address');
