@@ -52,14 +52,19 @@ class OrderController extends Controller
      */
     public function show($id)
     {
-        if(auth()->user()->can('show order')){
-            $order = Order::with(['user','transaction.payment_method','order_tracking.shipping_method'])->find($id);
-            //dd($order);
-            return view('order.admin.show')->with([
-                'order' => $order
-            ]);
+        if(is_numeric($id)){
+            $order = Order::with(['user','transaction.payment_method','order_tracking.shipping_method','products.images'])->find($id);
+            if($order != null){
+                if(auth()->user()->can('show order')){
+                    return view('order.admin.show')->with([
+                        'order' => $order
+                    ]);
+                }
+                return redirect()->back()->with('error','unauthorized access');
+            }
+            return redirect()->back()->with('error','page does not exists');
         }
-        return redirect()->back()->with('error','unauthorized access');
+        return redirect()->back()->withErrors('wrong url!');
     }
 
     /**

@@ -12,7 +12,7 @@ class Order extends Model
     ];
     public function products(){
         return $this->belongsToMany(Product::class,'order_product','order_id','product_id')
-                    ->withPivot('quantity');
+                    ->withPivot('quantity','variants');
     }
     public function transaction(){
         return $this->belongsTo(Transaction::class,'transaction_id', 'id');
@@ -22,5 +22,9 @@ class Order extends Model
     }
     public function order_tracking(){
         return $this->belongsTo(OrderTracking::class,'order_tracking_id','id');
+    }
+    public function getVariantsAttribute($value)
+    {
+        return json_decode($this->pivot->variants, true);
     }
 }

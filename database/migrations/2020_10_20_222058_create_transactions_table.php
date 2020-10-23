@@ -18,7 +18,7 @@ class CreateTransactionsTable extends Migration
             $table->string('code')->unique();
             $table->unsignedBigInteger('payment_method_id')->nullable();
             $table->float('total_payable_amount');
-            $table->enum('status',['pending','paid','refund'])->default('pending');
+            $table->enum('status',['pending','paid','refund','cancelled'])->default('pending');
             $table->timestamps();
 
             $table->foreign('payment_method_id')
