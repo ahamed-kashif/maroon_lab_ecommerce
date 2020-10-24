@@ -18,7 +18,7 @@
                 <div class="activities-history-list">
                     <div class="activities-history-item">
                         <h6>Processing started</h6>
-                        <p class="mb-0">{{date_format(date_create($order->order_tracking->processing_started_at),'h:i A')}} - {{date_format(date_create($order->order_tracking->processing_started_at),'d m,Y')}}</p>
+                        <p class="mb-0">{{date_format(date_create($order->order_tracking->processing_started_at),'h:i A')}} - {{date_format(date_create($order->order_tracking->processing_started_at),'d M, Y')}}</p>
                     </div>
                 </div>
             @endif
