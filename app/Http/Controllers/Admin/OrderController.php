@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\Order\OrderConfirmedEvent;
+use App\Events\Order\ShippingStatusUpdateEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderTracking;
@@ -138,9 +139,9 @@ class OrderController extends Controller
     public function tracking($id)
     {
         if(is_numeric($id)) {
-            $order = Order::with(['order_tracking'])->find($id);
+            $order = Order::with(['order_tracking','user'])->find($id);
+            //dd($order->user->email);
             $tracking = OrderTracking::find($order->order_tracking->id);
-            //dd($tracking);
             $data['content'] = $order;
             if ($order != null) {
                 if (auth()->user()->can('update order')) {
@@ -166,9 +167,8 @@ class OrderController extends Controller
                                     ]);
                                     break;
                             }
-                            $order->save();
+                            event(new ShippingStatusUpdateEvent($order));
                             $data['message'] = 'successfully updated shipping status.';
-                            event(new OrderConfirmedEvent($order));
                         }catch(\Exception $e){
                             $data['message'] = $e->getMessage();
                         }

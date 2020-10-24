@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Events\NewUserRegisteredEvent;
 use App\Events\Order\OrderConfirmedEvent;
 use App\Events\Order\OrderCreateEvent;
+use App\Events\Order\ShippingStatusUpdateEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -32,6 +33,9 @@ class EventServiceProvider extends ServiceProvider
         OrderConfirmedEvent::class => [
             \App\Listeners\Order\Confirm\User\CustomerListener::class,
             \App\Listeners\Order\Confirm\Admin\AdminListener::class,
+        ],
+        ShippingStatusUpdateEvent::class => [
+            \App\Listeners\Order\ShippingStatus\CustomerListener::class,
         ],
     ];
 

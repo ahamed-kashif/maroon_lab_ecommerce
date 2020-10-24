@@ -19,7 +19,7 @@
                 @if($order->status == 'pending')
                     @include('partials.partials-order-status-confirm',['order'=>$order])
                 @endif
-                @include('partials.partials-order-tracking')
+                @include('partials.partials-order-tracking',['order',$order])
                 <div class="card m-b-30">
                     <div class="card-header">
                         <h5 class="card-title">Chat with Customers</h5>
