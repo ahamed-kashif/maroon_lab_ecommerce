@@ -2,7 +2,7 @@
     <div class="card-header">
         <div class="row align-items-center">
             <div class="col-7">
-                <h5 class="card-title mb-0">Activity</h5>
+                <h5 class="card-title mb-0">Shipping Activity</h5>
             </div>
         </div>
     </div>
@@ -10,28 +10,43 @@
         <div class="activities-history">
             <div class="activities-history-list">
                 <div class="activities-history-item">
-                    <h6>Finished prototyping Project X.</h6>
-                    <p class="mb-0">Just Now</p>
+                    <h6>Order Placed</h6>
+                    <p class="mb-0">{{date_format(date_create($order->created_at),'d M, y')}}</p>
                 </div>
             </div>
-            <div class="activities-history-list">
-                <div class="activities-history-item">
-                    <h6>Received confirmation from marketing manager.</h6>
-                    <p class="mb-0">11:00 AM - 3 Oct, 2019</p>
+            @if($order->order_tracking->processing_started_at != null)
+                <div class="activities-history-list">
+                    <div class="activities-history-item">
+                        <h6>Processing started</h6>
+                        <p class="mb-0">{{date_format(date_create($order->order_tracking->processing_started_at),'h:i A')}} - {{date_format(date_create($order->order_tracking->processing_started_at),'d m,Y')}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="activities-history-list">
-                <div class="activities-history-item">
-                    <h6>Zoe Updated quick start guide for development process.</h6>
-                    <p class="mb-0">09:25 PM - 27 Sep, 2019</p>
+            @endif
+            @if($order->order_tracking->shipping_started_at != null)
+                <div class="activities-history-list">
+                    <div class="activities-history-item">
+                        <h6>Shipping started</h6>
+                        <p class="mb-0">{{date_format(date_create($order->order_tracking->shipping_started_at),'h:i A')}} - {{date_format(date_create($order->order_tracking->shipping_started_at),'d m,Y')}}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="activities-history-list">
-                <div class="activities-history-item">
-                    <h6>Nobita has applied for leave on Easter days.</h6>
-                    <p class="mb-0">06:45 PM - 15 Mar, 2019</p>
+            @endif
+            @if($order->order_tracking->delivered_at != null)
+                <div class="activities-history-list">
+                    <div class="activities-history-item">
+                        <h6>Delivered!</h6>
+                        <p class="mb-0">{{date_format(date_create($order->order_tracking->delivered_at),'h:i A')}} - {{date_format(date_create($order->order_tracking->delivered_at),'d m,Y')}}</p>
+                    </div>
                 </div>
-            </div>
+            @endif
+            @if($order->status == 'cancelled')
+                <div class="activities-history-list">
+                    <div class="activities-history-item">
+                        <h6>Cancelled!</h6>
+                        <p class="mb-0">{{date_format(date_create($order->order_tracking->cancelled_at),'h:i A')}} - {{date_format(date_create($order->order_tracking->cancelled_at),'d m,Y')}}</p>
+                    </div>
+                </div>
+            @endif
+
         </div>
     </div>
 </div>
