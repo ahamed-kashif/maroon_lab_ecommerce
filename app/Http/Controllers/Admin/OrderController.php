@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\Order\OrderCancelEvent;
 use App\Events\Order\OrderConfirmedEvent;
 use App\Events\Order\PaymentStatusUpdateEvent;
 use App\Events\Order\ShippingStatusUpdateEvent;
@@ -254,7 +255,7 @@ class OrderController extends Controller
     public function cancel($id)
     {
         if(is_numeric($id)){
-            $order = Order::with('order_tracking','transaction')->find($id);
+            $order = Order::with('order_tracking','transaction','user')->find($id);
             $data['content'] = $order;
             if($order != null){
                 if (auth()->user()->can('update order')) {
@@ -275,6 +276,7 @@ class OrderController extends Controller
                             $order->status = 'cancelled';
                             $order->save();
                             $data['message'] = 'order cancelled successfully';
+                            event(new OrderCancelEvent($order));
                         }catch(\Exception $e){
                             $data['message'] = $e->getMessage();
                         }

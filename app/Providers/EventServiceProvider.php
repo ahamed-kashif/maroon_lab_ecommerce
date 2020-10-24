@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Events\NewUserRegisteredEvent;
+use App\Events\Order\OrderCancelEvent;
 use App\Events\Order\OrderConfirmedEvent;
 use App\Events\Order\OrderCreateEvent;
 use App\Events\Order\PaymentStatusUpdateEvent;
@@ -41,6 +42,10 @@ class EventServiceProvider extends ServiceProvider
         PaymentStatusUpdateEvent::class => [
             \App\Listeners\Order\PaymentStatus\User\CustomerListener::class,
             \App\Listeners\Order\PaymentStatus\Admin\AdminListener::class,
+        ],
+        OrderCancelEvent::class => [
+            \App\Listeners\Order\Cancel\User\CustomerListener::class,
+            \App\Listeners\Order\Cancel\Admin\AdminListener::class,
         ],
     ];
 
