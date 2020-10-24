@@ -76,9 +76,11 @@
             </div>
         </div>
     </div>
-    @if($order->status != 'completed' && $order->transaction != 'paid' && $order->status != 'cancelled')
-        <div class="card-footer text-right">
-            <button type="button" class="btn btn-danger-rgba my-1 order-cancel"><i class="feather icon-trash mr-2"></i>Cancel</button>
-        </div>
-    @endif
+    @can('edit order')
+        @if($order->status != 'completed' && $order->transaction != 'paid' && $order->status != 'cancelled')
+            <div class="card-footer text-right">
+                <button type="button" class="btn btn-danger-rgba my-1 order-cancel"><i class="feather icon-trash mr-2"></i>Cancel</button>
+            </div>
+        @endif
+    @endcan
 </div>

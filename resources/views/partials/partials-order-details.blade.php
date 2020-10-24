@@ -30,7 +30,7 @@
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="order-primary-detail mb-4">
                     <h6>Name</h6>
-                    <p class="mb-0">{{$order->user->mobile_number}}</p>
+                    <p class="mb-0">{{$order->user->name}}</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
@@ -50,6 +50,7 @@
             <div class="col-md-6 col-lg-6 col-xl-6 ">
                 <div class="order-primary-detail mb-4">
                     <h6>Shipping Address</h6>
+                    <p>{{$order->shipping_to}}</p>
                     <p>{{$order->shipping_address}},<br/> {{$order->shipping_city}}, {{$order->shipping_district}}.<br/>
                         {{$order->shipping_post_code}}</p>
                     <p class="mb-0">{{$order->shipping_to_contact}}</p>

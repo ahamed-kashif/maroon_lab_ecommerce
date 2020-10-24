@@ -60,3 +60,10 @@ Route::prefix('admin')->group(function(){
      Route::get('/{order}/invoice','Admin\OrderController@invoice')->middleware('auth')->name('admin.order.invoice');
    });
 });
+Route::prefix('customer')->group(function(){
+   Route::prefix('order')->group(function(){
+      Route::get('/','Customer\OrderController@index')->name('customer.order.index');
+      Route::get('/{order}','Customer\OrderController@show')->name('customer.order.show');
+      Route::get('/{order}/invoice','Customer\OrderController@invoice')->name('customer.order.invoice');
+   });
+});

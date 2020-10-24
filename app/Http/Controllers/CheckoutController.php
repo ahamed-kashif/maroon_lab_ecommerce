@@ -12,6 +12,7 @@ use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Mockery\Exception;
+use MongoDB\Driver\Session;
 
 class CheckoutController extends Controller
 {
