@@ -40,21 +40,10 @@ class OrderController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
+     * Display the specified order.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view
      */
     public function show($id)
     {
@@ -74,10 +63,10 @@ class OrderController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the invoice page.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return view
      */
     public function invoice($id)
     {
@@ -94,7 +83,7 @@ class OrderController extends Controller
     }
 
     /**
-     * update order status to confirm.
+     * update order status.
      *
      *
      * @param  int  $id
@@ -203,7 +192,7 @@ class OrderController extends Controller
         return $data;
     }
     /**
-     * update shipping status.
+     * update payment status.
      *
      * @param  int  $id
      * @return string[]
@@ -245,5 +234,22 @@ class OrderController extends Controller
             $data['message'] = 'wrong url';
         }
         return $data;
+    }
+
+    /**
+     * cancel the specified order.
+     *
+     * @param  int $id
+     * @return string[]
+     */
+    public function cancel($id)
+    {
+        if(is_numeric($id)){
+            $order = Order::with('order_tracking','transaction')->find($id);
+            $data['content'] = $order;
+            if($order != null){
+
+            }
+        }
     }
 }
