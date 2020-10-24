@@ -20,6 +20,7 @@
                     @include('partials.partials-order-status-confirm',['order'=>$order])
                 @endif
                 @include('partials.partials-order-tracking',['order',$order])
+                @include('partials.partials-order-transaction-status',['order',$order])
                 <div class="card m-b-30">
                     <div class="card-header">
                         <h5 class="card-title">Chat with Customers</h5>
@@ -223,6 +224,46 @@
                     }
                 });
                 shippingStatus.fail(function (data) {
+                    console.log(data);
+                });
+            });
+            $('.transaction-status').on('click',function() {
+                let url = '{{route('admin.order.payment.status',$order->id)}}';
+                let transactionStatus = $.ajax({
+                    dataType: 'json',
+                    type: 'PUT',
+                    data: {api_token: $api_token},
+                    url: url,
+                });
+
+                transactionStatus.done(function (data) {
+                    console.log(data);
+                    if (data.message === 'successfully updated payment status.') {
+                        swal(
+                            {
+                                title: 'Nice Work!',
+                                text: data.message,
+                                type: 'success',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                        location.reload();
+                    } else {
+                        swal(
+                            {
+                                title: 'oh snap!',
+                                text: data.message,
+                                type: 'warning',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                    }
+                });
+                transactionStatus.fail(function (data) {
                     console.log(data);
                 });
             });
