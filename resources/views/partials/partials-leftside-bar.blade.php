@@ -27,6 +27,8 @@
                                 <li><a href="{{route('variant.index')}}">Variants</a></li>
                                 <li><a href="{{route('shipping_method.index')}}">Shipping-Method</a></li>
                                 <li><a href="{{route('payment_method.index')}}">Payment-Method</a></li>
+                                <li><a href="{{route('page.index')}}">Page Controller</a></li>
+
                             </ul>
                         </li>
                         <li><a href="#">Orders</a></li>

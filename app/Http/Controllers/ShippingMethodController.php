@@ -185,7 +185,7 @@ class ShippingMethodController extends Controller
             if(is_numeric($id)){
                 $Shipping_Method = ShippingMethod::find($id);
                 if($Shipping_Method == null){
-                    return redirect()->back()->with('error','Payment Method not exists!');
+                    return redirect()->back()->with('error','Shipping Method not exists!');
                 }
                 try{
                     $Shipping_Method->delete();
