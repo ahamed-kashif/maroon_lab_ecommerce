@@ -96,30 +96,33 @@ class OrderController extends Controller
             $data['content'] = $order;
             if ($order != null) {
                 if (auth()->user()->can('update order')) {
-                    try{
-                        $order->status = 'confirmed';
-                        switch ($order->status){
-                            case 'pending':
-                                $order->update([
-                                    'status' => 'confirmed',
-                                ]);
-                                break;
-                            case 'confirmed':
-                                if($order->order_tracking->status == 'delivered' && $order->transaction->status == 'paid'){
+                    if($order->status != 'cancelled'){
+                        try{
+                            switch ($order->status){
+                                case 'pending':
                                     $order->update([
-                                        'status' => 'completed',
+                                        'status' => 'confirmed',
                                     ]);
                                     break;
-                                }else{
-                                    $data['message'] = 'this order is not delivered or not paid or both';
-                                    return $data;
-                                }
+                                case 'confirmed':
+                                    if($order->order_tracking->status == 'delivered' && $order->transaction->status == 'paid'){
+                                        $order->update([
+                                            'status' => 'completed',
+                                        ]);
+                                        break;
+                                    }else{
+                                        $data['message'] = 'this order is not delivered or not paid or both';
+                                        return $data;
+                                    }
+                            }
+                            $order->save();
+                            $data['message'] = 'successfully confirmed this order.';
+                            event(new OrderConfirmedEvent($order));
+                        }catch(\Exception $e){
+                            $data['message'] = $e->getMessage();
                         }
-                        $order->save();
-                        $data['message'] = 'successfully confirmed this order.';
-                        event(new OrderConfirmedEvent($order));
-                    }catch(\Exception $e){
-                        $data['message'] = $e->getMessage();
+                    }else{
+                        $data['message'] = 'order is cancelled already';
                     }
                 }else{
                     $data['message'] = 'Unauthorized Access!';
@@ -144,40 +147,43 @@ class OrderController extends Controller
     {
         if(is_numeric($id)) {
             $order = Order::with(['order_tracking','user'])->find($id);
-            //dd($order->user->email);
             $tracking = OrderTracking::find($order->order_tracking->id);
             $data['content'] = $order;
             if ($order != null) {
                 if (auth()->user()->can('update order')) {
-                    if($order->status == 'confirmed'){
-                        try{
-                            switch ($order->order_tracking->status){
-                                case 'pending':
-                                    $tracking->update([
-                                        'status' => 'processing',
-                                        'processing_started_at' => date('Y-m-d H:i:s')
-                                    ]);
-                                    break;
-                                case 'processing':
-                                    $tracking->update([
-                                        'status' => 'shipping',
-                                        'shipping_started_at' => date('Y-m-d H:i:s')
-                                    ]);
-                                    break;
-                                case 'shipping':
-                                    $tracking->update([
-                                        'status' => 'delivered',
-                                        'delivered_at' => date('Y-m-d H:i:s')
-                                    ]);
-                                    break;
+                    if($order->status != 'cancelled'){
+                        if($order->status == 'confirmed'){
+                            try{
+                                switch ($order->order_tracking->status){
+                                    case 'pending':
+                                        $tracking->update([
+                                            'status' => 'processing',
+                                            'processing_started_at' => date('Y-m-d H:i:s')
+                                        ]);
+                                        break;
+                                    case 'processing':
+                                        $tracking->update([
+                                            'status' => 'shipping',
+                                            'shipping_started_at' => date('Y-m-d H:i:s')
+                                        ]);
+                                        break;
+                                    case 'shipping':
+                                        $tracking->update([
+                                            'status' => 'delivered',
+                                            'delivered_at' => date('Y-m-d H:i:s')
+                                        ]);
+                                        break;
+                                }
+                                event(new ShippingStatusUpdateEvent($order));
+                                $data['message'] = 'successfully updated shipping status.';
+                            }catch(\Exception $e){
+                                $data['message'] = $e->getMessage();
                             }
-                            event(new ShippingStatusUpdateEvent($order));
-                            $data['message'] = 'successfully updated shipping status.';
-                        }catch(\Exception $e){
-                            $data['message'] = $e->getMessage();
+                        }else{
+                            $data['message'] = 'Confirm the order first';
                         }
                     }else{
-                        $data['message'] = 'Confirm the order first';
+                        $data['message'] = 'Order is cancelled already!';
                     }
                 }else{
                     $data['message'] = 'Unauthorized Access!';
@@ -205,23 +211,26 @@ class OrderController extends Controller
             $data['content'] = $order;
             if ($order != null) {
                 if (auth()->user()->can('update order')) {
-                    if($order->status == 'confirmed'){
-                        try{
-                            switch ($order->transaction->status){
-                                case 'pending':
-                                    $transaction->update([
-                                        'status' => 'paid',
-                                        'processing_started_at' => date('Y-m-d H:i:s')
-                                    ]);
-                                    break;
+                    if($order->status != 'cancelled'){
+                        if($order->status == 'confirmed'){
+                            try{
+                                switch ($order->transaction->status){
+                                    case 'pending':
+                                        $transaction->update([
+                                            'status' => 'paid',
+                                        ]);
+                                        break;
+                                }
+                                event(new PaymentStatusUpdateEvent($order));
+                                $data['message'] = 'successfully updated payment status.';
+                            }catch(\Exception $e){
+                                $data['message'] = $e->getMessage();
                             }
-                            event(new PaymentStatusUpdateEvent($order));
-                            $data['message'] = 'successfully updated payment status.';
-                        }catch(\Exception $e){
-                            $data['message'] = $e->getMessage();
+                        }else{
+                            $data['message'] = 'Confirm the order first';
                         }
                     }else{
-                        $data['message'] = 'Confirm the order first';
+                        $data['message'] = 'Order is cancelled already!';
                     }
                 }else{
                     $data['message'] = 'Unauthorized Access!';
@@ -248,8 +257,37 @@ class OrderController extends Controller
             $order = Order::with('order_tracking','transaction')->find($id);
             $data['content'] = $order;
             if($order != null){
-
+                if (auth()->user()->can('update order')) {
+                    if($order->status == 'completed' || $order->transaction->status == 'paid'){
+                        $data['message'] = 'order is already paid or completed';
+                    }else{
+                        $order->order_tracking->status = 'cancelled';
+                        $transaction = Transaction::find($order->transaction->id);
+                        $tracking = OrderTracking::find($order->order_tracking->id);
+                        try{
+                            $transaction->update([
+                                'status' => 'cancelled',
+                            ]);
+                            $tracking->update([
+                                'status' => 'cancelled',
+                                'cancelled_at' => date('Y-m-d H:i:s')
+                            ]);
+                            $order->status = 'cancelled';
+                            $order->save();
+                            $data['message'] = 'order cancelled successfully';
+                        }catch(\Exception $e){
+                            $data['message'] = $e->getMessage();
+                        }
+                    }
+                }else{
+                    $data['message'] = 'unauthorized access!';
+                }
+            }else{
+                $data['message'] = 'resource did not found!';
             }
+        }else{
+            $data['message'] = 'resource not found';
         }
+        return $data;
     }
 }

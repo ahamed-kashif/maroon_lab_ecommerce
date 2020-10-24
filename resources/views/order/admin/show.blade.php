@@ -16,10 +16,13 @@
             <!-- End col -->
             <!-- Start col -->
             <div class="col-lg-5 col-xl-4">
-
-                @include('partials.partials-order-status-confirm',['order'=>$order])
-                @include('partials.partials-order-tracking',['order',$order])
-                @include('partials.partials-order-transaction-status',['order',$order])
+                @if($order->status != 'cancelled')
+                    @include('partials.partials-order-status-confirm',['order'=>$order])
+                    @include('partials.partials-order-tracking',['order',$order])
+                    @include('partials.partials-order-transaction-status',['order',$order])
+                @else
+                    @include('partials.partials-order-cancelled')
+                @endif
                 <div class="card m-b-30">
 
                 </div>
@@ -153,6 +156,46 @@
                     }
                 });
                 transactionStatus.fail(function (data) {
+                    console.log(data);
+                });
+            });
+            $('.order-cancel').on('click',function() {
+                let url = '{{route('admin.order.cancel',$order->id)}}';
+                let cancel = $.ajax({
+                    dataType: 'json',
+                    type: 'DELETE',
+                    data: {api_token: $api_token},
+                    url: url,
+                });
+
+                cancel.done(function (data) {
+                    console.log(data);
+                    if (data.message === 'order cancelled successfully') {
+                        swal(
+                            {
+                                title: 'Nice Work!',
+                                text: data.message,
+                                type: 'success',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                        location.reload();
+                    } else {
+                        swal(
+                            {
+                                title: 'oh snap!',
+                                text: data.message,
+                                type: 'warning',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                    }
+                });
+                cancel.fail(function (data) {
                     console.log(data);
                 });
             });

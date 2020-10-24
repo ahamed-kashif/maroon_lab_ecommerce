@@ -21,3 +21,4 @@ Route::middleware('auth:api')->delete('/product/{product_id}/image/{image_id}', 
 Route::middleware('auth:api')->put('admin/order/{order_id}/confirm', 'Admin\OrderController@order_status')->name('admin.order.confirm');
 Route::middleware('auth:api')->put('admin/order/{order_id}/shipping_status', 'Admin\OrderController@tracking')->name('admin.order.shipping.status');
 Route::middleware('auth:api')->put('admin/order/{order_id}/transaction_status', 'Admin\OrderController@transaction')->name('admin.order.payment.status');
+Route::middleware('auth:api')->delete('admin/order/{order_id}/cancel', 'Admin\OrderController@cancel')->name('admin.order.cancel');

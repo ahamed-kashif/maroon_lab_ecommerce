@@ -26,7 +26,7 @@ class CreateOrdersTable extends Migration
             $table->string('shipping_city');
             $table->string('shipping_district');
             $table->string('shipping_post_code');
-            $table->enum('status',['pending','confirmed','completed'])->default('pending');
+            $table->enum('status',['pending','confirmed','completed','cancelled'])->default('pending');
             $table->unsignedBigInteger('transaction_id');
             $table->unsignedBigInteger('order_tracking_id');
             $table->timestamps();
