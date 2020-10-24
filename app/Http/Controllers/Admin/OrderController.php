@@ -23,22 +23,19 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return view
      */
     public function index()
     {
-        //
+        if(auth()->user()->can('index order')){
+            $orders = Order::all();
+            return view('order.admin.index')->with([
+                'orders' => $orders
+            ]);
+        }
+        return redirect()->back()->with('error','unauthorized access!');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
 
     /**
      * Display the specified order.

@@ -56,6 +56,7 @@ Route::prefix('checkout')->group(function(){
 });
 Route::prefix('admin')->group(function(){
    Route::prefix('order')->group(function (){
+     Route::get('/','Admin\OrderController@index')->middleware('auth')->name('admin.order.index');
      Route::get('/{order}','Admin\OrderController@show')->middleware('auth')->name('admin.order.show');
      Route::get('/{order}/invoice','Admin\OrderController@invoice')->middleware('auth')->name('admin.order.invoice');
    });
