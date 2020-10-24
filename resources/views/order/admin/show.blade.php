@@ -1,4 +1,7 @@
 @extends('layouts.app')
+@section('css')
+    @include('extras.sweetalert2-css')
+@endsection
 @section('content')
     <!-- Start Contentbar -->
     <div class="contentbar">
@@ -13,47 +16,10 @@
             <!-- End col -->
             <!-- Start col -->
             <div class="col-lg-5 col-xl-4">
-                <div class="card m-b-30">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-4">
-                                <h5 class="card-title mb-0">Via</h5>
-                            </div>
-                            <div class="col-8">
-                                <div class="card-statistics">
-                                    <ul class="nav nav-pills mb-0" id="stastic-pills-tab" role="tablist">
-                                        <li class="nav-item">
-                                            <a class="nav-link active" id="pills-email-tab" data-toggle="pill" href="#pills-email" role="tab" aria-selected="false">Email</a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" id="pills-sms-tab" data-toggle="pill" href="#pills-sms" role="tab" aria-selected="false">SMS</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <form>
-                            <div class="form-group">
-                                <select id="orderCategory" class="form-control">
-                                    <option selected>Select Type</option>
-                                    <option value="processing">Processing</option>
-                                    <option value="on-hold">On-Hold</option>
-                                    <option value="shipped">Shipped</option>
-                                    <option value="out-for-delivery">Out for Delivery</option>
-                                    <option value="delivered">Delivered</option>
-                                    <option value="completed">Completed</option>
-                                    <option value="cancelled">Cancelled</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" name="specialMessage" id="specialMessage" rows="3" placeholder="Add Special Message"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary"><i class="feather icon-send mr-2"></i>Send</button>
-                        </form>
-                    </div>
-                </div>
+                @if($order->status == 'pending')
+                    @include('partials.partials-order-status-confirm',['order'=>$order])
+                @endif
+                @include('partials.partials-order-tracking')
                 <div class="card m-b-30">
                     <div class="card-header">
                         <h5 class="card-title">Chat with Customers</h5>
@@ -172,4 +138,54 @@
         <!-- End row -->
     </div>
     <!-- End Contentbar -->
+@endsection
+@section('js')
+    <script src="{{asset('/js/restapi.js')}}"></script>
+    @include('extras.sweetalert2-js')
+    <script>
+        $(document).ready(function(){
+            $('.order-confirm').on('click',function() {
+                let url = '{{route('admin.order.confirm',$order->id)}}';
+                let confirmOrder = $.ajax({
+                    dataType: 'json',
+                    type: 'PUT',
+                    data: {api_token: $api_token},
+                    url: url,
+                });
+
+                confirmOrder.done(function (data) {
+                    console.log(data);
+                    if (data.message === 'successfully confirmed this order.') {
+                        $('.order-confirm').prop("disabled",true);
+                        swal(
+                            {
+                                title: 'Nice Work!',
+                                text: data.message,
+                                type: 'success',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                        location.reload();
+                    } else {
+                        swal(
+                            {
+                                title: 'oh snap!',
+                                text: data.message,
+                                type: 'warning',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                    }
+                });
+                confirmOrder.fail(function (data) {
+                    alert(data.message);
+                    parent.remove();
+                });
+            });
+        });
+    </script>
 @endsection

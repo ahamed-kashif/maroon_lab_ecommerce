@@ -5,7 +5,17 @@
                 <h5 class="card-title mb-0">Order No : #{{strtoupper($order->code)}}</h5>
             </div>
             <div class="col-5 text-right">
-                <span class="badge badge-success-inverse">{{$order->status}}</span>
+                @switch($order->status)
+                    @case('pending')
+                        <span class="badge badge-warning-inverse">{{$order->status}}</span>
+                        @break
+                    @case('confirmed')
+                        <span class="badge badge-info-inverse">{{$order->status}}</span>
+                        @break
+                    @case('completed')
+                        <span class="badge badge-success-inverse">{{$order->status}}</span>
+                        @break
+                @endswitch
             </div>
         </div>
     </div>

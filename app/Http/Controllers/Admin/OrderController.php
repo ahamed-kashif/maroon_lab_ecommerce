@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\Order\OrderConfirmedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use Illuminate\Http\Request;
-use PDF;
+
+
 class OrderController extends Controller
 {
     public function __construct()
@@ -88,15 +90,42 @@ class OrderController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update order status to confirm.
      *
-     * @param  \Illuminate\Http\Request  $request
+     *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return string[]
      */
-    public function update(Request $request, $id)
+    public function confirm($id)
     {
-        //
+        if(is_numeric($id)) {
+            $order = Order::find($id);
+            $data['content'] = $order;
+            if ($order != null) {
+                if (auth()->user()->can('show order')) {
+                    if($order->status == 'confirmed'){
+                        $data['message'] = 'already confirmed';
+                    }else{
+                        try{
+                            $order->status = 'confirmed';
+                            $order->save();
+                            $data['message'] = 'successfully confirmed this order.';
+                            event(new OrderConfirmedEvent($order));
+                        }catch(\Exception $e){
+                            $data['message'] = $e->getMessage();
+                        }
+                    }
+                }else{
+                    $data['message'] = 'Unauthorized Access!';
+                }
+            }else{
+                $data['message'] = 'resource did not found!';
+            }
+        }else{
+            $data['content'] = '';
+            $data['message'] = 'wrong url';
+        }
+        return $data;
     }
 
     /**

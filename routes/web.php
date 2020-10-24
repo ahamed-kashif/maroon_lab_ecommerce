@@ -56,7 +56,8 @@ Route::prefix('checkout')->group(function(){
 });
 Route::prefix('admin')->group(function(){
    Route::prefix('order')->group(function (){
-     Route::get('/{order}','Admin\OrderController@show')->name('admin.order.show');
-     Route::get('/{order}/invoice','Admin\OrderController@invoice')->name('admin.order.invoice');
+     Route::get('/{order}','Admin\OrderController@show')->middleware('auth')->name('admin.order.show');
+     Route::get('/{order}/invoice','Admin\OrderController@invoice')->middleware('auth')->name('admin.order.invoice');
+     Route::put('/{order}/confirm','Admin\OrderController@confirm')->middleware('auth:api')->name('admin.order.confirm');
    });
 });
