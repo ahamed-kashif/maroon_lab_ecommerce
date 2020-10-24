@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Events\Order\OrderConfirmedEvent;
+use App\Events\Order\PaymentStatusUpdateEvent;
 use App\Events\Order\ShippingStatusUpdateEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
@@ -212,7 +213,7 @@ class OrderController extends Controller
                                     ]);
                                     break;
                             }
-                            //event(new ShippingStatusUpdateEvent($order));
+                            event(new PaymentStatusUpdateEvent($order));
                             $data['message'] = 'successfully updated payment status.';
                         }catch(\Exception $e){
                             $data['message'] = $e->getMessage();
