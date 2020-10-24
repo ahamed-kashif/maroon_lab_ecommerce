@@ -186,6 +186,46 @@
                     parent.remove();
                 });
             });
+            $('.tracking-status').on('click',function() {
+                let url = '{{route('admin.order.shipping.status',$order->id)}}';
+                let shippingStatus = $.ajax({
+                    dataType: 'json',
+                    type: 'PUT',
+                    data: {api_token: $api_token},
+                    url: url,
+                });
+
+                shippingStatus.done(function (data) {
+                    console.log(data);
+                    if (data.message === 'successfully updated shipping status.') {
+                        swal(
+                            {
+                                title: 'Nice Work!',
+                                text: data.message,
+                                type: 'success',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                        location.reload();
+                    } else {
+                        swal(
+                            {
+                                title: 'oh snap!',
+                                text: data.message,
+                                type: 'warning',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                timer: 2500
+                            }
+                        )
+                    }
+                });
+                shippingStatus.fail(function (data) {
+                    console.log(data);
+                });
+            });
         });
     </script>
 @endsection

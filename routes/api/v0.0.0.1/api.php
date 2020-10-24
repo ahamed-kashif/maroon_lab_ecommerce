@@ -18,4 +18,5 @@ use Illuminate\Http\Request;
 //});
 
 Route::middleware('auth:api')->delete('/product/{product_id}/image/{image_id}', 'ProductController@destroy_image')->name('product.image.destroy');
-Route::middleware('auth:api')->delete('admin/order/{order_id}/confirm', 'Admin\OrderController@confirm')->name('admin.order.confirm');
+Route::middleware('auth:api')->put('admin/order/{order_id}/confirm', 'Admin\OrderController@confirm')->name('admin.order.confirm');
+Route::middleware('auth:api')->put('admin/order/{order_id}/shipping_status', 'Admin\OrderController@tracking')->name('admin.order.shipping.status');

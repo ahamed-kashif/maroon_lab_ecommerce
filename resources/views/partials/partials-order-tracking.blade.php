@@ -2,19 +2,27 @@
     <div class="card-header">
         <div class="row align-items-center">
             <div class="col-12">
-                <h6 class="card-title mb-0">Shipping status</h6>
+                <span class="card-title mb-0 display-4">Shipping status: <b class="text-info"> {{strtoupper($order->order_tracking->status)}}</b></span><br>
+                <small>Tracking ID: {{$order->order_tracking->id}}</small>
             </div>
         </div>
     </div>
     <div class="card-body">
         <div class="form-group">
-            <select id="orderCategory" class="form-control">
-                <option>Select Type</option>
-                <option value="pending" {{$order->order_tracking->status == 'pending' ? 'selected':''}}>Pending</option>
-                <option value="processing" {{$order->order_tracking->status == 'processing' ? 'selected':''}}>Processing</option>
-                <option value="shipping" {{$order->order_tracking->status == 'shipping' ? 'selected':''}}>Delivered</option>
-                <option value="delivered" {{$order->order_tracking->status == 'delivered' ? 'selected':''}}>Delivered</option>
-            </select>
+            @switch($order->order_tracking->status)
+                @case('pending')
+                <button type="submit" class="btn btn-warning-rgba tracking-status float-right">start processing</button>
+                @break
+                @case('processing')
+                <button type="submit" class="btn btn-warning-rgba tracking-status float-right">start shipping</button>
+                @break
+                @case('shipping')
+                <button type="submit" class="btn btn-warning-rgba tracking-status float-right">complete delivery</button>
+                @break
+                @case('delivered')
+                    <h6 class="text-success-gradient">Delivered!</h6>
+                @break
+            @endswitch
         </div>
     </div>
 </div>

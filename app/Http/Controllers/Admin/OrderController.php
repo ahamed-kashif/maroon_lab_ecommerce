@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Events\Order\OrderConfirmedEvent;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\OrderTracking;
 use Illuminate\Http\Request;
 
 
@@ -102,7 +103,7 @@ class OrderController extends Controller
             $order = Order::find($id);
             $data['content'] = $order;
             if ($order != null) {
-                if (auth()->user()->can('show order')) {
+                if (auth()->user()->can('update order')) {
                     if($order->status == 'confirmed'){
                         $data['message'] = 'already confirmed';
                     }else{
@@ -129,13 +130,61 @@ class OrderController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * update shipping status.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @return string[]
      */
-    public function destroy($id)
+    public function tracking($id)
     {
-        //
+        if(is_numeric($id)) {
+            $order = Order::with(['order_tracking'])->find($id);
+            $tracking = OrderTracking::find($order->order_tracking->id);
+            //dd($tracking);
+            $data['content'] = $order;
+            if ($order != null) {
+                if (auth()->user()->can('update order')) {
+                    if($order->status == 'confirmed'){
+                        try{
+                            switch ($order->order_tracking->status){
+                                case 'pending':
+                                    $tracking->update([
+                                        'status' => 'processing',
+                                        'processing_started_at' => date('Y-m-d H:i:s')
+                                    ]);
+                                    break;
+                                case 'processing':
+                                    $tracking->update([
+                                        'status' => 'shipping',
+                                        'shipping_started_at' => date('Y-m-d H:i:s')
+                                    ]);
+                                    break;
+                                case 'shipping':
+                                    $tracking->update([
+                                        'status' => 'delivered',
+                                        'delivered_at' => date('Y-m-d H:i:s')
+                                    ]);
+                                    break;
+                            }
+                            $order->save();
+                            $data['message'] = 'successfully updated shipping status.';
+                            event(new OrderConfirmedEvent($order));
+                        }catch(\Exception $e){
+                            $data['message'] = $e->getMessage();
+                        }
+                    }else{
+                        $data['message'] = 'Confirm the order first';
+                    }
+                }else{
+                    $data['message'] = 'Unauthorized Access!';
+                }
+            }else{
+                $data['message'] = 'resource did not found!';
+            }
+        }else{
+            $data['content'] = '';
+            $data['message'] = 'wrong url';
+        }
+        return $data;
     }
 }
