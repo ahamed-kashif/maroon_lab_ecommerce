@@ -23,9 +23,7 @@
                 @else
                     @include('partials.partials-order-cancelled')
                 @endif
-                <div class="card m-b-30">
-
-                </div>
+                @include('partials.partials-order-activity')
             </div>
             <!-- End col -->
         </div>
