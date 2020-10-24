@@ -100,24 +100,37 @@ class OrderController extends Controller
      * @param  int  $id
      * @return string[]
      */
-    public function confirm($id)
+    public function order_status($id)
     {
         if(is_numeric($id)) {
-            $order = Order::find($id);
+            $order = Order::with(['user', 'transaction.payment_method', 'order_tracking.shipping_method', 'products.images'])->find($id);
             $data['content'] = $order;
             if ($order != null) {
                 if (auth()->user()->can('update order')) {
-                    if($order->status == 'confirmed'){
-                        $data['message'] = 'already confirmed';
-                    }else{
-                        try{
-                            $order->status = 'confirmed';
-                            $order->save();
-                            $data['message'] = 'successfully confirmed this order.';
-                            event(new OrderConfirmedEvent($order));
-                        }catch(\Exception $e){
-                            $data['message'] = $e->getMessage();
+                    try{
+                        $order->status = 'confirmed';
+                        switch ($order->status){
+                            case 'pending':
+                                $order->update([
+                                    'status' => 'confirmed',
+                                ]);
+                                break;
+                            case 'confirmed':
+                                if($order->order_tracking->status == 'delivered' && $order->transaction->status == 'paid'){
+                                    $order->update([
+                                        'status' => 'completed',
+                                    ]);
+                                    break;
+                                }else{
+                                    $data['message'] = 'this order is not delivered or not paid or both';
+                                    return $data;
+                                }
                         }
+                        $order->save();
+                        $data['message'] = 'successfully confirmed this order.';
+                        event(new OrderConfirmedEvent($order));
+                    }catch(\Exception $e){
+                        $data['message'] = $e->getMessage();
                     }
                 }else{
                     $data['message'] = 'Unauthorized Access!';

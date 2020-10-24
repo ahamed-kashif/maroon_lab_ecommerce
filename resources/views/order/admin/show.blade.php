@@ -16,9 +16,8 @@
             <!-- End col -->
             <!-- Start col -->
             <div class="col-lg-5 col-xl-4">
-                @if($order->status == 'pending')
-                    @include('partials.partials-order-status-confirm',['order'=>$order])
-                @endif
+
+                @include('partials.partials-order-status-confirm',['order'=>$order])
                 @include('partials.partials-order-tracking',['order',$order])
                 @include('partials.partials-order-transaction-status',['order',$order])
                 <div class="card m-b-30">
@@ -145,7 +144,7 @@
     @include('extras.sweetalert2-js')
     <script>
         $(document).ready(function(){
-            $('.order-confirm').on('click',function() {
+            $('.order-status').on('click',function() {
                 let url = '{{route('admin.order.confirm',$order->id)}}';
                 let confirmOrder = $.ajax({
                     dataType: 'json',
@@ -157,7 +156,6 @@
                 confirmOrder.done(function (data) {
                     console.log(data);
                     if (data.message === 'successfully confirmed this order.') {
-                        $('.order-confirm').prop("disabled",true);
                         swal(
                             {
                                 title: 'Nice Work!',

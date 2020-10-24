@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Order extends Model
 {
+    protected $fillable = ['status'];
     protected $casts = [
         'variants' => 'array'
     ];
