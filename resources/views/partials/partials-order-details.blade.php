@@ -49,10 +49,10 @@
         <div class="row">
             <div class="col-md-6 col-lg-6 col-xl-6 ">
                 <div class="order-primary-detail mb-4">
-                    <h6>Shipping Address <a href="#" class="badge badge-primary-inverse">Edit</a></h6>
+                    <h6>Shipping Address</h6>
                     <p>{{$order->shipping_address}},<br/> {{$order->shipping_city}}, {{$order->shipping_district}}.<br/>
                         {{$order->shipping_post_code}}</p>
-                    <p class="mb-0">{{$order->shipping_to}}</p>
+                    <p class="mb-0">{{$order->shipping_to_contact}}</p>
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-6 ">

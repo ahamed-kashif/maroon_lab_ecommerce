@@ -20,7 +20,7 @@
                 <button type="submit" class="btn btn-warning-rgba tracking-status float-right">complete delivery</button>
                 @break
                 @case('delivered')
-                    <h6 class="text-success-gradient">Delivered!</h6>
+                    <h6 class="text-success-gradient float-right">Delivered!</h6>
                 @break
             @endswitch
         </div>

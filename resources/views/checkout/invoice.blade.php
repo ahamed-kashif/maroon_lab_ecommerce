@@ -75,8 +75,8 @@
                                         <th scope="col">Product</th>
                                         <th scope="col">Variants</th>
                                         <th scope="col">Qty</th>
-                                        <th scope="col">Price</th>
-                                        <th scope="col" class="text-right">Total</th>
+                                        <th scope="col">Price(৳)</th>
+                                        <th scope="col" class="text-right">Total(৳)</th>
                                     </tr>
                                     </thead>
                                     <tbody>
@@ -124,20 +124,16 @@
                                         <table class="table table-borderless text-right">
                                             <tbody>
                                             <tr>
-                                                <td>Sub Total :</td>
-                                                <td>$1000.00</td>
+                                                <td>Total :</td>
+                                                <td>৳{{$order->total}}</td>
                                             </tr>
                                             <tr>
-                                                <td>Shipping Charges :</td>
-                                                <td>$0.00</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Tax (18%) :</td>
-                                                <td>$180.00</td>
+                                                <td>Discount :</td>
+                                                <td>৳{{$order->discount}}</td>
                                             </tr>
                                             <tr>
                                                 <td class="f-w-7 font-18"><h5>Amount Payable :</h5></td>
-                                                <td class="f-w-7 font-18"><h5>$1180.00</h5></td>
+                                                <td class="f-w-7 font-18"><h5>৳{{$order->transaction->total_payable_amount}}</h5></td>
                                             </tr>
                                             </tbody>
                                         </table>
