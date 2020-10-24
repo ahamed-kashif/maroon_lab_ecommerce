@@ -16,7 +16,12 @@ class Cart
     public function handle($request, Closure $next)
     {
         if($request->session()->has('cart')){
-            return $next($request);
+            if(count($request->session()->get('cart')->items()) > 0){
+                return $next($request);
+            }else{
+                 $request->session()->forget('cart');
+                 $request->session()->save();
+            }
         }
         return redirect()->route('store.index')->with('error','You need put products in your cart to checkout!');
 

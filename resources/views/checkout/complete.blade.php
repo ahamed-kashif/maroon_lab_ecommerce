@@ -18,8 +18,8 @@
                                     <h2 class="text-success">Thank You !!!</h2>
                                     <p class="my-4">Your Order has been successfully placed. Your Order CODE is #{{$order->code}}</p>
                                     <div class="button-list">
-                                        <button type="button" class="btn btn-primary-rgba font-16"><i class="feather icon-map-pin mr-2"></i>Track Order</button>
-                                        <button type="button" class="btn btn-success font-16"><i class="feather icon-file-text mr-2"></i>View Invoice</button>
+                                        <a href="{{route('customer.order.show',$order->id)}}" class="btn btn-primary-rgba font-16"><i class="feather icon-map-pin mr-2"></i>Track Order</a>
+                                        <a href="{{route('customer.order.invoice',$order->id)}}" class="btn btn-success font-16"><i class="feather icon-file-text mr-2"></i>View Invoice</a>
                                     </div>
                                 </div>
                             </div>
