@@ -1,75 +1,105 @@
-@extends('layouts.app')
-@section('content')
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-10">
-                <div class="card">
-                    <div class="card-header">
-                        Dashboard
-                        @include('partials.alert')
-                    </div>
-
-                    <div class="card-body">
-                        @if (session('status'))
-                            <div class="alert alert-success" role="alert">
-                                {{ session('status') }}
-                            </div>
-                        @endif
-                        <div class="profilebox py-4 text-center mb-4">
-                            <img src="{{asset('/images/users/profile.svg')}}" class="img-fluid mb-3" alt="profile">
-                            <div class="profilename">
-                                <h5>{{auth()->user()->name}}</h5>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                <div class="ecom-dashboard-widget">
-                                    <div class="media">
-                                        <a href="{{route('customer.order.index')}}" class="text-secondary-gradient"><i class="feather icon-package"></i></a>
-                                        <div class="media-body text-secondary">
-                                            <h5>My Orders</h5>
-                                            <p>Total ({{auth()->user()->orders()->count()}})</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                <div class="ecom-dashboard-widget row">
-                                    <div class="media text-center">
-                                        <a href="{{route('cart.index')}}" class="text-secondary-gradient"><i class="fa fa-shopping-basket"></i></a>
-                                        <div class="media-body text-secondary">
-                                            <h5>My Bag</h5>
-                                            <p>Items ({{session()->has('cart') ? count(session()->get('cart')->items()) : 0}})</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                <div class="ecom-dashboard-widget">
-                                    <div class="media float-right">
-                                        <a href="{{route('store.index')}}" class="text-secondary-gradient"><i class="fa fa-shopping-bag"></i></a>
-                                        <div class="media-body text-secondary">
-                                            <h5>Shop</h5>
-                                            <p>Go get'em!</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-lg-3 col-xl-3">
-                                <div class="ecom-dashboard-widget">
-                                    <div class="media float-right">
-                                        <i class="feather icon-star text-secondary-gradient"></i>
-                                        <div class="media-body text-secondary">
-                                            <h5>My Favourites</h5>
-                                            <p>Coming soon!</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+@extends('layouts.dashboard')
+@section('dashboard-content')
+    <div class="profilebox py-4 text-center mb-4">
+        <img src="{{asset('/images/users/user-group.png')}}" class="img-fluid mb-3" alt="profile">
+        <div class="profilename">
+            <a href="{{route('user.list')}}"><h5>TOTAL USERS: {{$users}}</h5></a>
         </div>
     </div>
+    <div class="text-right m-b-30 pr-5">
+        <h4 class="text-primary-gradient">{{strtoupper(date('F')).', '.date('Y')}}</h4>
+    </div>
+    <table>
+        <tr>
+            <td class="pr-5">
+                <div class="ecom-dashboard-widget">
+                    <div class="media">
+                        <a href="{{route('admin.order.index')}}" class="text-secondary-gradient"><i class="feather icon-package"></i></a>
+                        <h5>ORDERS</h5>
+                    </div>
+                </div>
+            </td>
+            <td class="pr-2">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{route('admin.order.index')}}" class="text-dark font-weight-bold">TOTAL:   {{$orders}}</a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.order.index','pending')}}" class="text-dark font-weight-bold">PENDING:   <span class="text-warning">{{$pendingOrders}}</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.order.index','confirmed')}}" class="text-dark font-weight-bold">CONFIRMED: {{$confirmedOrders}}</a>
+                    </li>
+                </ul>
+            </td>
+            <td class="pr-5"></td>
+            <td class="pr-5"></td>
+            <td class="pr-5">
+                <div class="ecom-dashboard-widget">
+                    <div class="media">
+                        <a href="{{route('product.index')}}" class="text-secondary-gradient"><i class="feather icon-box"></i></a>
+                            <h5>PRODUCTS</h5>
+                    </div>
+                </div>
+            </td>
+            <td class="pr-2">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{route('product.index')}}" class="text-dark font-weight-bold">TOTAL:   {{$products}}</a>
+                    </li>
+                    <li>
+                        <a href="{{route('product.index','active')}}" class="text-dark font-weight-bold">ACTIVE:   <span class="text-success">{{$activeProducts}}</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('product.index','featured')}}" class="text-dark font-weight-bold">FEATURED:   {{$featuredProducts}}</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <td class="pr-5">
+                <div class="ecom-dashboard-widget">
+                    <div class="media">
+                        <a href="{{route('transaction.index')}}" class="text-secondary-gradient"><i class="feather icon-dollar-sign"></i></a>
+                        <h5>TRANSACTIONS</h5>
+                    </div>
+                </div>
+            </td>
+            <td class="pr-2">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{route('admin.order.index','due')}}" class="text-dark font-weight-bold">DUE:   <span class="text-warning">{{$dueOrders}}</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('admin.order.index','paid')}}" class="text-dark font-weight-bold">PAID: {{$paidOrders}}</a>
+                    </li>
+                </ul>
+            </td>
+            <td class="pr-5"></td>
+            <td class="pr-5"></td>
+            <td class="pr-5">
+                <div class="ecom-dashboard-widget">
+                    <div class="media">
+                        <a href="{{route('admin.order.index')}}" class="text-secondary-gradient"><i class="fa fa-ship"></i></a>
+                        <h5>SHIPPING</h5>
+                    </div>
+                </div>
+            </td>
+            <td class="pr-2">
+                <ul class="list-unstyled">
+                    <li>
+                        <a href="{{route('product.index')}}" class="text-dark font-weight-bold">PENDING:   {{$notShippedOrders}}</a>
+                    </li>
+                    <li>
+                        <a href="{{route('product.index','active')}}" class="text-dark font-weight-bold">SHIPPED:   <span class="text-success">{{$shippedOrders}}</span></a>
+                    </li>
+                    <li>
+                        <a href="{{route('product.index','featured')}}" class="text-dark font-weight-bold">DELIVERED:   {{$deliveredOrders}}</a>
+                    </li>
+                </ul>
+            </td>
+        </tr>
+    </table>
+
 @endsection
+

@@ -55,6 +55,7 @@ Route::prefix('checkout')->group(function(){
    Route::get('complete','CheckoutController@complete')->middleware('order')->name('checkout.complete');
 });
 Route::prefix('admin')->group(function(){
+   Route::get('/dashboard','Admin\HomeController@index')->name('admin.dashboard');
    Route::prefix('order')->group(function (){
      Route::get('/','Admin\OrderController@index')->middleware('auth')->name('admin.order.index');
      Route::get('/{order}','Admin\OrderController@show')->middleware('auth')->name('admin.order.show');

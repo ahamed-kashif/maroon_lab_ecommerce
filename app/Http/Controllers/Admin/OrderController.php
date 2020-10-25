@@ -25,10 +25,44 @@ class OrderController extends Controller
      *
      * @return view
      */
-    public function index()
+    public function index(Request $request)
     {
         if(auth()->user()->can('index order')){
             $orders = Order::all();
+            if($request->has('pending')){
+                $orders = $orders->where('status','pending');
+            }
+            if($request->has('confirmed')){
+                $orders = $orders->where('status','confirmed');
+            }
+            if($request->has('completed')){
+                $orders = $orders->where('status','completed');
+            }
+            if($request->has('due')){
+                $orders = Order::whereHas('transaction', function ($q){
+                    $q->where('status','pending');
+                })->get();
+            }
+            if($request->has('paid')){
+                $orders = Order::whereHas('transaction', function ($q){
+                    $q->where('status','paid');
+                })->get();
+            }
+            if($request->has('pending')){
+                Order::whereHas('order_tracking', function ($q){
+                    $q->whereIn('status',['processing','pending']);
+                })->get();
+            }
+            if($request->has('shipping')){
+                Order::whereHas('order_tracking', function ($q){
+                    $q->where('status','shipping');
+                })->get();
+            }
+            if($request->has('shipping')){
+                Order::whereHas('order_tracking', function ($q){
+                    $q->where('status','delivered');
+                })->get();
+            }
             return view('order.admin.index')->with([
                 'orders' => $orders
             ]);
