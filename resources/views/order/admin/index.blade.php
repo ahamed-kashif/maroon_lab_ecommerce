@@ -17,7 +17,7 @@
                 <h6 class="card-subtitle">Orders are displayed here. Click the order code to see the order</h6>
                 @include('partials.alert')
                 <div class="table-responsive">
-                    <table id="default-datatable" class="display table table-striped table-bordered">
+                    <table id="datatable-buttons" class="display table table-striped table-bordered">
                         <thead>
                         <tr>
                             <th>CODE</th>

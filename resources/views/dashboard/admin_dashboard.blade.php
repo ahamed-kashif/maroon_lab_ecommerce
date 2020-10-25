@@ -88,13 +88,13 @@
             <td class="pr-2">
                 <ul class="list-unstyled">
                     <li>
-                        <a href="{{route('product.index')}}" class="text-dark font-weight-bold">PENDING:   {{$notShippedOrders}}</a>
+                        <a href="{{route('admin.order.index','pending')}}" class="text-dark font-weight-bold">PENDING:   {{$notShippedOrders}}</a>
                     </li>
                     <li>
-                        <a href="{{route('product.index','active')}}" class="text-dark font-weight-bold">SHIPPED:   <span class="text-success">{{$shippedOrders}}</span></a>
+                        <a href="{{route('admin.order.index','shipped')}}" class="text-dark font-weight-bold">SHIPPED:   <span class="text-success">{{$shippedOrders}}</span></a>
                     </li>
                     <li>
-                        <a href="{{route('product.index','featured')}}" class="text-dark font-weight-bold">DELIVERED:   {{$deliveredOrders}}</a>
+                        <a href="{{route('admin.order.index','delivered')}}" class="text-dark font-weight-bold">DELIVERED:   {{$deliveredOrders}}</a>
                     </li>
                 </ul>
             </td>
