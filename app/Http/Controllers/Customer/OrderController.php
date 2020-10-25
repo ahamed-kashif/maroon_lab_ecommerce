@@ -14,13 +14,16 @@ class OrderController extends Controller
     }
 
     /**
-     * Display a listing of the resource.
+     * Display a listing of the user orders.
      *
-     * @return \Illuminate\Http\Response
+     * @return view
      */
     public function index()
     {
-        //
+        $orders = auth()->user()->orders()->paginate(5);
+        return view('order.customer.index')->with([
+           'orders' => $orders
+        ]);
     }
 
     /**
