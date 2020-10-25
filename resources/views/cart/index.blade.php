@@ -65,7 +65,7 @@
                                                                 </td>
                                                                 <td>
                                                                     <div class="form-group mb-0">
-                                                                        <input type="number" class="form-control cart-qty qty" name="cartQty1" id="cartQty1" value="{{$item->getQty()}}" data-id="{{$item->product()->id}}">
+                                                                        <input type="number" class="form-control cart-qty qty" name="cartQty1" id="cartQty1" value="{{$item->getQty()}}" data-id="{{$item->product()->id}}" min="1">
                                                                     </div>
                                                                 </td>
                                                                 <td>{{$item->product()->price}}</td>
