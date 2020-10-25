@@ -14,10 +14,13 @@ class SubCategoryController extends Controller
     }
 
 
-    public function index()
+    public function index(Request $request)
     {
         if(auth()->user()->can('index subcategory')){
             $SubCategories = SubCategory::all();
+            if($request->has('active')){
+                $SubCategories = $SubCategories->where('is_active',1);
+            }
             return view('subcategory.index')->with([
                 'subcategories' => $SubCategories
             ]);

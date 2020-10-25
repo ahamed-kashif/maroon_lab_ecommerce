@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Events\NewUserRegisteredEvent;
+use App\Events\Order\OrderCancelEvent;
+use App\Events\Order\OrderConfirmedEvent;
+use App\Events\Order\OrderCreateEvent;
+use App\Events\Order\PaymentStatusUpdateEvent;
+use App\Events\Order\ShippingStatusUpdateEvent;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -17,6 +23,29 @@ class EventServiceProvider extends ServiceProvider
     protected $listen = [
         Registered::class => [
             SendEmailVerificationNotification::class,
+        ],
+        NewUserRegisteredEvent::class => [
+            \App\Listeners\WelcomeNewCustomerListener::class,
+            \App\Listeners\AdminNotificationListener::class,
+        ],
+        OrderCreateEvent::class => [
+            \App\Listeners\Order\Create\User\CustomerListener::class,
+            \App\Listeners\Order\Create\Admin\AdminListener::class,
+        ],
+        OrderConfirmedEvent::class => [
+            \App\Listeners\Order\Confirm\User\CustomerListener::class,
+            \App\Listeners\Order\Confirm\Admin\AdminListener::class,
+        ],
+        ShippingStatusUpdateEvent::class => [
+            \App\Listeners\Order\ShippingStatus\CustomerListener::class,
+        ],
+        PaymentStatusUpdateEvent::class => [
+            \App\Listeners\Order\PaymentStatus\User\CustomerListener::class,
+            \App\Listeners\Order\PaymentStatus\Admin\AdminListener::class,
+        ],
+        OrderCancelEvent::class => [
+            \App\Listeners\Order\Cancel\User\CustomerListener::class,
+            \App\Listeners\Order\Cancel\Admin\AdminListener::class,
         ],
     ];
 

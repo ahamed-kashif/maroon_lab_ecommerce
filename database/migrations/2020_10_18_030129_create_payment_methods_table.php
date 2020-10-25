@@ -19,6 +19,7 @@ class CreatePaymentMethodsTable extends Migration
             $table->char('short_code',5);
             $table->boolean('is_active')->default(false);
             $table->string('api_token')->nullable();
+            $table->boolean('default')->default(0);
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });

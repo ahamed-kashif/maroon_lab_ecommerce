@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Models\Order;
+use App\Models\ShippingDetails;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -45,5 +47,16 @@ class User extends Authenticatable
         $this->save();
 
         return $this->api_token;
+    }
+
+    public function shipping_address(){
+        return $this->hasOne(ShippingDetails::class);
+    }
+
+    public function has_shipping_details(){
+        return $this->shipping_address()->exists();
+    }
+    public function orders(){
+        return $this->hasMany(Order::class);
     }
 }

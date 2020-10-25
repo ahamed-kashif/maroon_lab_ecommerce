@@ -13,7 +13,7 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('welcome');
 
 Auth::routes();
 
@@ -46,3 +46,26 @@ Route::get('search/fetch','SearchController@fetch')->name('search.fetch');
 Route::resource('shipping_method','ShippingMethodController');
 Route::resource('payment_method','PaymentMethodController');
 Route::get('users_list', 'UsersListController@index')->name('user.list');
+Route::prefix('transaction')->group(function(){
+    Route::get('/','TransactionController@index')->name('transaction.index');
+});
+Route::prefix('checkout')->group(function(){
+   Route::get('create','CheckoutController@create')->middleware('cart')->name('checkout.create');
+   Route::post('/','CheckoutController@store')->name('checkout.store');
+   Route::get('complete','CheckoutController@complete')->middleware('order')->name('checkout.complete');
+});
+Route::prefix('admin')->group(function(){
+   Route::get('/dashboard','Admin\HomeController@index')->name('admin.dashboard');
+   Route::prefix('order')->group(function (){
+     Route::get('/','Admin\OrderController@index')->middleware('auth')->name('admin.order.index');
+     Route::get('/{order}','Admin\OrderController@show')->middleware('auth')->name('admin.order.show');
+     Route::get('/{order}/invoice','Admin\OrderController@invoice')->middleware('auth')->name('admin.order.invoice');
+   });
+});
+Route::prefix('customer')->group(function(){
+   Route::prefix('order')->group(function(){
+      Route::get('/','Customer\OrderController@index')->name('customer.order.index');
+      Route::get('/{order}','Customer\OrderController@show')->name('customer.order.show');
+      Route::get('/{order}/invoice','Customer\OrderController@invoice')->name('customer.order.invoice');
+   });
+});
