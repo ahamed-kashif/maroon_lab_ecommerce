@@ -20,7 +20,7 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = auth()->user()->orders()->paginate(5);
+        $orders = auth()->user()->orders()->with('transaction','order_tracking','products.images')->orderBy('updated_at','desc')->paginate(2);
         return view('order.customer.index')->with([
            'orders' => $orders
         ]);

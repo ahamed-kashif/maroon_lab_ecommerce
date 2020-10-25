@@ -1,19 +1,34 @@
-@extends('layouts.app')
-@section('content')
-    <div class="card m-b-30">
+@extends('layouts.dashboard')
+@section('dashboard-content')
+    <div class="card">
         <div class="card-header">
             <h5 class="card-title mb-0">My Orders</h5>
         </div>
         <div class="card-body">
-            <div class="order-box">
+            @foreach($orders as $order)
+                <div class="order-box">
                 <div class="card border m-b-30">
                     <div class="card-header">
                         <div class="row align-items-center">
                             <div class="col-sm-6">
-                                <h5>ID : #26598</h5>
+                                <a href="{{route('customer.order.show',$order->id)}}"><h5>ID : #{{strtoupper($order->code)}}</h5></a>
+                                @switch($order->status)
+                                    @case('pending')
+                                    <span class="badge badge-warning-inverse">{{$order->status}}</span>
+                                    @break
+                                    @case('confirmed')
+                                    <span class="badge badge-info-inverse">{{$order->status}}</span>
+                                    @break
+                                    @case('completed')
+                                    <span class="badge badge-success-inverse">{{$order->status}}</span>
+                                    @break
+                                    @case('cancelled')
+                                    <span class="badge badge-danger-inverse">{{$order->status}}</span>
+                                    @break
+                                @endswitch
                             </div>
                             <div class="col-sm-6">
-                                <h6 class="mb-0">Total : <strong>$500</strong></h6>
+                                <h6 class="mb-0">Total : ৳<strong>{{$order->transaction->total_payable_amount}}</strong></h6>
                             </div>
                         </div>
                     </div>
@@ -21,32 +36,32 @@
                         <div class="table-responsive">
                             <table class="table table-borderless">
                                 <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Photo</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Qty</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col" class="text-right">Total</th>
-                                </tr>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Photo</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Qty</th>
+                                        <th scope="col">Price</th>
+                                        <th scope="col" class="text-right">Total</th>
+                                    </tr>
                                 </thead>
                                 <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><img src="assets/images/ecommerce/product_01.svg" class="img-fluid" width="35" alt="product"></td>
-                                    <td>Apple Watch</td>
-                                    <td>1</td>
-                                    <td>$100</td>
-                                    <td class="text-right">$100</td>
-                                </tr>
-                                <tr>
-                                    <th scope="row">2</th>
-                                    <td><img src="assets/images/ecommerce/product_02.svg" class="img-fluid" width="35" alt="product"></td>
-                                    <td>Apple iPhone</td>
-                                    <td>2</td>
-                                    <td>$200</td>
-                                    <td class="text-right">$400</td>
-                                </tr>
+                                @foreach($order->products as $product)
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td>
+                                            @if($product->images()->count() != 0)
+                                                <img src="{{asset($product->images()->first()->url) }}" class="img-fluid" alt="product" width="35">
+                                            @else
+                                                <img src="{{asset('images/ecommerce/no_image.png') }}" class="img-fluid" alt="product" width="35">
+                                            @endif
+                                        </td>
+                                        <td>{{$product->title}}</td>
+                                        <td>{{$product->pivot->quantity}}</td>
+                                        <td>৳{{$product->price}}</td>
+                                        <td class="text-right">৳{{$product->price * $product->pivot->quantity}}</td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -54,64 +69,36 @@
                     <div class="card-footer">
                         <div class="row align-items-center">
                             <div class="col-sm-6">
-                                <h5>Status : <span class="badge badge-info-inverse font-14">Shipped</span></h5>
+                                <h5>Shipping Status : @switch($order->order_tracking->status)
+                                        @case('pending')
+                                        <span class="badge badge-warning-inverse">{{$order->order_tracking->status}}</span>
+                                        @break
+                                        @case('processing')
+                                        <span class="badge badge-info-inverse">{{$order->order_tracking->status}}</span>
+                                        @break
+                                        @case('shipping')
+                                        <span class="badge badge-primary-inverse">{{$order->order_tracking->status}}</span>
+                                        @break
+                                        @case('delivered')
+                                        <span class="badge badge-success-inverse">{{$order->order_tracking->status}}</span>
+                                        @break
+                                        @case('cancelled')
+                                        <span class="badge badge-danger-inverse">{{$order->order_tracking->status}}</span>
+                                        @break
+                                    @endswitch</h5>
                             </div>
                             <div class="col-sm-6">
-                                <h6 class="mb-0"><button class="btn btn-success-rgba font-16"><i class="feather icon-file mr-2"></i>Invoice</button></h6>
+                                <h6 class="mb-0"><a href="{{route('customer.order.invoice',$order->id)}}" class="btn btn-success-rgba font-16"><i class="feather icon-file mr-2"></i>Invoice</a></h6>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="order-box">
-                <div class="card border m-b-30">
-                    <div class="card-header">
-                        <div class="row align-items-center">
-                            <div class="col-sm-6">
-                                <h5>ID : #26597</h5>
-                            </div>
-                            <div class="col-sm-6">
-                                <h6 class="mb-0">Total : <strong>$100</strong></h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-borderless">
-                                <thead>
-                                <tr>
-                                    <th scope="col">#</th>
-                                    <th scope="col">Photo</th>
-                                    <th scope="col">Product</th>
-                                    <th scope="col">Qty</th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col" class="text-right">Total</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <th scope="row">1</th>
-                                    <td><img src="assets/images/ecommerce/product_01.svg" class="img-fluid" width="35" alt="product"></td>
-                                    <td>Apple iPad</td>
-                                    <td>1</td>
-                                    <td>$100</td>
-                                    <td class="text-right">$100</td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <div class="row align-items-center">
-                            <div class="col-sm-6">
-                                <h5>Status : <span class="badge badge-primary-inverse font-14">Delivered</span></h5>
-                            </div>
-                            <div class="col-sm-6">
-                                <h6 class="mb-0"><button class="btn btn-success-rgba font-16"><i class="feather icon-file mr-2"></i>Invoice</button></h6>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            @endforeach
+        </div>
+        <div class="card-footer text-right">
+            <div class="float-right">
+                {{$orders->links()}}
             </div>
         </div>
     </div>
