@@ -8,7 +8,9 @@
                 <span class="badge {{$Payment_Methods->is_active ? 'badge-success' : 'badge-secondary'}}">
                         {{$Payment_Methods->is_active ? 'active' : 'inactive'}}
                     </span>
-
+                    @if($Payment_Methods->default)
+                        <span class="badge badge-warning">Default</span>
+                    @endif
                 </h3>
                 <small>Short Code:  {{$Payment_Methods->short_code}}</small><br>
             </div>

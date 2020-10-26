@@ -18,10 +18,17 @@ class CategoryController extends Controller
      *
      * @return view
      */
-    public function index()
+    public function index(Request $request)
     {
         if(auth()->user()->can('index category')){
             $categories = Category::all();
+            if($request->has('active')){
+                $categories = $categories->where('is_active',1);
+            }
+            if($request->has('featured')){
+                $categories = $categories->where('is_featured',1);
+            }
+
             return view('category.index')->with([
                 'categories' => $categories
             ]);

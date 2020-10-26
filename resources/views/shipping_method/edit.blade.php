@@ -35,6 +35,12 @@
                                 Active
                             </label>
                         </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="default" name="default" {{$Shipping_Method->default ? 'checked' : ''}}>
+                            <label class="form-check-label" for="default">
+                                Default
+                            </label>
+                        </div>
                     </div>
                     <button type="submit" class="btn btn-warning-rgba">
                         <i class="feather icon-upload mr-2"></i>

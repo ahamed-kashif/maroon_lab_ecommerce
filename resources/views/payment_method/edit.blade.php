@@ -32,6 +32,12 @@
                                         Active
                                     </label>
                                 </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="default" name="default" {{$Payment_Methods->default ? 'checked' : ''}}>
+                                    <label class="form-check-label" for="default">
+                                        Default
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>

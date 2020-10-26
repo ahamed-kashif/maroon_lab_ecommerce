@@ -28,6 +28,12 @@
                                         Active
                                     </label>
                                 </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="default" name="default">
+                                    <label class="form-check-label" for="default">
+                                        Default payment method.
+                                    </label>
+                                </div>
                             </div>
                         </div>
 

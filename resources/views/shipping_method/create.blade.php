@@ -24,11 +24,17 @@
                         <label for="phone_number">Phone Number</label>
                         <input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="phone_number" required>
                     </div>
-                    <div class="form-group col-md-2">
+                    <div class="form-group col-md-12">
                         <div class="form-check">
                             <input class="form-check-input" type="checkbox" id="active" name="active">
                             <label class="form-check-label" for="=active">
                                 Active
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="default" name="default">
+                            <label class="form-check-label" for="=default">
+                                Default shipping method
                             </label>
                         </div>
                     </div>

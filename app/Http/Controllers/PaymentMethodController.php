@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\PaymentMethod;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
 class PaymentMethodController extends Controller
@@ -61,15 +62,21 @@ class PaymentMethodController extends Controller
         $request->validate([
             'title' => 'required',
             'short_code' => 'required',
-
-
+            'icon' => 'nullable'
         ]);
 
         $payment_Method = new PaymentMethod();
         $payment_Method->title = $request->title;
         $payment_Method->short_code = $request->short_code;
         $payment_Method->is_active = $request->has('is_active');
-
+        if($request->has('default')){
+            $payment_Method->default = true;
+        }else{
+            $payment_Method->default = false;
+        }
+        if($request->has('icon')){
+            $payment_Method->icon = Storage::url($request->file('icon')->store('public/images/checkout/payment_methods'));
+        }
         try{
             $payment_Method->save();
             return redirect(route('payment_method.index'))->with('success','successfully stored');
@@ -145,8 +152,7 @@ class PaymentMethodController extends Controller
         $request->validate([
             'title' => 'required',
             'short_code' => 'required',
-
-
+            'icon' => 'nullable'
         ]);
 
         if(auth()->user()->can('update payment_method')){
@@ -158,7 +164,17 @@ class PaymentMethodController extends Controller
                 $payment_Method->title = $request->title;
                 $payment_Method->short_code = $request->short_code;
                 $payment_Method->is_active = $request->has('is_active');
-
+                if($request->has('default')){
+                    $payment_Method->default = true;
+                }else{
+                    $payment_Method->default = false;
+                }
+                if($request->has('icon')){
+                    if(File::exists(public_path($payment_Method->icon))) {
+                        File::delete(public_path($payment_Method->icon));
+                    }
+                    $payment_Method->icon = Storage::url($request->file('icon')->store('public/images/checkout/payment_methods'));
+                }
                 try{
                     $payment_Method->save();
                     return redirect(route('payment_method.index'))->with('success','successfully updated!');
