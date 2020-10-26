@@ -69,3 +69,4 @@ Route::prefix('customer')->group(function(){
       Route::get('/{order}/invoice','Customer\OrderController@invoice')->name('customer.order.invoice');
    });
 });
+Route::resource('page','PageController');
