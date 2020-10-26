@@ -57,7 +57,7 @@ class PageController extends Controller
             'title' => 'required',
             'body' => 'required',
             'footer' => 'required',
-            'url' => 'required',
+            'url' => 'required','unique'
         ]);
 
         $page = new Page;
@@ -79,14 +79,16 @@ class PageController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param $id
+     * @param $url
      *  @return view
      */
-    public function show($id)
+    public function show($url)
     {
         if(auth()->user()->can('show page')){
-            if(is_numeric($id)){
-                $page = Page::find($id);
+
+            if(is_string($url)){
+                $page = Page::where('url',$url)->first();
+
                 if($page == null){
                     return redirect()->back()->with('error','Page not exists!');
                 }
@@ -104,15 +106,15 @@ class PageController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param $id
+     * @param $url
      *  @return view
      */
-    public function edit($id)
+    public function edit($url)
     {
 
         if(auth()->user()->can('edit page')){
-            if(is_numeric($id)){
-                $page = Page::find($id);
+            if(is_string($url)){
+                $page = Page::where('url',$url)->first();
                 if($page == null){
                     return redirect()->back()->with('error','Page not exists!');
                 }
@@ -130,21 +132,21 @@ class PageController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  $id
+     * @param  $url
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $url)
     {
         $request->validate([
             'title' => 'required',
             'body' => 'required',
             'footer' => 'required',
-            'url' => 'required',
+            'url' => 'required','unique'
         ]);
 
         if(auth()->user()->can('update page')){
-            if(is_numeric($id)){
-                $page = Page::find($id);
+            if(is_string($url)){
+                $page = Page::where('url',$url)->first();
                 if($page == null){
                     return redirect()->back()->with('error','Page not exists!');
                 }
@@ -170,14 +172,14 @@ class PageController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  $id
+     * @param  $url
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($url)
     {
         if(auth()->user()->can('delete page')){
-            if(is_numeric($id)){
-                $page = Page::find($id);
+            if(is_string($url)){
+                $page = Page::where('url',$url)->first();
                 if($page == null){
                     return redirect()->back()->with('error','Page not exists!');
                 }

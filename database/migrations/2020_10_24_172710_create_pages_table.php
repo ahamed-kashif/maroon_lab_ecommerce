@@ -18,7 +18,7 @@ class CreatePagesTable extends Migration
             $table->String('title');
             $table->string('body');
             $table->boolean('footer');
-            $table->String('url');
+            $table->String('url')->unique();
             $table->timestamp('created_at')->nullable();
             $table->timestamp('updated_at')->nullable();
         });
