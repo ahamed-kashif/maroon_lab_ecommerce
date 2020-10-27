@@ -200,6 +200,23 @@
                     </div>
                     <div class="card m-b-30">
                         <div class="card-header">
+                            <h5 class="card-title">Sub-Categories</h5>
+                        </div>
+                        <div class="card-body">
+                            @if($subcategories->count() != 0)
+                                <select class="select2-multi-select form-control" name="sub_category_id">
+                                    <option>select one.</option>
+                                    @foreach($subcategories as $subcategory)
+                                        <option value="{{$subcategory->id}}" {{$product->sub_category_id == $subcategory->id ? 'selected' : ''}}>{{$subcategory->title}}</option>
+                                    @endforeach
+                                </select>
+                            @else
+                                <h4>No Sub-Category is uploaded yet</h4>
+                            @endif
+                        </div>
+                    </div>
+                    <div class="card m-b-30">
+                        <div class="card-header">
                             <h5 class="card-title">Variant</h5>
                         </div>
                         <div class="card-body pt-3">
