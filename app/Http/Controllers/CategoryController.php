@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Image;
 use Illuminate\Http\Request;
 use App\Models\Category;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
+use File;
 
 class CategoryController extends Controller
 {
@@ -64,7 +67,8 @@ class CategoryController extends Controller
 
         $request->validate([
             'title' => 'required|max:20|unique:categories',
-            'short_code' => 'required|max:5'
+            'short_code' => 'required|max:5',
+            'image.*' => 'nullable|image|dimensions:min_width=121,min_height=121,max_width=242,max_height=242'
         ]);
 
         $category = new Category;
@@ -80,6 +84,13 @@ class CategoryController extends Controller
 
         try{
             $category->save();
+            if($request->has('image')){
+                $img = $request->file('image');
+                //dd($img);
+                $category->images()->create([
+                    'url' => Storage::url($img->store('public/images/home_page/featured_category'))
+                ]);
+            }
             return redirect(route('category.index'))->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
@@ -152,7 +163,8 @@ class CategoryController extends Controller
                 }
                 $request->validate([
                     'title' => 'required|max:20',
-                    'short_code' => 'required|max:5'
+                    'short_code' => 'required|max:5',
+                    'image.*' => 'nullable|dimensions:min_width=121,min_height=121,max_width=242,max_height=242'
                 ]);
                 $category->title = $request->title;
                 $category->short_code = $request->short_code;
@@ -164,9 +176,25 @@ class CategoryController extends Controller
 
                 try{
                     $category->save();
+                    if($request->has('image')){
+                        $img = $request->file('image');
+                        if($category->images()->count() > 0){
+                            //dd($img);
+                            $id = $category->images()->first()->id;
+                            $image = Image::findorfail($id);
+                            if(File::exists(public_path($image->url))){
+                                File::delete(public_path($image->url));
+                            }
+                            $category->images()->sync($image);
+                            $image->delete();
+                        }
+                        $category->images()->create([
+                            'url' => Storage::url($img->store('public/images/home_page/featured_category'))
+                        ]);
+                    }
                     return redirect(route('category.index'))->with('success','successfully updated!');
                 }catch (\Exception $e){
-                    return redirect()->back()->withErrors($e);
+                    return redirect()->back()->withErrors($e->getMessage());
                 }
             }else{
                 return redirect()->back()->with('error','wrong url!');
