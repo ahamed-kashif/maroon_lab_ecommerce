@@ -39,7 +39,7 @@
                                     {{$user->mobile_number}}
                                 </td>
                                 <td>
-                                    XXX
+                                    {{$user->orders->count()}}
                                 </td>
                             </tr>
                         @endforeach

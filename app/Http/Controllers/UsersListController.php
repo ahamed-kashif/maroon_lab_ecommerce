@@ -26,7 +26,7 @@ class UsersListController extends Controller
     public function index(){
 
         if(auth()->user()->can('index userslist')){
-            $List  = User::all();
+            $List  = User::with('orders')->where('id' ,'!=', 1)->get();
             return view('UsersList.index')->with([
                 'users' => $List
             ]);

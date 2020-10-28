@@ -51,6 +51,7 @@
                                 <img src="{{asset('images/svg-icon/icons.svg')}}" class="img-fluid" alt="dashboard"><span>Admin Panel</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
                             <ul class="vertical-submenu">
+                                <li><a href="{{route('admin.dashboard')}}">Dashboard</a></li>
                                 <li>
                                     <a href="#">Shop</a>
                                     <ul class="vertical-submenu">
@@ -71,6 +72,12 @@
                                         @endcan
                                     </ul>
                                 </li>
+{{--                                @can('index page')--}}
+{{--                                    <li><a href="{{route('')}}">Users</a></li>--}}
+{{--                                @endcan--}}
+                                @can('index userslist')
+                                    <li><a href="{{route('user.list')}}">Users</a></li>
+                                @endcan
                                 @can('index shipping_method')
                                     <li><a href="{{route('shipping_method.index')}}">Shipping-Method</a></li>
                                 @endcan
