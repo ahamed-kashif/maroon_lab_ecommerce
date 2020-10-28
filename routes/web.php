@@ -33,6 +33,7 @@ Route::prefix('shop')->group(function(){
    Route::get('/','StoreController@index')->name('store.index');
    Route::get('/product/{product}','StoreController@product')->name('store.product.show');
    Route::get('/category/{category}','StoreController@category')->name('store.category');
+   Route::get('/sub_category/{sub_category}','StoreController@subcategory')->name('store.subcategory');
 });
 Route::prefix('cart')->group(function(){
    Route::get('/', 'CartController@index')->name('cart.index');
