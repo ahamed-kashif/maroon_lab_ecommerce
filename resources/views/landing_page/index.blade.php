@@ -61,7 +61,6 @@
                 @include('landing_page.partials.slider-left-category')
                 <!--=======  End of slider left category  =======-->
             </div>
-
             <div class="col-lg-9 col-md-12">
                 <!--=======  slider container  =======-->
                 @include('landing_page.partials.slider-container')
