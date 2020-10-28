@@ -72,9 +72,9 @@
                                         @endcan
                                     </ul>
                                 </li>
-{{--                                @can('index page')--}}
-{{--                                    <li><a href="{{route('')}}">Users</a></li>--}}
-{{--                                @endcan--}}
+                                @can('index page')
+                                    <li><a href="{{route('page.index')}}">Pages</a></li>
+                                @endcan
                                 @can('index userslist')
                                     <li><a href="{{route('user.list')}}">Users</a></li>
                                 @endcan
