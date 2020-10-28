@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Greenfarm - Organic Food eCommerce Bootstrap 4 Template</title>
+    <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -44,50 +44,7 @@
 =============================================-->
 
 <!-- START NAVBAR -->
-<nav class="navbar navbar-expand-lg fixed-top custom-nav sticky">
-    <div class="container">
-        <!-- LOGO -->
-        <a class="navbar-brand logo" href="./index.html">
-            <img src="./assets/images/logo.png" alt="">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" style="color: #0A7BF6;font-family: 'Rubik', sans-serif; font-size: 1rem;">
-            MENU
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item active">
-                    <a href="#home" class="nav-link">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#services" class="nav-link">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#features" class="nav-link">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#price" class="nav-link">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#client" class="nav-link">Client</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#team" class="nav-link">Team</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#faq" class="nav-link">FAQ</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#contact" class="nav-link">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <button type="button" class="btn btn-custom align-middle waves-effect waves-light btn-rounded">Buy Now</button>
-                </li>
-
-            </ul>
-        </div>
-    </div>
-</nav>
+@include('landing_page.partials.navbar')
 <!-- END NAVBAR -->
 
 <!--=====  End of Header  ======-->

@@ -4,8 +4,8 @@
     <div class="sidebar">
         <!-- Start Logobar -->
         <div class="logobar">
-            <a href="/" class="logo logo-large"><img src="{{asset('images/logo.svg')}}" class="img-fluid" alt="logo"></a>
-            <a href="/" class="logo logo-small"><img src="{{asset('images/small_logo.svg')}}" class="img-fluid" alt="logo"></a>
+            <a href="/" class="logo logo-large"><img src="{{asset('logo/logo.png')}}" class="img-fluid" alt="logo"></a>
+            <a href="/" class="logo logo-small"><img src="{{asset('logo/logo_1.png')}}" class="img-fluid" alt="logo"></a>
         </div>
         <!-- End Logobar -->
         <!-- Start Navigationbar -->
