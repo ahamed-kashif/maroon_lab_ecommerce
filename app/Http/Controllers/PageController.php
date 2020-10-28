@@ -8,10 +8,6 @@ use Illuminate\View\View;
 
 class PageController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 
     /**
      * Display a listing of the resource.
@@ -57,7 +53,7 @@ class PageController extends Controller
             'title' => 'required',
             'body' => 'required',
             'footer' => 'required',
-            'url' => 'required','unique'
+            'url' => 'required|unique:pages'
         ]);
 
         $page = new Page;
@@ -68,7 +64,7 @@ class PageController extends Controller
 
         try{
             $page->save();
-            return redirect(route('page.index'))->with('success','successfully stored');
+            return redirect()->route('page.index')->with('success','successfully stored');
         }catch (\Exception $e){
             return redirect()->back()->withErrors($e->getmessage());
         }
@@ -84,22 +80,18 @@ class PageController extends Controller
      */
     public function show($url)
     {
-        if(auth()->user()->can('show page')){
+        if(is_string($url)){
+            $page = Page::where('url',$url)->first();
 
-            if(is_string($url)){
-                $page = Page::where('url',$url)->first();
-
-                if($page == null){
-                    return redirect()->back()->with('error','Page not exists!');
-                }
-                return view('page.show')->with([
-                    'pages' => $page
-                ]);
-            }else{
-                return redirect()->back()->with('error','wrong url!');
+            if($page == null){
+                return redirect()->back()->with('error','Page not exists!');
             }
+            return view('page.show')->with([
+                'pages' => $page
+            ]);
+        }else{
+            return redirect()->back()->with('error','wrong url!');
         }
-        return redirect('home')->with('error','Unauthorized Access!');
     }
 
 

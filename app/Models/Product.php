@@ -14,7 +14,7 @@ class Product extends Model
         return $this->belongsToMany(Category::class,'product_category','product_id','category_id');
     }
     public function sub_category(){
-        return $this->belongsTo(SubCategory::class,'sub_category_id');
+        return $this->belongsTo(SubCategory::class,'sub_category_id','id');
     }
     public function images(){
         return $this->morphToMany(Image::class,'imageable');

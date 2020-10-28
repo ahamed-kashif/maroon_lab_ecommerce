@@ -10,14 +10,8 @@
             <div class="userbox">
                 <ul class="list-unstyled mb-0">
                     <li class="media dropdown-item">
-                        <a href="#" class="profile-icon">
+                        <a href="{{route('home')}}" class="profile-icon">
                             <img src="{{asset('images/svg-icon/user.svg')}}" class="img-fluid" alt="user">My Profile
-                        </a>
-                    </li>
-                    <li class="media dropdown-item">
-                        <a href="#" class="profile-icon">
-                            <img src="{{asset('images/svg-icon/email.svg')}}" class="img-fluid" alt="email">
-                            Email
                         </a>
                     </li>
                     <li class="media dropdown-item">

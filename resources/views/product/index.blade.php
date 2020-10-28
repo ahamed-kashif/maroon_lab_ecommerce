@@ -24,7 +24,7 @@
                                     <th>Price</th>
                                     <th>Sale Price</th>
                                     <th>Categories</th>
-                                    <th>Tags</th>
+                                    <th>Sub-Category</th>
                                     <th>Orders</th>
                                     <th>Action</th>
                                 </tr>
@@ -48,11 +48,23 @@
                                                 {{ $item->title.', ' }}
                                                 @endforeach
                                             @else
-                                                <blockquote class="text-warning">No category assigned!</blockquote>
+                                                N/A
                                             @endif
                                         </td>
-                                        <td>yet tobe developed</td>
-                                        <td>yet tobe developed</td>
+                                        <td>
+                                            @if($product->sub_category()->count() > 0)
+                                                {{$product->sub_category->title}}
+                                            @else
+                                                N/A
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if($product->orders()->count() > 0)
+                                                {{$product->orders()->count()}}
+                                            @else
+                                                0
+                                            @endif
+                                        </td>
                                         <td>
                                             <div class="button-list">
                                                 <a href="{{route('product.edit',$product->id)}}" class="btn btn-success-rgba"><i class="feather icon-edit-2"></i></a>
