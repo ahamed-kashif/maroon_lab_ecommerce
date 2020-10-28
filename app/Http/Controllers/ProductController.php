@@ -95,6 +95,9 @@ class ProductController extends Controller
         if($request->has('purchase_note')){
             $product->purchase_note = $request->input('purchase_note');
         }
+        if($request->has('sub_category_id')){
+            $product->sub_category_id = $request->input('sub_category_id');
+        }
         $product->is_active = $request->has('is_active');
         $product->is_featured = $request->has('is_featured');
         try{
@@ -140,11 +143,13 @@ class ProductController extends Controller
                     return redirect()->back()->with('error', 'product not exists!');
                 }
                 $categories = Category::all();
+                $subcategories = SubCategory::all();
                 $variants = Variant::all();
                 return view('product.edit')->with([
                     'product' => $product,
                     'categories' => $categories,
-                    'variants' => $variants
+                    'variants' => $variants,
+                    'subcategories' => $subcategories
                 ]);
             }else{
                 return redirect()->back()->withErrors('wrong url!');
@@ -234,6 +239,9 @@ class ProductController extends Controller
                 }
                 if($request->has('purchase_note')){
                     $product->purchase_note = $request->input('purchase_note');
+                }
+                if($request->has('sub_category_id')){
+                    $product->sub_category_id = $request->input('sub_category_id');;
                 }
                 $product->is_active = $request->has('is_active');
                 $product->is_featured = $request->has('is_featured');

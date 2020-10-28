@@ -14,6 +14,6 @@ if (!function_exists('title')) {
 if (!function_exists('categories')) {
     function categories()
     {
-        return App\Models\Category::active()->get();
+        return App\Models\Category::with('subcategories')->active()->get();
     }
 }

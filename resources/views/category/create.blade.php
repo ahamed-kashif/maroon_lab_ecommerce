@@ -8,7 +8,7 @@
             </div>
             <div class="card-body">
                 @include('partials.alert')
-                <form action="{{route('category.store')}}" method="POST">
+                <form action="{{route('category.store')}}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-row">
                         <div class="form-group col-md-6">
@@ -23,6 +23,10 @@
                     <div class="form-group">
                         <label for="description">description</label>
                         <textarea type="text" class="form-control" id="description" placeholder="Description" name="description"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">featured image</label>
+                        <input type="file" class="form-control" id="image" placeholder="image" name="image" accept="image/png">
                     </div>
                     <div class="form-row">
                         <div class="form-group col-md-2">

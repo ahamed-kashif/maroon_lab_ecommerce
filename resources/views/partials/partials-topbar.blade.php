@@ -75,16 +75,16 @@
                         </li>
                     @endif
                 @else
-                    <li class="list-inline-item">
-                        <div class="settingbar">
-                            <a href="javascript:void(0)" id="infobar-settings-open" class="infobar-icon">
-                                <img src="{{asset('images/svg-icon/settings.svg')}}" class="img-fluid" alt="settings">
-                            </a>
-                        </div>
-                    </li>
-                    <li class="list-inline-item">
-                        @include('partials.partials-notifications')
-                    </li>
+{{--                    <li class="list-inline-item">--}}
+{{--                        <div class="settingbar">--}}
+{{--                            <a href="javascript:void(0)" id="infobar-settings-open" class="infobar-icon">--}}
+{{--                                <img src="{{asset('images/svg-icon/settings.svg')}}" class="img-fluid" alt="settings">--}}
+{{--                            </a>--}}
+{{--                        </div>--}}
+{{--                    </li>--}}
+{{--                    <li class="list-inline-item">--}}
+{{--                        @include('partials.partials-notifications')--}}
+{{--                    </li>--}}
 {{--                    <li class="list-inline-item">--}}
 {{--                        @include('partials.partials-language')--}}
 {{--                    </li>--}}

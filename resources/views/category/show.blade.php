@@ -16,6 +16,22 @@
                 </h3>
                 <small>{{$category->short_code}}</small>
             </div>
+            <div class="card m-b-30">
+                <div class="card-header">
+                    <h5 class="card-title">category featured image</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        @if($category->images()->count() > 0)
+                            <span class="pull-right clickable close-icon cross" data-effect="fadeOut">
+                                <img class="img-fluid rounded p-2" style="height:100px;width: 100px" src="{{asset($category->images()->first()->url)}}"/>
+                            </span>
+                        @else
+                            <h5>No image uploaded yet!</h5>
+                        @endif
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
                 <p>{{$category->description}}</p>
                 <div class="col-md-6 col-lg-6">

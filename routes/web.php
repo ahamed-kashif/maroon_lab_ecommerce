@@ -33,6 +33,7 @@ Route::prefix('shop')->group(function(){
    Route::get('/','StoreController@index')->name('store.index');
    Route::get('/product/{product}','StoreController@product')->name('store.product.show');
    Route::get('/category/{category}','StoreController@category')->name('store.category');
+   Route::get('/sub_category/{sub_category}','StoreController@subcategory')->name('store.subcategory');
 });
 Route::prefix('cart')->group(function(){
    Route::get('/', 'CartController@index')->name('cart.index');
@@ -69,4 +70,12 @@ Route::prefix('customer')->group(function(){
       Route::get('/{order}/invoice','Customer\OrderController@invoice')->name('customer.order.invoice');
    });
 });
-Route::resource('page','PageController');
+Route::prefix('page')->group(function(){
+   Route::get('/','PageController@index')->middleware('auth')->name('page.index');
+   Route::post('/','PageController@store')->middleware('auth')->name('page.store');
+   Route::get('/edit/{url}','PageController@edit')->middleware('auth')->name('page.edit');
+   Route::get('/create','PageController@create')->middleware('auth')->name('page.create');
+   Route::put('/{url}','PageController@update')->middleware('auth')->name('page.update');
+   Route::delete('/{url}','PageController@destroy')->middleware('auth')->name('page.destroy');
+   Route::get('/{url}','PageController@show')->name('page.show');
+});
