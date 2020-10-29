@@ -62,7 +62,7 @@
                                         <!--=======  tab slider sub product  =======-->
                                         <div class="gf-product tab-slider-sub-product">
                                             <div class="image">
-                                                <a href="single-product.html">
+                                                <a href="{{route('store.product.show',$item->id)}}">
                                                     <span class="onsale">Sale!</span>
                                                     @if($item->images()->count() != 0)
                                                         <img src="{{asset($item->images()->first()->url) }}" class="img-fluid" alt="product">
@@ -77,7 +77,7 @@
                                                         <a href="{{route('store.category',$i->id)}}">{{$i->title}}</a>,
                                                     @endforeach
                                                 </div>
-                                                <h3 class="product-title"><a href="single-product.html">Sed tempor ehicula non commodo</a></h3>
+                                                <h3 class="product-title"><a href="{{route('store.product.show',$item->id)}}">{{$item->title}}</a></h3>
                                                 <div class="price-box">
                                                     @if($item->discounted_price != null)
                                                         <span class="main-price">৳{{$item->price}}</span>

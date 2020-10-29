@@ -6,9 +6,8 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Favicon -->
-    <link rel="icon" href="{{asset('landing_page/images/favicon.ico')}}">
-
+    <!-- Fevicon -->
+    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
     <!-- CSS
     ============================================ -->
     <!-- Bootstrap CSS -->
@@ -172,21 +171,14 @@
                                     <span class="icon_mail_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Email: <span>support@hastech.company</span></p>
+                                    <p>Email: <span>service@tidyfish.co</span></p>
                                 </div>
                             </div>
-
                             <!--=======  End of single contact  =======-->
                         </div>
-
                         <!--=======  End of contact segments  =======-->
-
-
-
                     </div>
-
                     <!--=======  End of contact summery  =======-->
-
                 </div>
             </div>
         </div>
@@ -205,15 +197,13 @@
 
                     <div class="copyright-segment">
                         <p>
-                            <a href="#">Privacy Policy</a>
+                            <a href="{{route('page.show','privacy')}}">Privacy Policy</a>
                             <span class="separator">|</span>
-                            <a href="#">Term and conditions</a>
+                            <a href="{{route('page.show','t&r')}}">Term and conditions</a>
                         </p>
-                        <p class="copyright-text">&copy; 2019 <a href="https://demo.hasthemes.com/">Greenfarm</a>. All Rights Reserved</p>
+                        <p class="copyright-text">&copy; 2020 <a href="/">Tidy Fish</a>. All Rights Reserved</p>
                     </div>
-
                     <!--=======  End of copyright text	  =======-->
-
                 </div>
             </div>
         </div>

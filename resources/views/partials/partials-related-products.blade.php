@@ -6,7 +6,7 @@
         <div class="card-body">
             <!-- Start row -->
             <div class="row">
-                @if($product->related_products()->count() == 0)
+                @if($product->related_products()->count() > 0)
                     @foreach($products as $p)
                         <!-- Start col -->
                         <div class="col-lg-6 col-xl-3">
@@ -14,7 +14,7 @@
                                 <div class="product-head">
                                     @if($p->has('images') && $p->images()->count() != 0)
                                         <a href="{{route('store.product.show', $p->id)}}">
-                                            <img src="{{asset($p->images->pluck('url')->first())}}" class="img-fluid" alt="product">
+                                            <img src="{{asset($p->images->first()->url)}}" class="img-fluid" alt="product">
                                         </a>
                                     @else
                                         <div class="product-preview">
