@@ -79,3 +79,5 @@ Route::prefix('page')->group(function(){
    Route::delete('/{url}','PageController@destroy')->middleware('auth')->name('page.destroy');
    Route::get('/{url}','PageController@show')->name('page.show');
 });
+Route::get('oauth/{driver}', 'Auth\LoginController@redirectToProvider')->name('social.oauth');
+Route::get('oauth/{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
