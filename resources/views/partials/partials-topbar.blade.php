@@ -66,14 +66,10 @@
                 @guest
                     <li class="list-inline-item">
                         <a class="nav-link btn-outline-primary btn-sm" href="{{ route('login') }}">
-                            {{ strtoupper(__('Login')) }}
+                            <i class="mdi mdi-login-variant font-23"></i>
                         </a>
                     </li>
-                    @if (Route::has('register'))
-                        <li class="list-inline-item">
-                            <a class="nav-link  btn-outline-primary btn-sm" href="{{ route('register') }}">{{ strtoupper(__('Register')) }}</a>
-                        </li>
-                    @endif
+
                 @else
 {{--                    <li class="list-inline-item">--}}
 {{--                        <div class="settingbar">--}}

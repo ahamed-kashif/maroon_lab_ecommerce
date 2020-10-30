@@ -1,7 +1,8 @@
 <li class="list-inline-item">
     <div class="notifybar">
         <div class="dropdown">
-            <a class="dropdown-toggle infobar-icon" href="#" role="button" id="notoficationlink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src="{{asset('/images/svg-icon/ecommerce.svg')}}" class="img-fluid icon-svg" alt="ecommerce">
+            <a class="dropdown-toggle infobar-icon" href="#" role="button" id="notoficationlink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <img src="{{asset('/images/svg-icon/ecommerce.svg')}}" class="img-fluid icon-svg" alt="ecommerce">
                 @if(session()->has('cart'))
                     <span class="live-icon">
                         <span class="badge badge-pill badge-warning">{{count(session()->get('cart')->items())}}</span>

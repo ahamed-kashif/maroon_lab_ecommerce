@@ -33,8 +33,8 @@ class Product extends Model
     }
     public function scopeRelated_products(){
         return $this->active()->whereHas('categories', function($q){
-            $q->whereIn('categories.id',$this->categories->pluck('id')->toArray());
-        })->where('id','!=',$this->id);
+            $q->whereIn('categories.id',$this->categories()->pluck('id'));
+        })->where('product.id','!=',$this->id);
     }
     public function orders(){
         return $this->belongsToMany(Order::class,'order_product','product_id','order_id')->withPivot('quantity');

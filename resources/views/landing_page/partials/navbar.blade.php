@@ -11,13 +11,16 @@
         <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a href="{{route('page.show','about_us')}}" class="nav-link">About us!</a>
+                    <a href="{{route('page.show','about_us')}}" class="nav-link font-weight-normal">About us!</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('page.show','faq')}}" class="nav-link">FAQ</a>
+                    <a href="{{route('page.show','faq')}}" class="nav-link font-weight-normal">FAQ</a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{route('page.show','contact')}}" class="nav-link">Contact</a>
+                    <a href="{{route('page.show','contact')}}" class="nav-link font-weight-normal">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{route('login')}}" class="nav-link text-primary">Login!</a>
                 </li>
                 <li class="nav-item">
                     <form action="{{route('store.index')}}">

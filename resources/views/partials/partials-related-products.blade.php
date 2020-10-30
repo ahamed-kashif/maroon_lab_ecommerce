@@ -6,7 +6,7 @@
         <div class="card-body">
             <!-- Start row -->
             <div class="row">
-                @if($product->related_products()->count() > 0)
+                @if($products->count() > 0)
                     @foreach($products as $p)
                         <!-- Start col -->
                         <div class="col-lg-6 col-xl-3">

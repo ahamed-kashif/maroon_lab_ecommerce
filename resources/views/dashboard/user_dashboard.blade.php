@@ -1,7 +1,11 @@
 @extends('layouts.dashboard')
 @section('dashboard-content')
     <div class="profilebox py-4 text-center mb-4">
-        <img src="{{asset('/images/users/profile.svg')}}" class="img-fluid mb-3" alt="profile">
+        @if(auth()->user()->avatar != null)
+            <img src="{{auth()->user()->avatar}}" class="img-fluid mb-3" alt="profile">
+        @else
+            <img src="{{asset('/images/users/profile.svg')}}" class="img-fluid mb-3" alt="profile">
+        @endif
         <div class="profilename">
             <h5>{{auth()->user()->name}}</h5>
         </div>
