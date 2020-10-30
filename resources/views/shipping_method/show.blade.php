@@ -8,7 +8,7 @@
                     <span class="badge {{$Shipping_Methods->is_active ? 'badge-success' : 'badge-secondary'}}">
                         {{$Shipping_Methods->is_active ? 'active' : 'inactive'}}
                     </span>
-                    @if($Shipping_method->default)
+                    @if($Shipping_Methods->default)
                         <span class="badge badge-warning">Default</span>
                     @endif
                 </h3>
