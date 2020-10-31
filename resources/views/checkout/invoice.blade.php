@@ -147,9 +147,8 @@
                                     <div class="invoice-meta-box">
                                         <h6 class="mb-3">Terms & Conditions</h6>
                                         <ul class="pl-3">
-                                            <li>Goods once sold will not be taken back.</li>
                                             <li>We are responsible for Courier Damage.</li>
-                                            <li>Subjects to NY Jurisdiction.</li>
+                                            <li>Subjects to Jurisdiction.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -157,9 +156,9 @@
                                     <div class="invoice-meta-box">
                                         <h6 class="mb-3">Contact Us</h6>
                                         <ul class="list-unstyled">
-                                            <li><i class="feather icon-aperture mr-2"></i>www.example.com</li>
-                                            <li><i class="feather icon-mail mr-2"></i>demo@example.com</li>
-                                            <li><i class="feather icon-phone mr-2"></i>+1-9876543210</li>
+                                            <li><a href="/"><i class="feather icon-aperture mr-2"></i>www.tidyfish.co</a></li>
+                                            <li><a href="href = mailto: service@tidyfish.co"><i class="feather icon-mail mr-2"></i>service@tidyfish.co</a></li>
+                                            <li><a href="tel:+8801706445888"><i class="feather icon-phone mr-2"></i>+88 01706 445 888 </a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -167,7 +166,7 @@
                                     <div class="invoice-meta-box text-right">
                                         <h6 class="mb-0">Authorized Signatory</h6>
                                         <img src="{{asset('images/general/signature.svg')}}" class="img-fluid my-3" alt="signature">
-                                        <p class="mb-0">Jennifer C Doe</p>
+                                        <p class="mb-0">Manik</p>
                                     </div>
                                 </div>
                             </div>
