@@ -19,6 +19,6 @@ class TransactionSeeder extends Seeder
         Permission::create(['name' => 'update transaction']);
         Permission::create(['name' => 'api_get transaction']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('index transaction');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
     }
 }

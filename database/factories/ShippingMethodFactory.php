@@ -8,7 +8,7 @@ use Faker\Generator as Faker;
 $factory->define(ShippingMethod::class, function (Faker $faker) {
     return [
         'title' => $faker->jobTitle,
-        'phone_number' => $faker->randomDigit,
-        'short_code' => $faker->uuid,
+        'phone_number' => '01xxxxxxxxx',
+        'short_code' => $faker->randomLetter,
     ];
 });

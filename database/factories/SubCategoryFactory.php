@@ -9,7 +9,7 @@ $factory->define(SubCategory::class, function (Faker $faker) {
     return [
         'title' => $faker->userName,
         'description' => $faker->paragraph,
-        'short_code' => $faker->streetSuffix,
+        'short_code' => $faker->randomLetter,
         'category_id' => 2
     ];
 });

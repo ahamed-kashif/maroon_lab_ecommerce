@@ -21,7 +21,7 @@ class PaymentMethodSeeder extends Seeder
         Permission::create(['name' => 'update payment_method']);
         Permission::create(['name' => 'api_get payment_method']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show payment_method');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
 
     }
 }

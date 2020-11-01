@@ -120,11 +120,7 @@
                     <div class="social-media-section">
                         <h2>Follow us</h2>
                         <div class="social-links">
-                            <a class="facebook" href="http://www.facebook.com/" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
-                            <a class="twitter" href="http://www.twitter.com/" data-tooltip="Twitter"><i class="fa fa-twitter"></i></a>
-                            <a class="instagram" href="http://www.instagram.com/" data-tooltip="Instagram"><i class="fa fa-instagram"></i></a>
-                            <a class="linkedin" href="http://www.linkedin.com/" data-tooltip="Linkedin"><i class="fa fa-linkedin"></i></a>
-                            <a class="rss" href="http://www.rss.com/" data-tooltip="RSS"><i class="fa fa-rss"></i></a>
+                            <a class="facebook" href="https://www.facebook.com/tidyfishbangladesh" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
                         </div>
                     </div>
 
@@ -147,7 +143,7 @@
                                     <span class="icon_pin_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Address: <span>123 New Design Str, Melbourne, Australia</span></p>
+                                    <p>Address: <span>25/5C aziz moholla Mohammadpur dhaka 1207 1207 Dhaka, Dhaka Division, Bangladesh</span></p>
                                 </div>
                             </div>
 
@@ -159,7 +155,7 @@
                                     <span class="icon_mobile"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Phone: <span>1-888-123-456-89</span></p>
+                                    <p>Phone: <span>01408-494549</span></p>
                                 </div>
                             </div>
 

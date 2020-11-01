@@ -103,7 +103,7 @@ class StoreController extends Controller
     {
         if(is_numeric($id)){
             $product = Product::find($id);
-            $products = $product->categories()->first()->products()->get();
+            $products = Product::where('id','!=',$product->id)->limit(4)->get();
 
             if($product == null){
                 return redirect()->route('store.index')->with('error','Product Does not exist..');

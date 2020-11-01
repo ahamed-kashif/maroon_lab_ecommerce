@@ -22,7 +22,7 @@ class SubCategorySeeder extends Seeder
         Permission::create(['name' => 'update subcategory']);
         Permission::create(['name' => 'api_get subcategory']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show subcategory');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
         factory(SubCategory::class, 10)->create();
     }
 }

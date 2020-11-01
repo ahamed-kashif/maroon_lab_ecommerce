@@ -21,6 +21,6 @@ class PageSeeder extends Seeder
         Permission::create(['name' => 'update page']);
         Permission::create(['name' => 'api_get page']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show page');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
     }
 }

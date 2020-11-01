@@ -104,7 +104,8 @@
                     <div class="card-body ecommerce-pagination">
                         <div class="row align-items-center">
                             <div class="col-lg-12 col-xl-6">
-                                <p>Showing 1 to 2 of 12 entries</p>
+                                <p>Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}}
+                                    of  {{$products->total()}}  products</p>
                             </div>
                             <div class="col-lg-12 col-xl-6">
                                 {{$products->links()}}

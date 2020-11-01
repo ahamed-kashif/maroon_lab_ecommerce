@@ -22,7 +22,7 @@ class ProductsTableSeeder extends Seeder
         Permission::create(['name' => 'update product']);
         Permission::create(['name' => 'api_get product']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show product');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
         factory(Product::class, 10)->create();
     }
 }

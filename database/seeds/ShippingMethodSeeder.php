@@ -21,7 +21,7 @@ class ShippingMethodSeeder extends Seeder
         Permission::create(['name' => 'update shipping_method']);
         Permission::create(['name' => 'api_get shipping_method']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show shipping_method');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
         factory(ShippingMethod::class, 10)->create();
     }
 }

@@ -9,6 +9,6 @@ $factory->define(Variant::class, function (Faker $faker) {
     return [
         'value' => $faker->userName,
         'type' => $faker->jobTitle,
-        'unit' => $faker->companySuffix
+        'unit' => $faker->randomLetter
     ];
 });

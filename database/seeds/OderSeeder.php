@@ -21,6 +21,6 @@ class OderSeeder extends Seeder
         Permission::create(['name' => 'update order']);
         Permission::create(['name' => 'api_get order']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show order');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
     }
 }

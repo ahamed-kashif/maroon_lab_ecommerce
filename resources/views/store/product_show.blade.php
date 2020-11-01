@@ -62,13 +62,13 @@
                                     @endforeach
                                     <div class="mt-4 col-sm-2 col-md-2 col-lg-2 ml-0 p-0 ">
                                         <h5 class="card-title mr-2" for="inlineCheckbox1">Quantity</h5>
-                                        <input type="text" class="form-control" id="touchspin-vertical-btn" name="quantity" value="1" min="1" max="500">
+                                        <input type="number" class="form-control" id="touchspin-vertical-btn" name="quantity" value="1" min="1" max="500">
                                     </div>
                                     <div class="button-list mt-5 mb-5">
                                         {{--                                    <button type="button" class="btn btn-danger-rgba font-18"><i class="feather icon-heart"></i></button>--}}
 
                                         <button type="submit" class="btn btn-primary-rgba font-18"><i class="feather icon-shopping-bag mr-2"></i>Add to Cart</button>
-                                        <button type="button" class="btn btn-success font-17">Buy Now</button>
+{{--                                        <button type="button" class="btn btn-success font-17">Buy Now</button>--}}
                                     </div>
                                 </form>
                                 <div class="button-list">

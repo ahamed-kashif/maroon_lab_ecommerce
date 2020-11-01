@@ -23,7 +23,7 @@ class VariantSeeder extends Seeder
         Permission::create(['name' => 'update variant']);
         Permission::create(['name' => 'api_get variant']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show variant');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
         factory(Variant::class, 10)->create();
     }
 }

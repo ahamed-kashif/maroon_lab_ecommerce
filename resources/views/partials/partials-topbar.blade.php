@@ -65,7 +65,7 @@
                     </li>
                 @guest
                     <li class="list-inline-item">
-                        <a class="nav-link btn-outline-primary btn-sm" href="{{ route('login') }}">
+                        <a class="nav-link btn-outline-primary btn-sm" title="Login" href="{{ route('login') }}">
                             <i class="mdi mdi-login-variant font-23"></i>
                         </a>
                     </li>

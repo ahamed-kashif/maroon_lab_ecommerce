@@ -22,7 +22,7 @@ class CategorySeeder extends Seeder
         Permission::create(['name' => 'update category']);
         Permission::create(['name' => 'api_get category']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show category');
+        Role::findByName('admin')->givePermissionTo(Permission::all());
         factory(Category::class, 10)->create();
 
 

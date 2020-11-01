@@ -21,6 +21,6 @@ class SettingSeeder extends Seeder
         Permission::create(['name' => 'update setting']);
         Permission::create(['name' => 'api_get setting']);
         Role::findByName('super-admin')->givePermissionTo(Permission::all());
-        Role::findByName('admin')->givePermissionTo('show setting');
+        Role::findByName('admin')->givePermissionTo('index setting');
     }
 }
