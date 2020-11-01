@@ -19,9 +19,15 @@
                 <li class="nav-item">
                     <a href="{{route('page.show','contact')}}" class="nav-link font-weight-normal">Contact</a>
                 </li>
+                @guest
                 <li class="nav-item">
                     <a href="{{route('login')}}" class="nav-link text-primary">Login!</a>
                 </li>
+                @else
+                    <li class="nav-item">
+                        <a href="{{route('home')}}" class="nav-link text-primary">Hello {{auth()->user()->name}}!</a>
+                    </li>
+                @endguest
                 <li class="nav-item">
                     <form action="{{route('store.index')}}">
                         <button type="submit" class="btn btn-custom align-middle waves-effect waves-light btn-rounded">Shop Now</button>

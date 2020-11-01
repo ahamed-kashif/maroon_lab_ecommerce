@@ -73,11 +73,11 @@
                                                             @if($product->is_sale())
                                                                 <span>
                                                                     <p class="text-primary font-18 f-w-7 my-3">
-                                                                        <sup class="font-12">৳</sup><del class="mr-2">{{$product->price}}</del><span class="text-success-gradient text-small"><sup class="font-12 text-success-gradient">৳</sup>{{$product->discounted_price}}</span>
+                                                                        <sup class="font-12">৳</sup><del class="mr-2">{{round($product->price,2)}}</del><span class="text-success-gradient text-small"><sup class="font-12 text-success-gradient">৳</sup>{{round($product->discounted_price,2)}}</span>
                                                                     </p>
                                                                 </span>
                                                             @else
-                                                                <p class="text-primary font-18 f-w-7 my-3"><sup class="font-12">৳</sup>{{$product->price}}</p>
+                                                                <p class="text-primary font-18 f-w-7 my-3"><sup class="font-12">৳</sup>{{round($product->price,2)}}</p>
                                                             @endif
 {{--                                                            <h5 class="f-w-7 mb-0"><sup class="font-14">৳</sup>{{$product->price}}</h5>--}}
                                                         </div>

@@ -35,16 +35,16 @@
                                         <p class="text-primary font-26 f-w-7 my-3">
                                             <del class="mr-2">
                                                 <small>
-                                                    <sup class="font-10">৳</sup>{{$product->price}}
+                                                    <sup class="font-10">৳</sup>{{round($product->price,2)}}
                                                 </small>
                                             </del>
                                             <span class="text-success-gradient">
-                                                <sup class="font-16 text-success-gradient">৳</sup>{{$product->discounted_price}}
+                                                <sup class="font-16 text-success-gradient">৳</sup>{{round($product->discounted_price,2)}}
                                             </span>
                                         </p>
                                     </span>
                                 @else
-                                    <p class="text-primary font-26 f-w-7 my-3"><sup class="font-16">৳</sup>{{$product->price}}</p>
+                                    <p class="text-primary font-26 f-w-7 my-3"><sup class="font-16">৳</sup>{{round($product->price,2)}}</p>
                                 @endif
                                 <form action="{{route('cart.product.add', $product->id)}}" method="POST">
                                     @csrf

@@ -97,7 +97,10 @@ class CheckoutController extends Controller
 
         //storing order
         $order = new Order;
-        $order->code = strtoupper('OD'.uniqid());
+        $numOfOrders = Order::count();
+        $numOfOrders++;
+        $numOdOrders = $numOfOrders+5000;
+        $order->code = strtoupper('OD'.$numOfOrders);
         $order->user_id = auth()->user()->id;
         $order->total = $cart->total();
         $order->discount = $cart->discount();

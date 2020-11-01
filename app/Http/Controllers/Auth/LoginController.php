@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Events\NewUserRegisteredEvent;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -176,6 +177,7 @@ class LoginController extends Controller
                     // user can use reset password to create a password
                     'password' => ''
                 ]);
+                event(new NewUserRegisteredEvent($user));
             }else{
                 return \redirect()->route('register')->with('error','You need to register manually');
             }
