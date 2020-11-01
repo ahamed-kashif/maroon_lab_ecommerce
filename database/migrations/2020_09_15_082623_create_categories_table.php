@@ -17,7 +17,7 @@ class CreateCategoriesTable extends Migration
             $table->bigIncrements('id');
             $table->string('title')->unique();
             $table->char('short_code',5);
-            $table->string('description')->nullable();
+            $table->string('description',255)->nullable();
             $table->boolean('is_active')->default(false);
             $table->boolean('is_featured')->default(false);
             $table->timestamps();

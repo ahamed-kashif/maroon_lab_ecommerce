@@ -17,8 +17,8 @@ class CreateProductsTable extends Migration
             $table->bigIncrements('id');
             $table->string('title');
             $table->string('SKU')->unique()->nullable();
-            $table->string('short_description');
-            $table->string('description');
+            $table->string('short_description',255);
+            $table->string('description',10555);
             $table->unsignedBigInteger('sub_category_id')->nullable();
             $table->float('weight_in_kg')->nullable();
             $table->float('dimension_in_meter_cube')->nullable();
