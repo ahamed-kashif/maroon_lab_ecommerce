@@ -226,7 +226,7 @@
                                     </tr>
                                     </thead>
                                     <tbody class="variant-body">
-                                        <tr class="variant-row-1">
+                                        <tr class="variant-row" id="1">
                                             <td>
                                                 <select name="variants[]" class="form-control">
                                                     <option value="">select one</option>

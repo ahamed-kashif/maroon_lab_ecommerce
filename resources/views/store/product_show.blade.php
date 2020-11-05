@@ -2,6 +2,7 @@
 @section('css')
     @include('extras.slick-css')
     @include('extras.touchpin-css')
+    @include('extras.loader-css')
 @endsection
 @section('content')
     <!-- Start Contentbar -->
@@ -30,35 +31,37 @@
 {{--                                    <i class="feather icon-star"></i>--}}
 {{--                                    <span class="ml-2">25 Ratings</span>--}}
 {{--                                </p>--}}
-                                @if($product->is_sale())
+                                @if($discounted_price != 0)
                                     <span>
                                         <p class="text-primary font-26 f-w-7 my-3">
                                             <del class="mr-2">
                                                 <small>
-                                                    <sup class="font-10">৳</sup>{{round($product->price,2)}}
+                                                    <sup class="font-10">৳</sup><span class="price">{{round($price,2)}}</span>
                                                 </small>
                                             </del>
                                             <span class="text-success-gradient">
-                                                <sup class="font-16 text-success-gradient">৳</sup>{{round($product->discounted_price,2)}}
+                                                <sup class="font-16 text-success-gradient">৳</sup><span class="discounted_price">{{round($discounted_price,2)}}</span>
                                             </span>
                                         </p>
                                     </span>
                                 @else
-                                    <p class="text-primary font-26 f-w-7 my-3"><sup class="font-16">৳</sup>{{round($product->price,2)}}</p>
+                                    <p class="text-primary font-26 f-w-7 my-3"><sup class="font-16">৳</sup><span class="price">{{round($price,2)}}</span></p>
                                 @endif
                                 <form action="{{route('cart.product.add', $product->id)}}" method="POST">
                                     @csrf
                                     <div class="mb-4 summer_text">{!!$product->short_description !!}</div>
-                                    @foreach($product->variants->groupBy('type') as $key => $variant)
+                                    @foreach($product->variants->groupBy('type') as $key => $v)
                                         <div class="mt-3">
-                                            <h6>Select {{$key}}</h6>
+                                            <h6>{{strtoupper($key)}}</h6>
                                             <div class="form-check form-check-inline">
-                                                @foreach($variant as $item)
-                                                    <input class="form-check-input" type="checkbox" name="variants[]" value="{{$item->id}}">
-                                                    <label class="form-check-label mr-2" for="inlineCheckbox1">{{$item->value.' '.$item->unit}}</label>
+                                                <select name="variant" class="form-control variant">
+                                                @foreach($v as $item)
+                                                    <option value="{{$item->id}}"{{app('request')->has('variant') && app('request')->input('variant') == $item->id ? 'selected' : ''}}>{{$item->value}} {{$item->unit}}</option>
                                                 @endforeach
+                                                </select>
                                             </div>
                                         </div>
+                                        @break
                                     @endforeach
                                     <div class="mt-4 col-sm-2 col-md-2 col-lg-2 ml-0 p-0 ">
                                         <h5 class="card-title mr-2" for="inlineCheckbox1">Quantity</h5>
@@ -101,16 +104,21 @@
         <!-- End row -->
     </div>
     <!-- End Contentbar -->
+
 @endsection
 @section('js')
     @include('extras.slick-js')
     @include('extras.touchpin-js')
+    @include('extras.loader-js')
     <script>
+        $.loading.start();
         $(document).ready(function(){
-            let count = {{$product->variants->groupBy('type')->count()}};
-            $('input[type="checkbox"]').on('change', function() {
-                $(this).siblings('input[type="checkbox"]').prop('checked', false);
-            });
+            $.loading.end();
+            $('.variant').change(function(){
+                let $url = '{{route('store.product.show','product_id')}}';
+                $url = $url.replace('product_id','{{$product->id}}');
+                window.location.href = $url+'?variant='+$(this).val();
+            })
         });
     </script>
 @endsection

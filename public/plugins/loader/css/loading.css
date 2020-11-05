@@ -1,0 +1,107 @@
+.spin-spinning {
+    position: static;
+    display: inline-block;
+    opacity: 1;
+}
+.spin{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.7);
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: rgba(0,0,0,0.65);
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5;
+    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: 'tnum';
+    color: #1890ff;
+    text-align: center;
+    vertical-align: middle;
+    -webkit-transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+    transition: -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+    transition: transform .3s cubic-bezier(.78, .14, .15, .86);
+    transition: transform .3s cubic-bezier(.78, .14, .15, .86), -webkit-transform .3s cubic-bezier(.78, .14, .15, .86);
+}
+.spin-lg .spin-dot{
+    font-size: 0.8rem;
+    /*margin-bottom: 30%;*/
+}
+.spin-dot-spin {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-animation: antRotate 1.2s infinite linear;
+    animation: antRotate 1.2s infinite linear;
+}
+.spin-dot {
+    position: relative;
+    display: inline-block;
+    font-size: 20px;
+    width: 1em;
+    height: 1em;
+}
+.spin-lg .spin-dot i {
+    width: 0.35rem;
+    height: 0.35rem;
+}
+.spin-dot-item:nth-child(1) {
+    top: 0;
+    left: 0;
+    opacity: 0.47;
+}
+.spin-dot-item:nth-child(2) {
+    top: 0;
+    right: 0;
+    opacity: 0.84;
+    -webkit-animation-delay: .4s;
+    animation-delay: .4s;
+}
+.spin-dot-item:nth-child(3) {
+    right: 0;
+    bottom: 0;
+    opacity: 0.55;
+    -webkit-animation-delay: .8s;
+    animation-delay: .8s;
+}
+.spin-dot-item:nth-child(4) {
+    bottom: 0;
+    left: 0;
+    opacity: 0.7;
+    -webkit-animation-delay: 1.2s;
+    animation-delay: 1.2s;
+}
+.spin-dot-item {
+    position: absolute;
+    display: block;
+    width: 9px;
+    height: 9px;
+    background-color: #1890ff;
+    border-radius: 100%;
+    -webkit-transform: scale(.75);
+    -ms-transform: scale(.75);
+    transform: scale(.75);
+    -webkit-transform-origin: 50% 50%;
+    -ms-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    opacity: .3;
+    -webkit-animation: antSpinMove 1s infinite linear alternate;
+    animation: antSpinMove 1s infinite linear alternate;
+}
+.tips{
+    font-size: 0.3rem;
+    margin-bottom: 30%;
+    margin-top: 0.5rem;
+}
+@keyframes antRotate{to{-webkit-transform:rotate(405deg)}}

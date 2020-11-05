@@ -57,10 +57,8 @@
                                                                 </td>
                                                                 <td>
                                                                     {{$item->product()->title}}
-                                                                    @if(count($item->variants())>0)
-                                                                        @foreach($item->variants() as $v)
-                                                                            <span class="badge-pill badge-info-inverse">{{$v->value.' '.$v->unit}}</span>
-                                                                        @endforeach
+                                                                    @if($item->variant() != null)
+                                                                        <span class="badge-pill badge-info-inverse">{{$item->variant()->value.' '.$item->variant()->unit}}</span>
                                                                     @endif
                                                                 </td>
                                                                 <td>
@@ -68,7 +66,7 @@
                                                                         <input type="number" class="form-control cart-qty qty" name="cartQty1" id="cartQty1" value="{{$item->getQty()}}" data-id="{{$item->product()->id}}" min="1">
                                                                     </div>
                                                                 </td>
-                                                                <td>{{$item->product()->price}}</td>
+                                                                <td>{{$item->getPrice()}}</td>
                                                                 <td class="text-right amount" id="{{$item->product()->id}}">{{$item->amount()}}</td>
                                                             </tr>
                                                         @endforeach

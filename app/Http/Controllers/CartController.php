@@ -60,12 +60,13 @@ class CartController extends Controller
     public function add_product(Request $request, $id)
     {
         $product = Product::find($id);
-        $variants = [];
+        $variant = null;
         if($product->variants()->exists()){
-            if($request->input('variants') == null){
+            if($request->input('variant') == null){
                 return redirect()->back()->with('error','Please select a variant type!');
             }
-            $variants = Variant::whereIn('id',$request->input('variants'))->get();
+            $variant = $product->variants()->where('id',$request->input('variant'))->first();
+            //dd($variant);
         }
 
         $quantity = $request->input('quantity');
@@ -78,7 +79,19 @@ class CartController extends Controller
         }else{
             $cart= new Cart;
         }
-        $item = new Item($product,$variants);
+        $item = new Item($product,$variant);
+        if($variant->pivot->price != null){
+            $item->setPrice($variant->pivot->price);
+        }else{
+            $item->setPrice($product->price);
+        }
+        if($variant->pivot->discounted_price != null){
+            $item->setDiscountedPrice($variant->pivot->discounted_price);
+        }else{
+            if($product->discounted_price != null){
+                $item->setPrice($product->discounted_price);
+            }
+        }
         $added = $cart->add_item($item,$request->quantity);
 
         $request->session()->put('cart',$cart);

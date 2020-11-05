@@ -96,20 +96,55 @@ class StoreController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Request $request
+     * @param int $id
      * @return view
      */
-    public function product($id)
+    public function product(Request $request, $id)
     {
         if(is_numeric($id)){
-            $product = Product::find($id);
-            $products = Product::where('id','!=',$product->id)->limit(4)->get();
-
+            $product = Product::with('variants')->where('id',$id)->first();
             if($product == null){
                 return redirect()->route('store.index')->with('error','Product Does not exist..');
             }
+
+            $products = Product::where('id','!=',$product->id)->limit(4)->get();
+            if($product->variants->count() > 0){
+                if($request->has('variant')){
+                    $variant = $product->variants->where('id',$request->variant)->first();
+                    if($variant != null){
+                        $price = $variant->pivot->price;
+                        if($variant->pivot->discounted_price != null){
+                            $discounted_price = $variant->pivot->discounted_price;
+                        }else{
+                            $discounted_price = 0;
+                        }
+                    }else{
+                        return redirect()->route('store.index')->with('error','wrong request');
+                    }
+                }else{
+                    $price = $product->variants->first()->pivot->price;
+                    //dd($price);
+                    if($product->variants->first()->pivot->discounted_price != null){
+                        $discounted_price = $product->variants->first()->pivot->discounted_price;
+                    }else{
+                        $discounted_price = 0;
+                    }
+                }
+            }else{
+                $price = $product->price;
+                if($product->discounted_price != null){
+                    $discounted_price = $product->discounted_price;
+                }else{
+                    $discounted_price = 0;
+                }
+            }
+
+
             return view('store.product_show')->with([
                 'product' => $product,
+                'price' => $price,
+                'discounted_price' => $discounted_price,
                 'products' => $products
 
             ]);

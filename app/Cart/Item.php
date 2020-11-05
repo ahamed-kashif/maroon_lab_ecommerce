@@ -3,23 +3,42 @@
 namespace App\Cart;
 
 use App\Models\Product;
+use App\Models\Variant;
 use Illuminate\Support\Facades\Redirect;
 
 
 class Item
 {
     private $product;
-    private $variants = [];
+    private $variant = null;
     private $quantity = 0;
+    private $price = 0;
+    private $discountedPrice = 0;
 
-    public function __construct(Product $product, $variants){
+    public function __construct(Product $product, Variant $variant){
         try{
             $this->product = $product;
-            $this->variants = $variants;
+            $this->variant = $variant;
         }catch(\Exception $e){
             $this->product = null;
-            $this->variants = [];
+            $this->variant = null;
         }
+    }
+
+    public function setPrice($price){
+        $this->price = $price;
+    }
+
+    public function setDiscountedPrice($dPrice){
+        $this->discountedPrice = $dPrice;
+    }
+
+    public function getPrice(){
+        return $this->price;
+    }
+
+    public function getDiscountedPrice(){
+        return $this->discountedPrice;
     }
 
     /**
@@ -36,8 +55,8 @@ class Item
      *
      * @return array
      */
-    public function variants(){
-        return $this->variants;
+    public function variant(){
+        return $this->variant;
     }
 
     /**
@@ -47,10 +66,10 @@ class Item
      */
     public function amount(){
         $amount = 0;
-        if($this->product->discounted_price != null){
-            $amount = $this->product->discounted_price * $this->quantity;
+        if($this->discountedPrice != 0){
+            $amount = $this->discountedPrice * $this->quantity;
         }else{
-            $amount = $this->product->price * $this->quantity;
+            $amount = $this->price * $this->quantity;
         }
 
         return $amount;
@@ -63,7 +82,7 @@ class Item
      */
     public function total(){
         $total = 0;
-        $total = $this->product->price * $this->quantity;
+        $total = $this->price * $this->quantity;
 
         return $total;
     }
