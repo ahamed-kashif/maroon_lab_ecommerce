@@ -173,6 +173,91 @@
                     </div>
                     <div class="card m-b-30">
                         <div class="card-header">
+                            <h5 class="card-title">Variants</h5>
+                        </div>
+                        <div class="card-body variant-container pl-4 ml-4">
+                        <div class="form-group row variant">
+                            @if($product->variants()->count() > 0)
+                                <table id="variant">
+                                <thead>
+                                <tr>
+                                    <th>Type</th>
+                                    <th>Price</th>
+                                    <th>Discounted price</th>
+                                    <th>Action</th>
+                                </tr>
+                                </thead>
+                                <tbody class="variant-body">
+                                @foreach($product->variants()->get() as $variant)
+                                    <tr class="variant-row" id = {{$loop->first ? '1' : ''}}>
+                                        <td>
+                                            <select name="variants[]" class="form-control">
+                                                <option value="">select one</option>
+                                                @foreach($variants->groupBy('type') as $key => $v)
+                                                    <optgroup label="{{$key}}">
+                                                        @foreach($v as $item)
+                                                            <option value="{{$item->id}}" {{$item->id == $variant->id ? 'selected' : ''}}>{{$item->value.'  '.$item->unit}}</option>
+                                                        @endforeach
+                                                    </optgroup>
+                                                @endforeach
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="number" name="variant_price[]" class="form-control" value="{{$variant->pivot->price}}">
+                                        </td>
+                                        <td>
+                                            <input type="number" name="variant_discounted_price[]" class="form-control" value="{{$variant->pivot->discounted_price}}">
+                                        </td>
+                                        <td>
+                                            <a href="javaScript:void(0);" class="btn btn-outline-danger remove"><i class="feather icon-minus"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
+                            @else
+                                <table id="variant">
+                                    <thead>
+                                    <tr>
+                                        <th>Type</th>
+                                        <th>Price</th>
+                                        <th>Discounted price</th>
+                                        <th>Action</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="variant-body">
+                                        <tr class="variant-row-1">
+                                            <td>
+                                                <select name="variants[]" class="form-control">
+                                                    <option value="">select one</option>
+                                                    @foreach($variants->groupBy('type') as $key => $v)
+                                                        <optgroup label="{{$key}}">
+                                                            @foreach($v as $item)
+                                                                <option value="{{$item->id}}">{{$item->value}} {{$item->unit}}</option>
+                                                            @endforeach
+                                                        </optgroup>
+                                                    @endforeach
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <input type="number" name="variant_price[]" class="form-control" value="">
+                                            </td>
+                                            <td>
+                                                <input type="number" name="variant_discounted_price[]" class="form-control" value="">
+                                            </td>
+                                            <td>
+                                                <a href="javaScript:void(0);" class="btn btn-outline-danger remove"><i class="feather icon-minus"></i></a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            @endif
+                        </div>
+                        <a href="javaScript:void(0)" onclick="addrow();" class="btn btn-outline-primary"><i class="feather icon-plus font-15"></i></a>
+                    </div>
+                    </div>
+                    <div class="card m-b-30">
+                        <div class="card-header">
                             <h6 class="card-subtitle">If you are satisfied hit the update button..</h6>
                             <button class="btn btn-outline-warning btn-lg btn-block" type="submit"><i class="feather icon-upload mr-2"></i>Update</button>
                         </div>
@@ -205,7 +290,7 @@
                         <div class="card-body">
                             @if($subcategories->count() != 0)
                                 <select class="select2-multi-select form-control" name="sub_category_id">
-                                    <option>select one.</option>
+                                    <option value="">select one.</option>
                                     @foreach($subcategories as $subcategory)
                                         <option value="{{$subcategory->id}}" {{$product->sub_category_id == $subcategory->id ? 'selected' : ''}}>{{$subcategory->title}}</option>
                                     @endforeach
@@ -215,22 +300,22 @@
                             @endif
                         </div>
                     </div>
-                    <div class="card m-b-30">
-                        <div class="card-header">
-                            <h5 class="card-title">Variant</h5>
-                        </div>
-                        <div class="card-body pt-3">
-                            <select class="select2-multi-select form-control" name="variants[]" multiple="multiple">
-                                @foreach($variants->groupBy('type') as $key => $variant)
-                                    <optgroup label="{{$key}}">
-                                        @foreach($variant as $item)
-                                            <option value="{{$item->id}}" {{$product->variants->contains($item) ? 'selected' : ''}}>{{$item->value.'  '.$item->unit}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+{{--                    <div class="card m-b-30">--}}
+{{--                        <div class="card-header">--}}
+{{--                            <h5 class="card-title">Variant</h5>--}}
+{{--                        </div>--}}
+{{--                        <div class="card-body pt-3">--}}
+{{--                            <select class="select2-multi-select form-control" name="variants[]" multiple="multiple">--}}
+{{--                                @foreach($variants->groupBy('type') as $key => $variant)--}}
+{{--                                    <optgroup label="{{$key}}">--}}
+{{--                                        @foreach($variant as $item)--}}
+{{--                                            <option value="{{$item->id}}" {{$product->variants->contains($item) ? 'selected' : ''}}>{{$item->value.'  '.$item->unit}}</option>--}}
+{{--                                        @endforeach--}}
+{{--                                    </optgroup>--}}
+{{--                                @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
                 </div>
                 <!-- End col -->
             </div>
@@ -323,7 +408,22 @@
                     parent.remove();
                 });
              });
+            $('#variant').on('click','.remove',function(){
+                if($(this).closest('tr').attr('id') === '1'){
+                    alert('you can\'t remove this');
+                    return;
+                }
+                $(this).closest("tr").remove();
+            });
         });
+        function addrow() {
+            let $row = $('.variant-row').clone();
+            $row.removeClass('variant-row')
+                .removeAttr('id');
+            let $body = $('.variant-body');
+            $row.appendTo($body);
+        }
+
     </script>
 @endsection
 

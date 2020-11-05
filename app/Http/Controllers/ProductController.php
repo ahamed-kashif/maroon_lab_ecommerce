@@ -65,12 +65,15 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->input('variant_price'));
         $request->validate([
             'title' => 'required|string|max:20',
             'description' => 'required|string',
             'price' => 'required|numeric',
             'salePrice' => 'nullable|numeric',
             'variants.*' => 'nullable',
+            'variant_price.*' => 'nullable|numeric',
+            'variant_discounted_price.*' => 'nullable|numeric',
             'images.*' => 'nullable|image|dimensions:ratio=12/13,min_width=600,min_height=650,max_width=1200,max_height=1300'
         ]);
         $product = new Product;
@@ -118,7 +121,9 @@ class ProductController extends Controller
             }
             if($request->has('variants')){
                 $variants = Variant::whereIn('id',$request->input('variants'))->get();
-                $product->variants()->attach($variants->pluck('id'));
+                foreach ($variants as $key => $variant){
+                    $product->variants()->attach($variant, ['price' => $request->input('variant_price')[$key],'discounted_price' => $request->input('variant_discounted_price')[$key]]);
+                }
             }
             return redirect()->back()->with('success','stored successfully');
         }catch (\Exception $e){
@@ -260,7 +265,13 @@ class ProductController extends Controller
                         }
                     }
                     if($request->has('variants')){
-                        $product->variants()->sync($request->input('variants'));
+                        if($request->has('variants')){
+                            $variants = Variant::whereIn('id',$request->input('variants'))->get();
+                            $product->variants()->detach();
+                            foreach ($variants as $key => $variant){
+                                $product->variants()->attach($variant, ['price' => $request->input('variant_price')[$key],'discounted_price' => $request->input('variant_discounted_price')[$key]]);
+                            }
+                        }
                     }else{
                         $product->variants()->detach();
                     }

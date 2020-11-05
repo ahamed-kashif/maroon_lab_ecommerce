@@ -22,7 +22,7 @@ class Product extends Model
         return $this->morphToMany(Image::class,'imageable');
     }
     public function variants(){
-        return $this->morphToMany(Variant::class,'variantable', 'variantables');
+        return $this->morphToMany(Variant::class, 'variantable','variantables','variantable_id')->withPivot('price','discounted_price')->withTimestamps();
     }
     public function scopeActive($query){
         return $query->where('is_active',1);
