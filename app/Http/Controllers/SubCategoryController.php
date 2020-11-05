@@ -21,7 +21,7 @@ class SubCategoryController extends Controller
             if($request->has('active')){
                 $SubCategories = $SubCategories->where('is_active',1);
             }
-            return view('subcategory.index')->with([
+            return view('SubCategory.index')->with([
                 'subcategories' => $SubCategories
             ]);
         }else{
@@ -34,7 +34,7 @@ class SubCategoryController extends Controller
     {
         if(auth()->user()->can('create subcategory')){
             $categories = Category::all();
-            return view('subcategory.create')->with([
+            return view('SubCategory.create')->with([
                 'categories' => $categories
             ]);
         }else{
@@ -66,7 +66,7 @@ class SubCategoryController extends Controller
 
         try{
             $subcategory->save();
-            return redirect(route('subcategory.index'))->with('success','successfully stored');
+            return redirect(route('SubCategory.index'))->with('success','successfully stored');
         }catch (\Exception $e){
             //dd($e);
             return redirect()->back()->withErrors($e->getMessage());
@@ -82,7 +82,7 @@ class SubCategoryController extends Controller
                 if($SubCategory == null){
                     return redirect()->back()->with('error','SubCategory not exists!');
                 }
-                return view('subcategory.show')->with([
+                return view('SubCategory.show')->with([
                     'subcategory' => $SubCategory
                 ]);
             }else{
@@ -101,7 +101,7 @@ class SubCategoryController extends Controller
                     return redirect()->back()->with('error','Subcategory not exists!');
                 }
                 $categories = Category::all();
-                return view('subcategory.edit')->with([
+                return view('SubCategory.edit')->with([
                     'subcategory' => $SubCategory,
                     'categories' => $categories
                 ]);
@@ -122,7 +122,7 @@ class SubCategoryController extends Controller
                 }
                 try{
                     $subcategory->delete();
-                    return redirect(route('subcategory.index'))->with('success','successfully deleted!');
+                    return redirect(route('SubCategory.index'))->with('success','successfully deleted!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }
@@ -156,7 +156,7 @@ class SubCategoryController extends Controller
 
                 try{
                     $subcategory->save();
-                    return redirect(route('subcategory.index'))->with('success','successfully updated!');
+                    return redirect(route('SubCategory.index'))->with('success','successfully updated!');
                 }catch (\Exception $e){
                     return redirect()->back()->withErrors($e->getMessage());
                 }

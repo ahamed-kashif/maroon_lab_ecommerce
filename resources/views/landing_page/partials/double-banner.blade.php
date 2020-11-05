@@ -5,7 +5,7 @@
                 <!--=======  single banner  =======-->
                 <div class="single-banner">
                     <a href="#">
-                        <img src="{{asset('landing_page/images/banners/fb.gif')}}" class="img-fluid" alt="">
+                        <img src="{{asset('landing_page/images/banners/banner2.jpg')}}" class="img-fluid" alt="">
                     </a>
                 </div>
                 <!--=======  End of single banner  =======-->
@@ -14,7 +14,7 @@
                 <!--=======  single banner  =======-->
                 <div class="single-banner">
                     <a href="#">
-                        <img src="{{asset('landing_page/images/banners/whatsapp.jpg')}}" class="img-fluid" alt="">
+                        <img src="{{asset('landing_page/images/banners/banner1.jpg')}}" class="img-fluid" alt="">
                     </a>
                 </div>
                 <!--=======  End of single banner  =======-->

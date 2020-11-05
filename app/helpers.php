@@ -29,3 +29,9 @@ if (!function_exists('featured_products')) {
         return App\Models\Product::with('categories')->active()->where('is_featured','=',1)->get();
     }
 }
+if (!function_exists('all_products')) {
+    function all_products()
+    {
+        return App\Models\Product::with('categories')->active()->get();
+    }
+}

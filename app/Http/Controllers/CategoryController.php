@@ -218,6 +218,15 @@ class CategoryController extends Controller
                     return redirect()->back()->with('error','category not exists!');
                 }
                 try{
+                    if($category->images()->count() > 0){
+                        $id = $category->images()->first()->id;
+                        $image = Image::findorfail($id);
+                        if(File::exists(public_path($image->url))){
+                            File::delete(public_path($image->url));
+                        }
+                        $category->images()->sync($image);
+                        $image->delete();
+                    }
                     $category->delete();
                     return redirect(route('category.index'))->with('success','successfully deleted!');
                 }catch (\Exception $e){

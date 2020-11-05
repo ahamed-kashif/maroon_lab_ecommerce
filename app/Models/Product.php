@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Product extends Model
 {
+    protected $with = ['images'];
+
     public function categories(){
         return $this->belongsToMany(Category::class,'product_category','product_id','category_id');
     }

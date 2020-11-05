@@ -28,6 +28,14 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="javaScript:void(0);">
+                        <img src="{{asset('images/svg-icon/ecommerce.svg')}}" class="img-fluid" alt="dashboard"><span>Cart</span><i class="feather icon-chevron-right pull-right"></i>
+                    </a>
+                    <ul class="vertical-submenu">
+                        <li><a href="{{route('cart.index')}}">@guest my bag!@else <span class="text-primary">{{auth()->user()->name.'`s'}}</span> bag! <span class="badge badge-pill badge-primary">{{session()->has('cart') ? (count(session()->get('cart')->items())):''}}</span>@endguest </a></li>
+                    </ul>
+                </li>
                 @foreach(categories() as $item)
                     @if($item->subcategories->count() >0)
                         <li>
@@ -35,11 +43,21 @@
                                 <img src="{{asset('images/svg-icon/dashboard.svg')}}" class="img-fluid" alt="dashboard"><span>{{$item->title}}</span><i class="feather icon-chevron-right pull-right"></i>
                             </a>
                             <ul class="vertical-submenu">
+                                <li><a href="{{route('store.category',$item->id)}}">{{$item->title}}</a></li>
                                 @foreach($item->subcategories as $i)
                                     @if($i->is_active == 1)
                                         <li><a href="{{route('store.subcategory',$i->id)}}">{{$i->title}}</a></li>
                                     @endif
                                 @endforeach
+                            </ul>
+                        </li>
+                    @else
+                        <li>
+                            <a href="javaScript:void(0);">
+                                <img src="{{asset('images/svg-icon/dashboard.svg')}}" class="img-fluid" alt="dashboard"><span>{{$item->title}}</span><i class="feather icon-chevron-right pull-right"></i>
+                            </a>
+                            <ul class="vertical-submenu">
+                                <li><a href="{{route('store.category',$item->id)}}">{{$item->title}}</a></li>
                             </ul>
                         </li>
                     @endif
@@ -99,7 +117,7 @@
                         </a>
                         <ul class="vertical-submenu">
                             <li><a href="{{route('customer.order.index', auth()->user()->id)}}">Orders</a></li>
-                            <li><a href="{{route('cart.index')}}">Cart</a></li>
+                            <li><a href="javaScript:void(0);" onclick="alert('Coming Soon!\nThank you for your interest..')">Favorites</a></li>
                         </ul>
                     </li>
                 @endauth

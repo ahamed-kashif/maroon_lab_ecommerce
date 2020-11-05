@@ -103,7 +103,8 @@
                             searchBox.fadeIn();
                             let list = $('<ul></ul>');
                             list.addClass('list-group')
-                                .attr('style', 'display: block; position: relative; z-index: 1')
+                                .addClass('mt-7')
+                                .attr('style', 'display: block; position: absolute; z-index: 1; background-color:white;')
                             for(let i=0; i<data.length;i++){
                                 let item = $('<li></li>');
                                 item.addClass('list-group-item')
