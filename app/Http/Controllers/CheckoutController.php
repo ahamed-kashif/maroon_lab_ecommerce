@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart\Item;
 use App\Events\Order\OrderCreateEvent;
 use App\Models\Order;
 use App\Models\OrderTracking;
@@ -57,7 +58,6 @@ class CheckoutController extends Controller
         ]);
 
         $cart = session()->get('cart');
-
         //one time shipping address storing
         if(!auth()->user()->has_shipping_details()){
            $shipping_details =new ShippingDetails;
@@ -99,7 +99,7 @@ class CheckoutController extends Controller
         $order = new Order;
         $numOfOrders = Order::count();
         $numOfOrders++;
-        $numOdOrders = $numOfOrders+5000;
+        $numOfOrders = $numOfOrders+5000;
         $order->code = strtoupper('OD'.$numOfOrders);
         $order->user_id = auth()->user()->id;
         $order->total = $cart->total();
@@ -116,14 +116,19 @@ class CheckoutController extends Controller
         try{
             $order->save();
             foreach ($cart->items() as $item){
-                if(count($item->variants()) > 0){
+                //dd($item->variant());
+                if($item->variant() != null){
                     $order->products()->attach($item->product(),[
-                        'variants' => $item->variants(),
-                        'quantity' => $item->getQty()
+                        'variants' => $item->variant(),
+                        'quantity' => $item->getQty(),
+                        'price' => $item->getPrice(),
+                        'discounted_price' => $item->getDiscountedPrice()
                     ]);
                 }else{
                     $order->products()->attach($item->product(),[
-                        'quantity' => $item->getQty()
+                        'quantity' => $item->getQty(),
+                        'price' => $item->getPrice(),
+                        'discounted_price' => $item->getDiscountedPrice()
                     ]);
                 }
 

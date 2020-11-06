@@ -80,25 +80,31 @@ class CartController extends Controller
             $cart= new Cart;
         }
         $item = new Item($product,$variant);
-        if($variant->pivot->price != null){
-            $item->setPrice($variant->pivot->price);
+        if($variant != null){
+            if($variant->pivot->price != null){
+                $item->setPrice($variant->pivot->price);
+            }
+            if($variant->pivot->discounted_price != null){
+                $item->setDiscountedPrice($variant->pivot->discounted_price);
+            }
         }else{
             $item->setPrice($product->price);
-        }
-        if($variant->pivot->discounted_price != null){
-            $item->setDiscountedPrice($variant->pivot->discounted_price);
-        }else{
             if($product->discounted_price != null){
                 $item->setPrice($product->discounted_price);
             }
         }
+
+
         $added = $cart->add_item($item,$request->quantity);
+
+        if(!$added){
+            return redirect()->route('store.index')->with('error','Something wrong! Try again!');
+        }
 
         $request->session()->put('cart',$cart);
         $request->session()->save();
-        if(!$added){
-            return redirect()->route('store.index')->with('error','product already added');
-        }
+        //dd($cart);
+
         return redirect()->back()->with('success','added product!');
     }
 
