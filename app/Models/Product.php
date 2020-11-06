@@ -39,7 +39,7 @@ class Product extends Model
         })->where('product.id','!=',$this->id);
     }
     public function orders(){
-        return $this->belongsToMany(Order::class,'order_product','product_id','order_id')->withPivot('quantity');
+        return $this->belongsToMany(Order::class,'order_product','product_id','order_id')->withPivot('quantity','variants', 'price', 'discounted_price');
     }
     public function variant_price($id){
         return $this->variants()->where('id',$id)->first()->price;

@@ -15,7 +15,7 @@ class Item
     private $price = 0;
     private $discountedPrice = 0;
 
-    public function __construct(Product $product, Variant $variant){
+    public function __construct(Product $product,$variant = null){
         try{
             $this->product = $product;
             $this->variant = $variant;
