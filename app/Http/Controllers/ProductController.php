@@ -227,16 +227,10 @@ class ProductController extends Controller
                 $product->title = $request->input('title');
                 $product->short_description = $request->input('short_description');
                 $product->description = $request->input('description');
-                if($request->has('variant_price') && $request->input('variant_price')[0] == $request->input('price')){
-                    $product->price = $request->input('price');
-                }else{
-                    return redirect()->back()->with('error','set products price as variants first price');
-                }
-                if($request->has('variant_discounted_price') && $request->input('variant_discounted_price')[0] == $request->input('sale_price')){
-                    $product->discounted_price = $request->input('sale_price');
-                }else{
-                    return redirect()->back()->with('error','set products discounted price as variants first price');
-                }
+                $product->price = $request->input('price');
+                $product->discounted_price = $request->input('sale_price');
+
+
 
                 if($request->has('sku')){
                     $product->sku = $request->input('sku');

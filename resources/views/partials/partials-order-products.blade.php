@@ -13,6 +13,7 @@
                         <th scope="col">variants</th>
                         <th scope="col">Qty</th>
                         <th scope="col">Price(<small>৳</small>)</th>
+                        <th scope="col">Discount(<small>৳</small>)</th>
                         <th scope="col" class="text-right">Total(<small>৳</small>)</th>
                     </tr>
                 </thead>
@@ -29,17 +30,17 @@
                             </td>
                             <td>{{$product->title}}</td>
                             <td>
-                                @if(count($product->variants) > 0)
-                                    @foreach($product->variants as $variant)
-                                        <small>{{$variant->value}} {{$variant->unit}}</small>
-                                    @endforeach
+                                @if($product->pivot->variants != null)
+{{--                                    {{dd(json_decode($product->pivot->variants))}}--}}
+                                    <small>{{json_decode($product->pivot->variants)->value}} {{json_decode($product->pivot->variants)->unit}}</small>
                                 @else
                                     NILL
                                 @endif
                             </td>
                             <td>{{$product->pivot->quantity}}</td>
-                            <td>{{$product->price}}</td>
-                            <td class="text-right">{{$product->price*$product->pivot->quantity}}</td>
+                            <td>{{$product->pivot->price}}</td>
+                            <td>{{$product->pivot->discounted_price}}</td>
+                            <td class="text-right">{{$product->pivot->price*$product->pivot->quantity}}</td>
                         </tr>
                     @endforeach
                 </tbody>

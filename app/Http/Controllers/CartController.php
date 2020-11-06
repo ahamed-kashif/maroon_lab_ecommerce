@@ -90,7 +90,7 @@ class CartController extends Controller
         }else{
             $item->setPrice($product->price);
             if($product->discounted_price != null){
-                $item->setPrice($product->discounted_price);
+                $item->setDiscountedPrice($product->discounted_price);
             }
         }
 
