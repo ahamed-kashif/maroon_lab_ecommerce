@@ -17,7 +17,7 @@
                                     </div>
                                     <h4>{{config('app.name')}}</h4>
                                     <p>Get fresh fish and meat at your doorstep</p>
-                                    <p class="mb-0">25/5C aziz moholla Mohammadpur dhaka 1207 1207 Dhaka, Dhaka Division, Bangladesh</p>
+                                    <p class="mb-0">25/5C, Aziz Moholla, Mohammadpur, Dhaka-1207, Dhaka Division, Bangladesh</p>
                                 </div>
                                 <div class="col-12 col-md-5 col-lg-5">
                                     <div class="invoice-name">
@@ -76,35 +76,36 @@
                                         <th scope="col">Variants</th>
                                         <th scope="col">Qty</th>
                                         <th scope="col">Price(৳)</th>
+                                        <th scope="col">Discount(<small>৳</small>)</th>
                                         <th scope="col" class="text-right">Total(৳)</th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach($order->products as $product)
-                                            <tr>
-                                                <th scope="row">{{$loop->index+1}}</th>
-                                                <td>
-                                                    @if($product->images->count() > 0)
-                                                        <img src="{{asset($product->images->first()->url) }}" class="img-fluid" width="35" alt="product">
-                                                    @else
-                                                        <img src="{{asset('images/ecommerce/no_image.png') }}" class="img-fluid" width="35" alt="product">
-                                                    @endif
-                                                </td>
-                                                <td>{{$product->title}}</td>
-                                                <td>
-                                                    @if(count($product->variants) > 0)
-                                                        @foreach($product->variants as $variant)
-                                                            <small>{{$variant->value}} {{$variant->unit}}</small>
-                                                        @endforeach
-                                                    @else
-                                                        NILL
-                                                    @endif
-                                                </td>
-                                                <td>{{$product->pivot->quantity}}</td>
-                                                <td>{{$product->price}}</td>
-                                                <td class="text-right">{{$product->price*$product->pivot->quantity}}</td>
-                                            </tr>
-                                        @endforeach
+                                    @foreach($order->products as $product)
+                                        <tr>
+                                            <th scope="row">{{$loop->index+1}}</th>
+                                            <td>
+                                                @if($product->images->count() > 0)
+                                                    <img src="{{asset($product->images->first()->url) }}" class="img-fluid" width="35" alt="product">
+                                                @else
+                                                    <img src="{{asset('images/ecommerce/no_image.png') }}" class="img-fluid" width="35" alt="product">
+                                                @endif
+                                            </td>
+                                            <td>{{$product->title}}</td>
+                                            <td>
+                                                @if($product->pivot->variants != null)
+                                                    {{--                                    {{dd(json_decode($product->pivot->variants))}}--}}
+                                                    <small>{{json_decode($product->pivot->variants)->value}} {{json_decode($product->pivot->variants)->unit}}</small>
+                                                @else
+                                                    NILL
+                                                @endif
+                                            </td>
+                                            <td>{{$product->pivot->quantity}}</td>
+                                            <td>{{$product->pivot->price}}</td>
+                                            <td>{{$product->pivot->discounted_price}}</td>
+                                            <td class="text-right">{{$product->pivot->price*$product->pivot->quantity}}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -166,7 +167,6 @@
                                     <div class="invoice-meta-box text-right">
                                         <h6 class="mb-0">Authorized Signatory</h6>
                                         <img src="{{asset('images/general/signature.svg')}}" class="img-fluid my-3" alt="signature">
-                                        <p class="mb-0">Manik</p>
                                     </div>
                                 </div>
                             </div>
