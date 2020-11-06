@@ -75,11 +75,15 @@
                                     </div>
                                 </form>
                                 <div class="button-list">
-                                    <h6 class="mb-3">Share this product</h6>
-                                    <a href="#" class="btn btn-primary-rgba font-18"><i class="feather icon-facebook"></i></a>
-                                    <a href="#" class="btn btn-info-rgba font-18"><i class="feather icon-twitter"></i></a>
-                                    <a href="#" class="btn btn-danger-rgba font-18"><i class="feather icon-instagram"></i></a>
-                                    <a href="#" class="btn btn-warning-rgba font-18"><i class="feather icon-linkedin"></i></a>
+{{--                                    <h6 class="mb-3">Share this product</h6>--}}
+{{--                                    <a href="#" class="btn btn-primary-rgba font-18"><i class="feather icon-facebook"></i></a>--}}
+{{--                                    <a href="#" class="btn btn-info-rgba font-18"><i class="feather icon-twitter"></i></a>--}}
+{{--                                    <a href="#" class="btn btn-danger-rgba font-18"><i class="feather icon-instagram"></i></a>--}}
+{{--                                    <a href="#" class="btn btn-warning-rgba font-18"><i class="feather icon-linkedin"></i></a>--}}
+
+<!-- Go to www.addthis.com/dashboard to customize your tools -->
+    <div class="addthis_inline_share_toolbox"></div>
+
                                 </div>
                             </div>
                         </div>

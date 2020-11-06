@@ -189,7 +189,7 @@
                                 </thead>
                                 <tbody class="variant-body">
                                 @foreach($product->variants()->get() as $variant)
-                                    <tr class="variant-row" id = {{$loop->first ? '1' : ''}}>
+                                    <tr class="variant-row" {{$loop->first ? 'id = 1 ' : ''}}>
                                         <td>
                                             <select name="variants[]" class="form-control">
                                                 <option value="">select one</option>

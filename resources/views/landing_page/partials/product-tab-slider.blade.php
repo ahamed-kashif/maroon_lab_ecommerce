@@ -26,8 +26,8 @@
                                                 <!--=======  tab slider sub product  =======-->
                                                 <div class="gf-product tab-slider-sub-product">
                                                     <div class="image">
-                                                        <a href="{{route('store.product.show',featured_products()[$i]->id)}}">
-                                                            @if(featured_products()[$i]->discounted_price != null)
+                                                        <a href="{{route('store.product.show',featured_products()[$j]->id)}}">
+                                                            @if(featured_products()[$j]->discounted_price != null)
                                                                 <span class="onsale">Sale!</span>
                                                             @endif
                                                             @if(featured_products()[$j]->images()->count() != 0)
@@ -37,7 +37,7 @@
                                                             @endif
                                                         </a>
                                                         <div class="product-hover-icons">
-                                                            <a href="{{route('store.product.show',featured_products()[$i]->id)}}" data-tooltip="View"> <span class="icon_search"></span> </a>
+                                                            <a href="{{route('store.product.show',featured_products()[$j]->id)}}" data-tooltip="View"> <span class="icon_search"></span> </a>
                                                         </div>
                                                     </div>
                                                     <div class="product-content">
