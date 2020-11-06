@@ -4,7 +4,7 @@
 Your order <b>#{{strtoupper($order->code)}}</b> has been {{$order->status}}.
 
 Click this button to see this order
-@component('mail::button', ['url' => ''])
+@component('mail::button', ['url' => route('order.customer.show',$order->id)])
 Order
 @endcomponent
 
