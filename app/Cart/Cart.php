@@ -36,11 +36,6 @@ class Cart
     public function add_item(Item $item, $quantity)
     {
         try{
-            foreach ($this->items as $i){
-                if($i->product()->id == $item->product()->id){
-                    return false;
-                }
-            }
             $item->setQty($quantity);
             array_push($this->items, $item);
             return true;
