@@ -5,10 +5,10 @@
     Version: 1.0
 
 -----------------------------------------------------------------------------------
-    
+
     CSS INDEX
     ===================
-	
+
     01. Theme default CSS
     02. Header
         02.1 Header top
@@ -294,28 +294,7 @@ ul {
       transition: 0.3s; }
 
 /*----------  scroll to top  ----------*/
-/* scroll to top */
-a.scroll-top {
-  background: #666;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-  line-height: 40px;
-  display: none;
-  text-align: center;
-  color: #fff;
-  font-family: 'FontAwesome';
-  position: fixed;
-  right: 25px;
-  bottom: 25px;
-  z-index: 50000; }
-  a.scroll-top:after {
-    content: "\f077";
-    display: inline;
-    font-size: 20px; }
-  a.scroll-top:hover {
-    background-color: #0A7BF6;
-    color: #ffffff; }
+
 
 /*----------  breadcrumb  ----------*/
 .breadcrumb-area .breadcrumb-container {

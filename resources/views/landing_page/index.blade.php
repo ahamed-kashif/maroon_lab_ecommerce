@@ -12,6 +12,7 @@
     ============================================ -->
     <!-- Bootstrap CSS -->
     <link href="{{asset('landing_page/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{asset('/css/cart.css')}}" rel="stylesheet">
 
     <!-- FontAwesome CSS -->
     <link href="{{asset('landing_page/css/font-awesome.min.css')}}" rel="stylesheet">
@@ -218,9 +219,8 @@
 <!--=====  End of Quick view modal  ======-->
 
 <!-- scroll to top  -->
-<a href="#" class="scroll-top"></a>
+@include('partials.floating-cart')
 <!-- end of scroll to top -->
-
 <!-- JS
 ============================================ -->
 <!-- jQuery JS -->

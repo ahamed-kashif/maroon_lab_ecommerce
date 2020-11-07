@@ -22,7 +22,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    <link href="{{asset('/css/cart.css')}}" rel="stylesheet">
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <!-- Switchery css -->
@@ -69,7 +69,7 @@
             <!-- End Rightbar -->
         </div>
     </div>
-
+    @include('partials.floating-cart')
     <!-- Start js -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/popper.min.js')}}"></script>

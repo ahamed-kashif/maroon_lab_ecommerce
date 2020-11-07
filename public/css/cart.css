@@ -1,0 +1,27 @@
+/* scroll to top */
+a.scroll-top {
+    background: #0b52e4;
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    line-height: 40px;
+    display: block;
+    text-align: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 2px 2px 5px rgba(0,0,0,0.25);
+    color: #fff;
+    font-family: 'FontAwesome';
+    position: fixed;
+    right: 29px;
+    bottom: 92px;
+    z-index: 50000;
+    transition: background 0.50s;
+}
+a.scroll-top:after {
+    content: "\f291";
+    display: inline;
+    font-size: 30px; }
+a.scroll-top:hover {
+    background-color: #f5f5fa;
+    color: #0b52e4; }

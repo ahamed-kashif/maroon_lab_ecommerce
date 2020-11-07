@@ -3,7 +3,7 @@
 
 You Order <b>#{{$order->code}}</b> is <b>{{$order->transaction->status}}</b> with transaction code <b>{{$order->transaction->code}}</b>
 
-@component('mail::button', ['url' => route('order.customer.show',$order->id)])
+@component('mail::button', ['url' => route('customer.order.show',$order->id)])
 {{strtoupper($order->code)}}
 @endcomponent
 
