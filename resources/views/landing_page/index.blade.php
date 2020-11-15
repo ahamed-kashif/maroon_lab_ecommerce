@@ -219,7 +219,9 @@
 <!--=====  End of Quick view modal  ======-->
 
 <!-- scroll to top  -->
-@include('partials.floating-cart')
+@if(session()->has('cart'))
+    @include('partials.floating-cart')
+@endif
 <!-- end of scroll to top -->
 <!-- JS
 ============================================ -->

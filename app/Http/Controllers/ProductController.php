@@ -120,9 +120,9 @@ class ProductController extends Controller
                 }
             }
             if($request->has('variants')){
-                $variants = Variant::whereIn('id',$request->input('variants'))->get();
-                foreach ($variants as $key => $variant){
-                    $product->variants()->attach($variant, ['price' => $request->input('variant_price')[$key],'discounted_price' => $request->input('variant_discounted_price')[$key]]);
+                foreach ($request->input('variants') as $key => $variant){
+                    $v = Variant::where('id',$variant)->first();
+                    $product->variants()->attach($v, ['price' => $request->input('variant_price')[$key],'discounted_price' => $request->input('variant_discounted_price')[$key]]);
                 }
             }
             return redirect()->back()->with('success','stored successfully');
@@ -267,10 +267,10 @@ class ProductController extends Controller
                     }
                     if($request->has('variants')){
                         if($request->has('variants')){
-                            $variants = Variant::whereIn('id',$request->input('variants'))->get();
                             $product->variants()->detach();
-                            foreach ($variants as $key => $variant){
-                                $product->variants()->attach($variant, ['price' => $request->input('variant_price')[$key],'discounted_price' => $request->input('variant_discounted_price')[$key]]);
+                            foreach ($request->input('variants') as $key => $variant){
+                                $v = Variant::where('id',$variant)->first();
+                                $product->variants()->attach($v, ['price' => $request->input('variant_price')[$key],'discounted_price' => $request->input('variant_discounted_price')[$key]]);
                             }
                         }
                     }else{

@@ -28,7 +28,7 @@ class OrderController extends Controller
     public function index(Request $request)
     {
         if(auth()->user()->can('index order')){
-            $orders = Order::all();
+            $orders = Order::orderBy('updated_at','desc')->get();
             if($request->has('pending')){
                 $orders = $orders->where('status','pending');
             }
@@ -63,6 +63,7 @@ class OrderController extends Controller
                     $q->where('status','delivered');
                 })->get();
             }
+            //dd($orders);
             return view('order.admin.index')->with([
                 'orders' => $orders
             ]);

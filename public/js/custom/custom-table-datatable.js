@@ -12,8 +12,9 @@ $(document).ready(function() {
     $('#default-datatable').DataTable( {
         "order": [[ 3, "desc" ]],
         responsive: true
-    } );    
+    } );
     var table = $('#datatable-buttons').DataTable({
+        "order": [[ 1, "desc" ]],
         lengthChange: false,
         responsive: true,
         buttons: ['copy', 'csv', 'excel', 'pdf', 'print']

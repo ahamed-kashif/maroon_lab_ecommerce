@@ -103,7 +103,7 @@
                 <div class="card m-b-30">
                     <div class="card-body ecommerce-pagination">
                         <div class="row align-items-center">
-                            <div class="col-lg-12 col-xl-6">
+                            <div class="col-lg-12 col-xl-6 col-sm-6">
                                 <p>Showing {{($products->currentpage()-1)*$products->perpage()+1}} to {{$products->currentpage()*$products->perpage()}}
                                     of  {{$products->total()}}  products</p>
                             </div>

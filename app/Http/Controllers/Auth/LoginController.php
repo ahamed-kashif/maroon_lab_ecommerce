@@ -47,6 +47,7 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
     /**
      * The user has been authenticated.
      *

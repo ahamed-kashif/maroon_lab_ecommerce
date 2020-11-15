@@ -76,4 +76,5 @@
 @endsection
 @section('js')
     @include('extras.datatable-js')
+
 @endsection

@@ -55,7 +55,10 @@
                     <div class="row my-5">
                         <!-- Start col -->
                         <div class="col-md-12 col-lg-12 col-xl-12">
-                            @yield('content')
+                           <div class="mt-4">
+                               @yield('content')
+                           </div>
+
                         </div>
                         <!-- End col -->
                     </div>
@@ -69,7 +72,9 @@
             <!-- End Rightbar -->
         </div>
     </div>
-    @include('partials.floating-cart')
+    @if(session()->has('cart'))
+        @include('partials.floating-cart')
+    @endif
     <!-- Start js -->
     <script src="{{asset('js/jquery.min.js')}}"></script>
     <script src="{{asset('js/popper.min.js')}}"></script>

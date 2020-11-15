@@ -11,13 +11,11 @@
 |
 */
 
-Route::get('/', function () {
-    return view('landing_page.index');
-})->name('welcome');
+Route::get('/', 'StoreController@landing_page')->name('welcome');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->middleware('auth')->name('home');
 Route::resource('category','CategoryController');
 Route::resource('subcategory','SubCategoryController');
 Route::prefix('product')->middleware('auth')->group(function () {

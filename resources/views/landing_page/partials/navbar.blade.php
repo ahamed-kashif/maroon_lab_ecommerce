@@ -28,6 +28,14 @@
                         <a href="{{route('home')}}" class="nav-link text-primary">Hello {{auth()->user()->name}}!</a>
                     </li>
                 @endguest
+                <li class="nav-item mr-2">
+                    <div class="header-advance-search">
+                        <form action="{{route('search.index')}}">
+                            <input type="text" id="search" name="query" placeholder="Search your product" autocomplete="off">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                </li>
                 <li class="nav-item">
                     <form action="{{route('store.index')}}">
                         <button type="submit" class="btn btn-custom align-middle waves-effect waves-light btn-rounded">Shop Now</button>

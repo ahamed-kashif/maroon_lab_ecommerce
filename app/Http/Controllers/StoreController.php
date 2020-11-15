@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class StoreController extends Controller
 {
+    public function landing_page(){
+        return view('landing_page.index');
+    }
     /**
      * Display a listing of the resource.
      * @param Request $request
