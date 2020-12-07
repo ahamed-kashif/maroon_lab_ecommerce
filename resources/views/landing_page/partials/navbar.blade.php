@@ -2,7 +2,7 @@
     <div class="container">
         <!-- LOGO -->
         <a class="navbar-brand logo" href="/">
-            <img src="{{asset('logo/logo.png')}}" alt="Tidy Fish">
+            <img src="{{asset('logo/logo.png')}}" alt="Business Peak">
         </a>
 
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" style="color: #0A7BF6;font-family: 'Rubik', sans-serif; font-size: 1rem;">

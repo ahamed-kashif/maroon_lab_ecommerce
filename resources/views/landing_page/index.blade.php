@@ -121,7 +121,7 @@
                     <div class="social-media-section">
                         <h2>Follow us</h2>
                         <div class="social-links">
-                            <a class="facebook" href="https://www.facebook.com/tidyfishbangladesh" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
+                            <a class="facebook" href="https://www.facebook.com/outfitzoid/" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
                         </div>
                     </div>
 
@@ -144,7 +144,7 @@
                                     <span class="icon_pin_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Address: <span>25/5C aziz moholla Mohammadpur dhaka 1207 1207 Dhaka, Dhaka Division, Bangladesh</span></p>
+                                    <p>Address: <span>18/3 Tajmohal Road,Mohammadpur Dhaka-1207, Dhaka Division, Bangladesh</span></p>
                                 </div>
                             </div>
 
@@ -156,7 +156,7 @@
                                     <span class="icon_mobile"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Phone: <span>01408-494549</span></p>
+                                    <p>Phone: <span>01738-598748</span></p>
                                 </div>
                             </div>
 
@@ -168,7 +168,7 @@
                                     <span class="icon_mail_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Email: <span>service@tidyfish.co</span></p>
+                                    <p>Email: <span>service@bpeak.co</span></p>
                                 </div>
                             </div>
                             <!--=======  End of single contact  =======-->
@@ -198,7 +198,7 @@
                             <span class="separator">|</span>
                             <a href="{{route('page.show','t&r')}}">Term and conditions</a>
                         </p>
-                        <p class="copyright-text">&copy; 2020 <a href="/">Tidy Fish</a>. All Rights Reserved</p>
+                        <p class="copyright-text">&copy; 2020 <a href="/">Business Peak</a>. All Rights Reserved</p>
                     </div>
                     <!--=======  End of copyright text	  =======-->
                 </div>

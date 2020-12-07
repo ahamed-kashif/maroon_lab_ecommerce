@@ -14,8 +14,8 @@ class AddPriceColumnToOrderProductTable extends Migration
     public function up()
     {
         Schema::table('order_product', function (Blueprint $table) {
-            $table->float('price');
-            $table->float('discounted_price');
+            $table->float('price')->nullable();
+            $table->float('discounted_price')->nullable();
         });
     }
 
