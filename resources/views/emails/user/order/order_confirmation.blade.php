@@ -1,12 +1,12 @@
 @component('mail::message')
-# Hello {{$order->user->name}}
+# CONFIRMATION
+Dear Valued {{$order->user->name}},
 
-Your order <b>#{{strtoupper($order->code)}}</b> has been {{$order->status}}.
-
-Click this button to see this order
+Yours BluesDen order <b>#{{strtoupper($order->code)}}</b> has been {{$order->status}}.
 @component('mail::button', ['url' => route('customer.order.show',$order->id)])
-Order
+   Your Order
 @endcomponent
+For Order Query, call us
 
 Thanks,<br>
 {{ config('app.name') }}

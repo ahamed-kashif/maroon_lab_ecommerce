@@ -53,12 +53,18 @@ Route::prefix('checkout')->group(function(){
    Route::post('/','CheckoutController@store')->name('checkout.store');
    Route::get('complete','CheckoutController@complete')->middleware('order')->name('checkout.complete');
 });
+Route::get('/upload-sliders','Landing\LandingPageController@index')->name('admin.landing.slider.create');
 Route::prefix('admin')->group(function(){
    Route::get('/dashboard','Admin\HomeController@index')->name('admin.dashboard');
    Route::prefix('order')->group(function (){
      Route::get('/','Admin\OrderController@index')->middleware('auth')->name('admin.order.index');
      Route::get('/{order}','Admin\OrderController@show')->middleware('auth')->name('admin.order.show');
      Route::get('/{order}/invoice','Admin\OrderController@invoice')->middleware('auth')->name('admin.order.invoice');
+   });
+   Route::prefix('landing-page')->group(function(){
+      Route::get('upload-sliders','Landing\LandingPageController@upload_sliders')->middleware('auth')->name('admin.landing.slider.upload');
+      Route::get('sliders','Landing\LandingPageController@slider_list')->middleware('auth')->name('admin.landing.slider.index');
+      Route::delete('delete-slider/{id}','Landing\LandingPageController@destroy_slider')->middleware('auth')->name('admin.landing.slider.delete');
    });
 });
 Route::prefix('customer')->group(function(){
@@ -79,3 +85,5 @@ Route::prefix('page')->group(function(){
 });
 Route::get('oauth/{driver}', 'Auth\LoginController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
+
+

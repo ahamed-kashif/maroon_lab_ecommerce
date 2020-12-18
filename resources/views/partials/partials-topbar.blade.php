@@ -2,7 +2,7 @@
     <div class="row align-items-center">
         <div class="col-md-12">
             <div class="mobile-logobar">
-                <a href="/" class="mobile-logo"><img src="{{asset('logo/logo.png')}}" class="img-fluid" alt="logo"></a>
+                <a href="/" class="mobile-logo"><img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo"></a>
             </div>
 
             <div class="mobile-togglebar">

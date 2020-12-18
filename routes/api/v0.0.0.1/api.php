@@ -22,3 +22,7 @@ Route::middleware('auth:api')->put('admin/order/{order_id}/confirm', 'Admin\Orde
 Route::middleware('auth:api')->put('admin/order/{order_id}/shipping_status', 'Admin\OrderController@tracking')->name('admin.order.shipping.status');
 Route::middleware('auth:api')->put('admin/order/{order_id}/transaction_status', 'Admin\OrderController@transaction')->name('admin.order.payment.status');
 Route::middleware('auth:api')->delete('admin/order/{order_id}/cancel', 'Admin\OrderController@cancel')->name('admin.order.cancel');
+Route::prefix('landing-page')->group(function(){
+    Route::post('store-slider','Landing\LandingPageController@store_sliders')->name('admin.landing.slider.store');
+    Route::post('delete-slider','Landing\LandingPageController@destroy_media')->middleware('auth:api')->name('admin.dropzone.media.delete');
+});

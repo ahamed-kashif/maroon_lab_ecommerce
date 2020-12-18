@@ -17,6 +17,8 @@ class CreateTableOrderProduct extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('order_id');
             $table->unsignedBigInteger('product_id');
+            $table->float('price')->nullable();
+            $table->float('discounted_price')->nullable();
             $table->json('variants')->nullable();
             $table->integer('quantity');
             $table->timestamps();

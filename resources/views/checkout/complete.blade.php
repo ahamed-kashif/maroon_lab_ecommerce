@@ -14,7 +14,7 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-4">
                                 <div class="thankyou-content text-center my-5">
-                                    <img src="{{asset('/images/ecommerce/thankyou.svg')}}" class="img-fluid mb-5" alt="thankyou">
+{{--                                    <img src="{{asset('/images/ecommerce/thankyou.svg')}}" class="img-fluid mb-5" alt="thankyou">--}}
                                     <h2 class="text-success">Thank You !!!</h2>
                                     <p class="my-4">Your Order has been successfully placed. Your Order CODE is #{{$order->code}}</p>
                                     <div class="button-list">

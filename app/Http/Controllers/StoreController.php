@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Landing\LandingSlider;
 use App\Models\Product;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -10,7 +11,13 @@ use Illuminate\Http\Request;
 class StoreController extends Controller
 {
     public function landing_page(){
-        return view('landing_page.index');
+        $sliders = LandingSlider::all();
+        $featuredProducts = Product::with('images')->featured()->get();
+        //dd($featuredProducts);
+        return view('landing_page.index')->with([
+            'sliders' => $sliders,
+            'featuredProducts' => $featuredProducts
+        ]);
     }
     /**
      * Display a listing of the resource.

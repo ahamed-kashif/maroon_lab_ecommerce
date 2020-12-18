@@ -35,7 +35,7 @@
                                 <form method="POST" action="{{ route('login') }}">
                                     @csrf
                                     <div class="form-head">
-                                        <a href="/" class="logo"><img src="{{asset('/logo/logo.png')}}" class="img-fluid" alt="logo"></a>
+                                        <a href="/" class="logo"><img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo"></a>
                                     </div>
                                     <h4 class="text-primary my-4">Log in !</h4>
                                     <div class="form-group">

@@ -16,6 +16,8 @@ class CreateVariantableTable extends Migration
         Schema::create('variantables', function (Blueprint $table) {
             $table->unsignedBigInteger('variant_id');
             $table->unsignedBigInteger('variantable_id');
+            $table->float('price')->nullable();
+            $table->float('discounted_price')->nullable();
             $table->String('variantable_type');
             $table->timestamps();
         });

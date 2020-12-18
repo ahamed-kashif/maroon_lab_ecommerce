@@ -11,7 +11,7 @@
         <meta name="api-token" content="{{ auth()->user()->api_token }}">
     @endauth
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('landing_page/images/favicon.ico')}}">
 
     <!-- app name -->
     <title>{{ config('app.name', 'Laravel') }}</title>

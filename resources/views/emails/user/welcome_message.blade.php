@@ -1,7 +1,7 @@
 @component('mail::message')
 # Welcome
-
-Thank you {{$user->name}} for being with us! Checkout our cool virtual store...
+Dear {{$user->name}},
+Thank you for reaching here out <3
 
 @component('mail::button', ['url' => route('welcome')])
 {{config('app.name')}}

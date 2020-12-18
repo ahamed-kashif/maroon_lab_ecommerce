@@ -13,11 +13,11 @@
                             <div class="row">
                                 <div class="col-12 col-md-7 col-lg-7">
                                     <div class="invoice-logo">
-                                        <img src="{{asset('/logo/logo.png')}}" class="img-fluid" alt="invoice-logo">
+                                        <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="invoice-logo">
                                     </div>
                                     <h4>{{config('app.name')}}</h4>
-                                    <p>Get fresh fish and meat at your doorstep</p>
-                                    <p class="mb-0">25/5C, Aziz Moholla, Mohammadpur, Dhaka-1207, Dhaka Division, Bangladesh</p>
+                                    <p>In music the passions follow themselves</p>
+                                    <p class="mb-0">29/13 Taj Mahal Road, Block #C, Mohammadpur, Dhaka - 1207</p>
                                 </div>
                                 <div class="col-12 col-md-5 col-lg-5">
                                     <div class="invoice-name">
@@ -157,16 +157,17 @@
                                     <div class="invoice-meta-box">
                                         <h6 class="mb-3">Contact Us</h6>
                                         <ul class="list-unstyled">
-                                            <li><a href="/"><i class="feather icon-aperture mr-2"></i>www.tidyfish.co</a></li>
-                                            <li><a href="href = mailto: service@tidyfish.co"><i class="feather icon-mail mr-2"></i>service@tidyfish.co</a></li>
-                                            <li><a href="tel:+8801706445888"><i class="feather icon-phone mr-2"></i>+88 01706 445 888 </a></li>
+                                            <li><a href="/"><i class="feather icon-aperture mr-2"></i>www.bluesden.com.bd</a></li>
+                                            <li><a href="href = mailto:info@bluesden.com.bd"><i class="feather icon-mail mr-2"></i>info@bluesden.com.bd</a></li>
+                                            <li><a href="tel:+8801305775556"><i class="feather icon-phone mr-2"></i>+880 13 0577 5556</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                     <div class="invoice-meta-box text-right">
                                         <h6 class="mb-0">Authorized Signatory</h6>
-                                        <img src="{{asset('images/general/signature.svg')}}" class="img-fluid my-3" alt="signature">
+                                        <h6>Mahbub Alam</h6>
+{{--                                        <img src="{{asset('images/general/signature.svg')}}" class="img-fluid my-3" alt="signature">--}}
                                     </div>
                                 </div>
                             </div>
