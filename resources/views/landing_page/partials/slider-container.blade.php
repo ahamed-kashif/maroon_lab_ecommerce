@@ -4,7 +4,7 @@
         <!--=======  hero slider item  =======-->
         <div class="hero-slider-item slider-bg-3">
             <div class="slider-content mt-20">
-                <h1 class="text-light font-weight-bolder display-4 mb-100">Welcome to<span>Business Peak</span></h1>
+                <h1 class="text-dark font-weight-bolder display-4 mb-100">Welcome to<span>Business Peak</span></h1>
                 <a href="{{route('store.index')}}" class="slider-two-btn mt-20">Enjoy upto 5% discount</a>
             </div>
         </div>
@@ -12,7 +12,7 @@
         <!--=======  Hero slider item  =======-->
         <div class="hero-slider-item slider-bg-4">
             <div class="slider-content">
-                <h1 class="text-warning font-weight-bolder display-4 mb-100">Fresh & <span>Quality</span>   <span>Products</span></h1>
+                <h1 class="text-dark font-weight-bolder display-4 mb-100">Fresh & <span>Quality</span>   <span>Products</span></h1>
                 <a href="{{route('store.index')}}" class="slider-two-btn mt-20 btn-white">Enjoy upto 5% discount</a>
             </div>
         </div>

@@ -11,10 +11,10 @@
         <meta name="api-token" content="{{ auth()->user()->api_token }}">
     @endauth
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('images/faviconx.png')}}">
 
     <!-- app name -->
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Business Peak') }}</title>
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>

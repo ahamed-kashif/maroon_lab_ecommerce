@@ -29,9 +29,9 @@ class UsersTableSeeder extends Seeder
             [
                 'id' 		=> 	2,
                 'name'	=>	'Mr. Admin',
-                'email'		=>	'admin@tidyfish.co',
-                'mobile_number' => '01880156724',
-                'password'	=>	Hash::make('Marooned 01880156724')
+                'email'		=>	'admin@bpeak.co',
+                'mobile_number' => '01738598748',
+                'password'	=>	Hash::make('Marooned 01738598748')
             ]
         );
         $role = Role::create(['name' => 'super-admin']);

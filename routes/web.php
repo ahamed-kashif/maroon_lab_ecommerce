@@ -79,3 +79,6 @@ Route::prefix('page')->group(function(){
 });
 Route::get('oauth/{driver}', 'Auth\LoginController@redirectToProvider')->name('social.oauth');
 Route::get('oauth/{driver}/callback', 'Auth\LoginController@handleProviderCallback')->name('social.callback');
+Route::view('/about_us','about_us');
+Route::view('/contact','contact');
+Route::view('/faq','faq');
