@@ -11,7 +11,7 @@
         <meta name="api-token" content="{{ auth()->user()->api_token }}">
     @endauth
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="{{asset('images/faviconx.png')}}">
+    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}">
 
     <!-- app name -->
     <title>{{ config('app.name', 'Business Peak') }}</title>

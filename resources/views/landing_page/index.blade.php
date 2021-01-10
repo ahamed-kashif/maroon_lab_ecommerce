@@ -3,11 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ config('app.name', 'Business Peak') }}</title>
+    <title>{{ config('app.name', 'Bazar Shodai') }}</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Fevicon -->
-    <link rel="shortcut icon" href="{{asset('images/favicon.ico')}}">
+    <link rel="shortcut icon" href="{{asset('images/favicon.png')}}">
     <!-- CSS
     ============================================ -->
     <!-- Bootstrap CSS -->
@@ -121,7 +121,7 @@
                     <div class="social-media-section">
                         <h2>Follow us</h2>
                         <div class="social-links">
-                            <a class="facebook" href="https://www.facebook.com/outfitzoid/" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
+                            <a class="facebook" href="https://www.facebook.com/Bazarshodai22" data-tooltip="Facebook"><i class="fa fa-facebook"></i></a>
                         </div>
                     </div>
 
@@ -168,7 +168,7 @@
                                     <span class="icon_mail_alt"></span>
                                 </div>
                                 <div class="contact-info">
-                                    <p>Email: <span>service@bpeak.co</span></p>
+                                    <p>Email: <span>service@bshodai.co</span></p>
                                 </div>
                             </div>
                             <!--=======  End of single contact  =======-->
