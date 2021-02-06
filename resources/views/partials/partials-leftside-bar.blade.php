@@ -4,8 +4,11 @@
     <div class="sidebar">
         <!-- Start Logobar -->
         <div class="logobar">
-            <a href="/" class="logo logo-large"><img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo"></a>
-            <a href="/" class="logo logo-small"><img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo"></a>
+            <a href="/" class="logo logo-large">
+                Home Shop
+                {{--                <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo">--}}
+            </a>
+{{--            <a href="/" class="logo logo-small"><img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo"></a>--}}
         </div>
         <!-- End Logobar -->
         <!-- Start Navigationbar -->
@@ -13,7 +16,7 @@
             <ul class="vertical-menu">
                 <li>
                     <a href="javaScript:void(0);">
-                        <img src="{{asset('landing_page/images/icons.webp')}}" class="img-fluid" alt="dashboard"><span>Shop</span><i class="feather icon-chevron-right pull-right"></i>
+                        <img src="{{asset('images/svg-icon/basic.svg')}}" class="img-fluid" alt="dashboard"><span>Shop</span><i class="feather icon-chevron-right pull-right"></i>
                     </a>
                     <ul class="vertical-submenu">
                         <li><a href="{{route('store.index')}}">All Products</a></li>

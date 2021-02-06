@@ -11,7 +11,9 @@
 |
 */
 
-Route::get('/', 'StoreController@landing_page')->name('welcome');
+Route::get('/', function (){
+    return view('welcome');
+})->name('welcome');
 
 Auth::routes();
 
