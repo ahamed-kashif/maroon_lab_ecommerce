@@ -82,3 +82,4 @@ Route::get('oauth/{driver}/callback', 'Auth\LoginController@handleProviderCallba
 Route::view('/about_us','about_us');
 Route::view('/contact','contact');
 Route::view('/faq','faq');
+Route::view('/privacy','privacy');

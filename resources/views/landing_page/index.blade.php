@@ -194,11 +194,11 @@
 
                     <div class="copyright-segment">
                         <p>
-                            <a href="{{route('page.show','privacy')}}">Privacy Policy</a>
+                            <a href="/privacy">Privacy Policy</a>
                             <span class="separator">|</span>
                             <a href="{{route('page.show','t&r')}}">Term and conditions</a>
                         </p>
-                        <p class="copyright-text">&copy; 2020 <a href="/">Business Peak</a>. All Rights Reserved</p>
+                        <p class="copyright-text">&copy; 2021 <a href="/">Bazar Shodai</a>. All Rights Reserved</p>
                     </div>
                     <!--=======  End of copyright text	  =======-->
                 </div>
