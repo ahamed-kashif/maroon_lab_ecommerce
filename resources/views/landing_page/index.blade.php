@@ -196,9 +196,9 @@
                         <p>
                             <a href="/privacy">Privacy Policy</a>
                             <span class="separator">|</span>
-                            <a href="{{route('page.show','t&r')}}">Term and conditions</a>
+                            <a href="/Terms&Condition">Term and conditions</a>
                         </p>
-                        <p class="copyright-text">&copy; 2021 <a href="/">Bazar Shodai</a>. All Rights Reserved</p>
+                        <p class="copyright-text">&copy; 2021 <a href="https://www.facebook.com/Bazarshodai22">Bazar Shodai</a>. All Rights Reserved</p>
                     </div>
                     <!--=======  End of copyright text	  =======-->
                 </div>

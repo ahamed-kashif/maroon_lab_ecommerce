@@ -83,3 +83,4 @@ Route::view('/about_us','about_us');
 Route::view('/contact','contact');
 Route::view('/faq','faq');
 Route::view('/privacy','privacy');
+Route::view('/Terms&Condition','terms');
