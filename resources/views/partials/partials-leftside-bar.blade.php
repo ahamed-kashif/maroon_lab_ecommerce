@@ -5,10 +5,9 @@
         <!-- Start Logobar -->
         <div class="logobar">
             <a href="/" class="logo logo-large">
-                Home Shop
-                {{--                <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo">--}}
+                                <img src="{{bigLogoUrl()}}" class="img-fluid" alt="logo">
             </a>
-{{--            <a href="/" class="logo logo-small"><img src="{{asset('images/logo.png')}}" class="img-fluid" alt="logo"></a>--}}
+            <a href="/" class="logo logo-small"><img src="{{smallLogoUrl()}}" class="img-fluid" alt="logo"></a>
         </div>
         <!-- End Logobar -->
         <!-- Start Navigationbar -->

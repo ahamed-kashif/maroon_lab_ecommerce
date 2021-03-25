@@ -35,3 +35,17 @@ if (!function_exists('all_products')) {
         return App\Models\Product::with('categories')->active()->get();
     }
 }
+
+/**** new addition **/
+if (!function_exists('bigLogoUrl')) {
+    function bigLogoUrl()
+    {
+        return env('APP_URL').'/logo/logo.png';
+    }
+}
+if (!function_exists('smallLogoUrl')) {
+    function smallLogoUrl()
+    {
+        return env('APP_URL').'/logo/logo_1.png';
+    }
+}

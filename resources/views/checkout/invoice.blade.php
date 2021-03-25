@@ -13,7 +13,7 @@
                             <div class="row">
                                 <div class="col-12 col-md-7 col-lg-7">
                                     <div class="invoice-logo">
-                                        <img src="{{asset('images/logo.png')}}" class="img-fluid" alt="invoice-logo">
+                                        <img src="{{bigLogoUrl()}}" class="img-fluid" alt="invoice-logo">
                                     </div>
                                     <h4>{{config('app.name')}}</h4>
                                     <p>In music the passions follow themselves</p>
@@ -158,15 +158,15 @@
                                         <h6 class="mb-3">Contact Us</h6>
                                         <ul class="list-unstyled">
                                             <li><a href="/"><i class="feather icon-aperture mr-2"></i>www.bluesden.com.bd</a></li>
-                                            <li><a href="href = mailto:info@bluesden.com.bd"><i class="feather icon-mail mr-2"></i>info@bluesden.com.bd</a></li>
-                                            <li><a href="tel:+8801305775556"><i class="feather icon-phone mr-2"></i>+880 13 0577 5556</a></li>
+                                            <li><a href="href = mailto:{{env('app_mail')}}"><i class="feather icon-mail mr-2"></i>{{env('app_mail')}}/a></li>
+                                            <li><a href="tel:{{env('app_phone')}}"><i class="feather icon-phone mr-2"></i>{{env('app_phone')}}</a></li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="col-sm-12 col-md-4 col-lg-4">
                                     <div class="invoice-meta-box text-right">
                                         <h6 class="mb-0">Authorized Signatory</h6>
-                                        <h6>Mahbub Alam</h6>
+                                        <h6>{{env('app_signature')}}</h6>
 {{--                                        <img src="{{asset('images/general/signature.svg')}}" class="img-fluid my-3" alt="signature">--}}
                                     </div>
                                 </div>
