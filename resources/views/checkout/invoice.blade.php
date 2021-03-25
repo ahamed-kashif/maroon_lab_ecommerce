@@ -157,8 +157,8 @@
                                     <div class="invoice-meta-box">
                                         <h6 class="mb-3">Contact Us</h6>
                                         <ul class="list-unstyled">
-                                            <li><a href="/"><i class="feather icon-aperture mr-2"></i>www.bluesden.com.bd</a></li>
-                                            <li><a href="href = mailto:{{env('app_mail')}}"><i class="feather icon-mail mr-2"></i>{{env('app_mail')}}/a></li>
+                                            <li><a href="/"><i class="feather icon-aperture mr-2"></i>{{env('app_url')}}</a></li>
+                                            <li><a href="href = mailto:{{env('app_mail')}}"><i class="feather icon-mail mr-2"></i>{{env('app_mail')}}</a></li>
                                             <li><a href="tel:{{env('app_phone')}}"><i class="feather icon-phone mr-2"></i>{{env('app_phone')}}</a></li>
                                         </ul>
                                     </div>
