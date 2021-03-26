@@ -6,8 +6,8 @@
                     <div class="header-banner">
                         <div class="assetBlock">
                             <div id="slideshow">
-                                <p>Special Offers! - Get <span>50%</span> off on vegetables </p>
-                                <p>sale <span>40%</span> of  on bulk shopping! </p>
+                                <p>Farm produces at your doorstep  <span>with</span> reasonable price </p>
+                                <p> <span>Fast</span> home delivery </p>
                             </div>
                         </div>
                     </div>
@@ -20,7 +20,7 @@
             <div class="header-container row">
                 <div class="logo">
                     <a href="/" title="index">
-                        <div><img src="{{smallLogoUrl()}}" alt="logo" width="100" height="50"></div>
+                        <div><img src="{{smallLogoUrl()}}" alt="logo" width="100" height="75"></div>
                     </a>
                 </div>
                 <div class="fl-nav-menu">
