@@ -5617,7 +5617,7 @@ font-family: FontAwesome;
     margin-bottom: 26px;
     line-height: 60px;
     border: 2px #80b435 dotted;
-    border-radius: 999px;
+    border-radius: 50px;
 
 }
 .icon-money:before {
@@ -11795,6 +11795,7 @@ button.button span span {
 	padding-top: 25px;
 	padding-bottom: 0px;
 
+
 }
 
 /*  offer-slider   **/
@@ -12951,8 +12952,8 @@ select#shipping-address-select {
     z-index: 9;
 }
 .avatar img  {border-radius: 65px; box-shadow: 0px 10px 30px 0px rgba(188,188,188,0.7); margin-bottom:25px; width:auto; display:inline-block; width:152px }
-.testimonials {color:#292929; font-family:'Merriweather', serif; text-align: center; font-style: italic; letter-spacing:0.5px; font-size:22px; margin-bottom:15px; font-weight:300; line-height:1.6em}
-.clients_author {font-size:14px; font-family:'Rubik', sans-serif; font-weight:500; color:#80b435}
+.testimonials {color:#ffffff; font-family:'Merriweather', serif; text-align: center; font-style: italic; letter-spacing:0.5px; font-size:22px; margin-bottom:15px; font-weight:300; line-height:1.6em}
+.clients_author {font-size:30px; font-family:'Rubik', sans-serif; font-weight:500; color:#80b435}
 .clients_author span{font-size:14px;   font-family: 'Rubik', sans-serif; font-weight:normal; color:#777; display:inline-block; margin-left:7px}
 .testimonials-section.slider-items-products .owl-buttons { display:none}
 .testimonials-section.slider-items-products:hover .owl-buttons { display:block}

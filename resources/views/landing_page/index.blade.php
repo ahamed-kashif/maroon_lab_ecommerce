@@ -38,78 +38,63 @@
                     <div class="slider-items-products">
                         <div id="top-categories" class="product-flexslider hidden-buttons">
                             <div class="slider-items slider-width-col4 products-grid">
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p1.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Fruits</div>
+                                            <div class="pro-info">Coconut Oil</div>
                                         </div>
-                                    </a> </div>
+                                   </div>
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p2.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Salads</div>
+                                            <div class="pro-info">Ghee</div>
                                         </div>
-                                    </a> </div>
+                                   </div>
                                 <!-- End Item -->
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p3.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Vegetables</div>
+                                            <div class="pro-info">Kali Jeera Oil </div>
                                         </div>
-                                    </a> </div>
+                                   </div>
                                 <!-- End Item -->
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p5.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Juices</div>
+                                            <div class="pro-info">Honey</div>
                                         </div>
-                                    </a> </div>
+                                    </div>
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p12.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Meats</div>
+                                            <div class="pro-info">Mustard Oil</div>
                                         </div>
-                                    </a> </div>
+                               </div>
                                 <!-- End Item -->
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p27.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Lettuce</div>
+                                            <div class="pro-info">Jaggery/Gur</div>
                                         </div>
-                                    </a> </div>
+                                    </div>
                                 <!-- End Item -->
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p8.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Citrus‎</div>
+                                            <div class="pro-info">Jafran</div>
                                         </div>
-                                    </a> </div>
+                                  </div>
                                 <!-- End Item -->
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
+                                <div class="item">
                                         <div class="pro-img"><img src="{{asset('landing_page/products-images/p11.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Berries</div>
+                                            <div class="pro-info">Elachi</div>
                                         </div>
-                                    </a> </div>
+                                   </div>
                                 <!-- End Item -->
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
-                                        <div class="pro-img"><img src="{{asset('landing_page/products-images/p9.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Beans</div>
-                                        </div>
-                                    </a> </div>
+
                                 <!-- End Item -->
                                 <!-- Item -->
-                                <div class="item"> <a href="#">
-                                        <div class="pro-img"><img src="{{asset('landing_page/products-images/p6.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Pomegranates</div>
-                                        </div>
-                                    </a> </div>
-                                <!-- End Item -->
-                                <!-- Item -->
-                                <div class="item"> <a href="#">
-                                        <div class="pro-img"><img src="{{asset('landing_page/products-images/p7.jpg')}}" alt="Fresh Organic Mustard Leaves ">
-                                            <div class="pro-info">Leafy Veg</div>
-                                        </div>
-                                    </a> </div>
+
                                 <!-- End Item -->
                             </div>
                         </div>
@@ -121,8 +106,8 @@
         <div id="top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> <a href="#" data-scroll-goto="1"> <img src="{{asset('landing_page/images/banner-img1.jpg')}}" alt="promotion-banner1"> </a> </div>
-                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12"> <a href="#" data-scroll-goto="2"> <img src="{{asset('landing_page/images/banner-img2.jpg')}}" alt="promotion-banner2"> </a> </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">  <img src="{{asset('landing_page/images/banner-img1.jpg')}}" alt="promotion-banner1">  </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">  <img src="{{asset('landing_page/images/banner-img2.jpg')}}" alt="promotion-banner2">  </div>
                 </div>
             </div>
         </div>
@@ -368,355 +353,47 @@
             <div class="container">
                 <div class="row">
                     <div class="ad-info">
-                        <h2>Hurry Up!</h2>
-                        <h3>Deal of the week</h3>
-                        <h4>From our family farm right to your doorstep.</h4>
+                        <h2>Get</h2>
+                        <h3>Real Benefits</h3>
+                        <h4>For Your Health.</h4>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="hot-deal">
-                        <div class="box-timer">
-                            <div class="countbox_1 timer-grid"></div>
-                        </div>
-                        <ul class="products-grid">
-                            <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p16.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                            <div class="new-label new-top-left">Hot</div>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="add_cart">
-                                            <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
 
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p12.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="add_cart">
-                                            <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p21.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="add_cart">
-                                            <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="item col-lg-3 col-md-3 col-sm-3 col-xs-6">
-                                <div class="item-inner">
-                                    <div class="item-img">
-                                        <div class="item-img-info"><a href="product-detail.html" title="Fresh Organic Mustard Leaves " class="product-image"><img src="products-images/p3.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                                            <div class="sale-label sale-top-right">-40%</div>
-                                            <div class="item-box-hover">
-                                                <div class="box-inner">
-                                                    <div class="product-detail-bnt"><a href="#" class="button detail-bnt"><span>Quick View</span></a></div>
-                                                    <div class="actions"><span class="add-to-links"><a href="#" class="link-wishlist" title="Add to Wishlist"><span>Add to Wishlist</span></a> <a href="#" class="link-compare add_to_compare" title="Add to Compare"><span>Add to Compare</span></a></span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="add_cart">
-                                            <button class="button btn-cart" type="button"><span>Add to Cart</span></button>
-                                        </div>
-                                    </div>
-                                    <div class="item-info">
-                                        <div class="info-inner">
-                                            <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                            <div class="item-content">
-                                                <div class="rating">
-                                                    <div class="ratings">
-                                                        <div class="rating-box">
-                                                            <div class="rating" style="width:80%"></div>
-                                                        </div>
-                                                        <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                                    </div>
-                                                </div>
-                                                <div class="item-price">
-                                                    <div class="price-box"><span class="regular-price"><span class="price">$125.00</span> </span> </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="row">
                     <div class="testimonials-section slider-items-products">
                         <div  id="testimonials" class="offer-slider parallax parallax-2">
                             <div class="slider-items slider-width-col6">
                                 <div class="item">
-                                    <div class="avatar"><img src="images/member1.png" alt="Image"></div>
-                                    <div class="testimonials">Perfect Themes and the best of all that you have many options to choose! Very fast responding! I highly recommend this theme and these people!</div>
-                                    <div class="clients_author"> Smith John <span>Happy Customer</span> </div>
-                                </div>
-                                <div class="item">
-                                    <div class="avatar"><img src="images/member2.png" alt="Image"></div>
-                                    <div class="testimonials">Code, template and others are very good. The support has served me immediately and solved my problems when I need help. Are to be congratulated.</div>
-                                    <div class="clients_author"> Karla Anderson <span>Happy Customer</span> </div>
-                                </div>
-                                <div class="item">
-                                    <div class="avatar"><img src="images/member3.png" alt="Image"></div>
-                                    <div class="testimonials">Our support and response has been amazing, helping me with several issues I came across and got them solved almost the same day. A pleasure to work with them!</div>
-                                    <div class="clients_author"> Stephen Smith <span>Happy Customer</span> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="logo-brand">
-                        <div class="slider-items-products">
-                            <div id="brand-slider" class="product-flexslider hidden-buttons">
-                                <div class="slider-items slider-width-col6">
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand1.png" alt="Image"></a></div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand2.png" alt="Image"></a></div>
-                                    </div>
-                                    <!-- End Item -->
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand3.png" alt="Image"></a></div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand4.png" alt="Image"></a></div>
-                                    </div>
-                                    <!-- End Item -->
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand5.png" alt="Image"></a></div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand6.png" alt="Image"></a></div>
-                                    </div>
-                                    <!-- End Item -->
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand1.png" alt="Image"></a></div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand2.png" alt="Image"></a></div>
-                                    </div>
-                                    <!-- End Item -->
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand3.png" alt="Image"></a></div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand4.png" alt="Image"></a></div>
-                                    </div>
-                                    <!-- End Item -->
-                                    <!-- Item -->
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand5.png" alt="Image"></a></div>
-                                    </div>
-                                    <div class="item">
-                                        <div class="logo-item"><a href="#"><img src="images/brand6.png" alt="Image"></a></div>
-                                    </div>
-                                    <!-- End Item -->
 
+                                    <div class="testimonials">I can ensure that you will be satisfied by our products.</div>
+                                    <div class="clients_author">Owner <span></span> </div>
                                 </div>
+                                <div class="item">
+
+                                    <div class="testimonials">I got my products on given time and the products were very fresh. </div>
+                                    <div class="clients_author"> Sani Ahamed <span>Happy Customer</span> </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
+
             </div>
         </div>
         <!-- Home Lastest Blog Block -->
-        <div class="latest-blog wow bounceInUp animated animated container">
-            <!--exclude For version 6 -->
-
-            <!--For version 1,2,3,4,5,6,8 -->
-            <div>
-                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 blog-post">
-                    <div class="blog_inner">
-                        <div class="blog-img"> <a href="blog-detail.html"> <img src="images/blog-img1.jpg" alt="blog image"> </a>
-                            <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>
-                        </div>
-                        <!--blog-img-->
-                        <div class="blog-info">
-                            <div class="post-date">
-                                <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">26 <span>June</span></time>
-                            </div>
-                            <ul class="post-meta">
-                                <li><i class="fa fa-user"></i>Posted by <a href="#">admin</a> </li>
-                                <li><i class="fa fa-comments"></i><a href="#">4 comments</a> </li>
-                            </ul>
-                            <h3><a href="blog-detail.html">Powerful and flexible premium Ecommerce themes</a></h3>
-                            <p>Fusce ac pharetra urna. Duis non lacus sit amet lacus interdum facilisis sed non est. Ut mi metus, semper eu dictum nec...</p>
-                        </div>
-                    </div>
-                    <!--blog_inner-->
-                </div>
-                <!--col-lg-4 col-md-4 col-xs-12 col-sm-4-->
-                <div class="col-lg-6 col-md-6 col-xs-12 col-sm-6 blog-post">
-                    <div class="blog_inner">
-                        <div class="blog-img"> <a href="blog-detail.html"> <img src="images/blog-img2.jpg" alt="blog image"> </a>
-                            <div class="mask"> <a class="info" href="blog-detail.html">Read More</a> </div>
-                        </div>
-                        <!--blog-img-->
-                        <div class="blog-info">
-                            <div class="post-date">
-                                <time class="entry-date" datetime="2015-05-11T11:07:27+00:00">30 <span>June</span></time>
-                            </div>
-                            <ul class="post-meta">
-                                <li><i class="fa fa-user"></i>Posted by <a href="#">admin</a> </li>
-                                <li><i class="fa fa-comments"></i><a href="#">6 comments</a> </li>
-                            </ul>
-                            <h3><a href="blog-detail.html">Awesome template with lot's of features on the board!</a></h3>
-                            <p>Aliquam laoreet consequat malesuada. Integer vitae diam sed dolor euismod laoreet eget ac felis erat sed elit bibendum ...</p>
-                        </div>
-                    </div>
-                    <!--blog_inner-->
-                </div>
-            </div>
-            <!--END For version 1,2,3,4,5,6,8 -->
-            <!--exclude For version 6 -->
-            <!--container-->
-        </div>
         <!-- Logo Brand Block -->
     </div>
 
 
-    <div class="mid-section">
-        <div class="container">
-            <div class="row">
-                <h3>Fresh organic foods delivery made easy</h3>
-                <h2>Special Product</h2>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="block1"> <strong>fresh from our farm</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
-                    </div>
-                    <div class="block2"> <strong>100% organic Foods</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="spl-pro"><a href="product-detail.html" title="Fresh Organic Mustard Leaves "><img src="products-images/p12.jpg" alt="Fresh Organic Mustard Leaves "></a>
-                        <div class="item-info">
-                            <div class="info-inner">
-                                <div class="item-title"><a href="product-detail.html" title="Fresh Organic Mustard Leaves ">Fresh Organic Mustard Leaves </a> </div>
-                                <div class="item-content">
-                                    <div class="rating">
-                                        <div class="ratings">
-                                            <div class="rating-box">
-                                                <div class="rating" style="width:80%"></div>
-                                            </div>
-                                            <p class="rating-links"><a href="#">1 Review(s)</a> <span class="separator">|</span> <a href="#">Add Review</a> </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    <div class="block3"> <strong>Good for health</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
-                    </div>
-                    <div class="block4"> <strong>Safe From Pesticides</strong>
-                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy habitant morbi.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+
     <div class="container">
         <div class="row our-features-box">
             <ul>
                 <li>
                     <div class="feature-box">
                         <div class="icon-truck"></div>
-                        <div class="content">FREE SHIPPING on order over $99</div>
+                        <div class="content">FAST SHIPPING</div>
                     </div>
                 </li>
                 <li>
@@ -725,23 +402,34 @@
                         <div class="content">Have a question?<br>
                             +1 800 789 0000</div>
                     </div>
-                </li>
                 <li>
                     <div class="feature-box">
                         <div class="icon-money"></div>
-                        <div class="content">100% Money Back Guarantee</div>
+                        <div class="content">Cash On Delivery</div>
                     </div>
                 </li>
                 <li>
                     <div class="feature-box">
                         <div class="icon-return"></div>
-                        <div class="content">30 days return Service</div>
+                        <div class="content">100% Authentic</div>
                     </div>
                 </li>
                 <li class="last">
-                    <div class="feature-box"> <a href="#"><i class="fa fa-apple"></i> download</a> <a href="#"><i class="fa fa-android"></i> download</a> </div>
+                 <br>
+                    <br>
+                    <br>
+                    <div class="feature-box">
+                      AG PLUS AGRO LIMITED
+                    </div>
+                    <br>
+                    <br>
+                    <br>
+
+
+
                 </li>
-            </ul>
+
+             </ul>
         </div>
     </div>
     <!-- For version 1,2,3,4,6 -->
@@ -757,7 +445,7 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 col1">
                             <div class="newsletter-wrap">
                                 <h5>Newsletter</h5>
-                                <h4>Get discount 30% off</h4>
+                                <h4>Get Upadtes!</h4>
                                 <form action="#" method="post" id="newsletter-validate-detail1">
                                     <div id="container_form_news">
                                         <div id="container_form_news2">
@@ -782,25 +470,18 @@
                             <div class="footer-column">
                                 <h4>Shopping Guide</h4>
                                 <ul class="links">
-                                    <li><a href="blog.html" title="How to buy">Blog</a></li>
+
                                     <li><a href="faq.html" title="FAQs">FAQs</a></li>
-                                    <li><a href="#" title="Payment">Payment</a></li>
-                                    <li><a href="#" title="Shipment">Shipment</a></li>
-                                    <li><a href="#" title="Where is my order?">Where is my order?</a></li>
-                                    <li><a href="#" title="Return policy">Return policy</a></li>
+
                                 </ul>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="footer-column">
-                                <h4>Style Advisor</h4>
+                                <h4>Terms</h4>
                                 <ul class="links">
-                                    <li><a href="login.html" title="Your Account">Your Account</a></li>
-                                    <li><a href="#" title="Information">Information</a></li>
-                                    <li><a href="#" title="Addresses">Addresses</a></li>
-                                    <li><a href="#" title="Addresses">Discount</a></li>
-                                    <li><a href="#" title="Orders History">Orders History</a></li>
-                                    <li><a href="#" title="Order Tracking">Order Tracking</a></li>
+                                    <li><a href="login.html" title="t&r">Terms and conditions</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -808,12 +489,9 @@
                             <div class="footer-column">
                                 <h4>Information</h4>
                                 <ul class="links">
-                                    <li><a href="sitemap.html" title="Site Map">Site Map</a></li>
-                                    <li><a href="#" title="Search Terms">Search Terms</a></li>
-                                    <li><a href="#" title="Advanced Search">Advanced Search</a></li>
                                     <li><a href="about_us.html" title="About Us">About Us</a></li>
                                     <li><a href="contact_us.html" title="Contact Us">Contact Us</a></li>
-                                    <li><a href="#" title="Suppliers">Suppliers</a></li>
+
                                 </ul>
                             </div>
                         </div>
@@ -846,16 +524,11 @@
                         <div class="social">
                             <ul>
                                 <li class="fb"><a href="#"></a></li>
-                                <li class="tw"><a href="#"></a></li>
-                                <li class="googleplus"><a href="#"></a></li>
-                                <li class="rss"><a href="#"></a></li>
-                                <li class="pintrest"><a href="#"></a></li>
-                                <li class="linkedin"><a href="#"></a></li>
-                                <li class="youtube"><a href="#"></a></li>
+
                             </ul>
                         </div>
                     </div>
-                    <div class="col-sm-4 col-xs-12 coppyright"> © 2018 ThemesGround. All Rights Reserved. </div>
+                    <div class="col-sm-4 col-xs-12 coppyright"> © 2021 Ag PLus Agro Ltd. All Rights Reserved. </div>
                     <div class="col-xs-12 col-sm-4">
                         <div class="payment-accept"> <img src="images/payment-1.png" alt=""> <img src="images/payment-2.png" alt=""> <img src="images/payment-3.png" alt=""> <img src="images/payment-4.png" alt=""> </div>
                     </div>
