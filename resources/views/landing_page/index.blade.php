@@ -8,7 +8,7 @@
     <meta name="keywords" content="fashion, store, E-commerce">
     <meta name="robots" content="*">
     <link rel="icon" href="#" type="image/x-icon">
-    <link rel="shortcut icon" href="#" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('landing_page/images/favicon.ico')}}">
 
     <!-- CSS Style -->
     <link rel="stylesheet" type="text/css" href="{{asset('landing_page/stylesheet/bootstrap.min.css')}}">

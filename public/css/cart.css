@@ -1,6 +1,6 @@
 /* scroll to top */
 a.scroll-top {
-    background: #0b52e4;
+    background: #28d610;
     width: 55px;
     height: 55px;
     border-radius: 50%;
@@ -24,4 +24,4 @@ a.scroll-top:after {
     font-size: 30px; }
 a.scroll-top:hover {
     background-color: #f5f5fa;
-    color: #0b52e4; }
+    color: #28d610; }
