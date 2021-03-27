@@ -2,7 +2,7 @@
 # Thank you for your order.
 
 Dear Customer,
-Yours BluesDen order has been pre-confirmed.
+Yours order has been pre-confirmed.
 Soon you will be contacted by us.To see your order click the button below.
 @component('mail::button', ['url' => route('customer.order.show',$order->id)])
 Your Order!

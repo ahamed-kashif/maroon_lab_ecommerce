@@ -2,7 +2,7 @@
 # CONFIRMATION
 Dear Valued {{$order->user->name}},
 
-Yours BluesDen order <b>#{{strtoupper($order->code)}}</b> has been {{$order->status}}.
+Yours order <b>#{{strtoupper($order->code)}}</b> has been {{$order->status}}.
 @component('mail::button', ['url' => route('customer.order.show',$order->id)])
    Your Order
 @endcomponent
