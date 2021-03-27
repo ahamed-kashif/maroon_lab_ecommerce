@@ -49,3 +49,10 @@ if (!function_exists('smallLogoUrl')) {
         return env('APP_URL').'/logo/logo_1.png';
     }
 }
+
+if (!function_exists('featuredProducts')) {
+    function featuredProducts()
+    {
+        return \App\Models\Product::featured()->all();
+    }
+}
