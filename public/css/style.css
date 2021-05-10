@@ -187,6 +187,7 @@ code {
 .contentbar {
   padding: 30px;
   margin-bottom: 30px;
+    background-color:white;
 }
 
 .footerbar {
@@ -26775,7 +26776,7 @@ mark {
   display: inline-block;
 }
 .topbar-mobile .mobile-logobar img {
-  width: 128px;
+  width: 80px;
 }
 .topbar-mobile .mobile-togglebar {
   display: inline-block;
