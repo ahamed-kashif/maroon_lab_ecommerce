@@ -164,7 +164,7 @@
                     <div class="feature-box">
                         <div class="icon-support"></div>
                         <div class="content">Have a question?<br>
-                            +1 800 789 0000</div>
+                            +8801758116593 </div>
                     </div>
                 <li>
                     <div class="feature-box">
@@ -267,7 +267,7 @@
                                         <i class="add-icon"></i>Tropical Tower 8th Floor,Elephant Road, Dhaka-1205
                                         <br>
                                     </address>
-                                    <div class="phone-footer"><i class="phone-icon"></i>+ 888 456-7890</div>
+                                    <div class="phone-footer"><i class="phone-icon"></i>+8801758116593</div>
                                     <div class="email-footer"><i class="email-icon"></i><a href="mailto:abc@example.com">Qualis@themesground.com</a></div>
                                 </div>
                             </div>
@@ -287,7 +287,7 @@
                     <div class="col-xs-12 col-sm-4">
                         <div class="social">
                             <ul>
-                                <li class="fb"><a href="#"></a></li>
+                                <li class="fb"><a href="https://www.facebook.com/agplusagro" target="_blank"></a></li>
 
                             </ul>
                         </div>
